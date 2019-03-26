@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.turtlebody.imagepicker">
+
+    <application>
+        <activity android:name=".activities.ActivityImages"
+            android:theme="@style/PickerTheme"/>
+        <activity android:name=".activities.ActivityFolders"
+            android:theme="@style/PickerTheme"/>
+    </application>
+
+</manifest>

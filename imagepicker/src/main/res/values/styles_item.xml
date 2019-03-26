@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SubmitButton" parent="Widget.AppCompat.Button.Small">
+        <item name="android:background">@drawable/sc_button_round_accent</item>
+        <item name="colorControlHighlight">?attr/colorAccent</item>
+
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:color">@color/md_white_1000</item>
+    </style>
+
+    <style name="ToolBarStyle" parent="ToolBarStyle.Base"/>
+
+    <style name="ToolBarStyle.Base" parent="">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="ToolBarStyle.Event" parent="ToolBarStyle">
+        <item name="titleTextAppearance">@style/TextAppearance.Widget.Event.Toolbar.Title</item>
+    </style>
+
+    <style name="TextAppearance.Widget.Event.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <!--Any text styling can be done here-->
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="BottomNavigation">
+        <!--<item name="android:background">@color/md_white_1000</item>-->
+        <!--<item name="itemBackground">@color/colorPrimary</item>-->
+        <!--<item name="itemIconTint">@color/colorPrimary</item>-->
+        <!--<item name="itemTextColor">@color/navigation_bar_txt_color</item>-->
+        <!--<item name="paddingStart">@dimen/bottom_navigation_padding</item>-->
+        <!--<item name="paddingEnd">@dimen/bottom_navigation_padding</item>-->
+    </style>
+
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="App.Base.TextAppearance.Body1" parent="Base.TextAppearance.AppCompat.Body1">
+        <item name="android:ellipsize">end</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="App.Base.TextAppearance.Body2" parent="Base.TextAppearance.AppCompat.Body2">
+        <item name="android:ellipsize">end</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="App.Base.TextAppearance.Display4" parent="Base.TextAppearance.AppCompat.Display4">
+        <item name="android:ellipsize">end</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:maxLines">1</item>
+        <!--<item name="android:fontFamily">sans-serif-light</item>-->
+        <item name="android:textSize">@dimen/font_14</item>
+    </style>
+
+    <!-- -->
+
+    <style name="App.TextAppearance.Text" parent="App.Base.TextAppearance.Body1">
+        <item name="android:textSize">@dimen/font_16</item>
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <style name="App.TextAppearance.Bold" parent="App.Base.TextAppearance.Body2">
+        <item name="android:textSize">@dimen/font_16</item>
+        <item name="android:textColor">@color/md_grey_800</item>
+    </style>
+
+    <style name="App.TextAppearance.Title" parent="App.Base.TextAppearance.Display4">
+        <!--<item name="android:fontFamily">sans-serif-light</item>-->
+        <item name="android:textSize">@dimen/font_20</item>
+        <item name="android:textColor">@color/md_grey_800</item>
+    </style>
+    <style name="App.TextAppearance.h2" parent="App.Base.TextAppearance.Body1">
+        <!--<item name="android:fontFamily">sans-serif-light</item>-->
+        <item name="android:textSize">@dimen/font_22</item>
+        <item name="android:textColor">@color/md_grey_800</item>
+    </style>
+
+    <style name="App.TextAppearance.h2.bold" parent="App.Base.TextAppearance.Body2">
+        <!--<item name="android:fontFamily">sans-serif-light</item>-->
+        <item name="android:textSize">@dimen/font_24</item>
+        <item name="android:textColor">@color/md_grey_800</item>
+    </style>
+
+    <style name="App.TextAppearance.h3" parent="App.Base.TextAppearance.Body1">
+        <!--<item name="android:fontFamily">sans-serif-light</item>-->
+        <item name="android:textSize">@dimen/font_20</item>
+        <item name="android:textColor">@color/md_grey_800</item>
+    </style>
+
+    <style name="App.TextAppearance.h4" parent="App.Base.TextAppearance.Body1">
+        <!--<item name="android:fontFamily">sans-serif-light</item>-->
+        <item name="android:textSize">@dimen/font_16</item>
+        <item name="android:textColor">@color/md_grey_800</item>
+    </style>
+
+    <style name="App.TextAppearance.h4.Title" parent="App.TextAppearance.h4">
+        <!--<item name="android:fontFamily">sans-serif-light</item>-->
+        <item name="android:ellipsize">end</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="App.TextAppearance.Title.Small" parent="App.Base.TextAppearance.Display4">
+        <!--<item name="android:fontFamily">sans-serif-light</item>-->
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+    <style name="App.TextAppearance.Caption" parent="App.Base.TextAppearance.Body1">
+        <!--<item name="android:fontFamily">sans-serif-light</item>-->
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@color/md_grey_600</item>
+    </style>
+
+
+    <!--***************EditText*******************************-->
+    <style name="MyEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlActivated">#dc8f41</item>
+    </style>
+    <style name="MyEditTextStyle2" parent="Widget.AppCompat.EditText">
+        <item name="colorControlActivated">#dc8f41</item>
+        <item name="colorControlNormal">#d11472</item>
+    </style>
+    <style name="ChipTextApperance" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+</resources>

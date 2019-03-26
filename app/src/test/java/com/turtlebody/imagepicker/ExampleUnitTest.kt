@@ -1,4 +1,4 @@
-package com.turtleody.imagepicker
+package com.turtlebody.imagepicker
 
 import org.junit.Test
 
