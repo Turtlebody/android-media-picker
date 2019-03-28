@@ -1,13 +1,16 @@
-package com.turtlebody.imagepicker.activities
+package com.turtlebody.imagepicker.fragments
 
-import android.content.Intent
+
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.turtlebody.imagepicker.R
+import com.turtlebody.imagepicker.activities.ActivityMain
 import com.turtlebody.imagepicker.adapters.FolderListAdapter
-import com.turtlebody.imagepicker.base.ActivityBase
+import com.turtlebody.imagepicker.base.FragmentBase
 import com.turtlebody.imagepicker.models.Folder
 import com.turtlebody.imagepicker.core.FileManager
 import io.reactivex.Single
@@ -16,41 +19,55 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_folders.*
+import kotlinx.android.synthetic.main.fragment_folder_list.*
 import kotlinx.android.synthetic.main.frame_progress.*
-import kotlinx.android.synthetic.main.toolbar.*
-import java.util.ArrayList
 
-class ActivityFolders : ActivityBase() {
+
+class FolderListFragment : FragmentBase() {
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance(key: Int, b: Bundle?): Fragment {
+            val bf: Bundle = b ?: Bundle()
+            bf.putInt("fragment.key", key);
+            val fragment = FolderListFragment()
+            fragment.arguments = bf
+            return fragment
+        }
+
+    }
 
     private var mAdapter: FolderListAdapter = FolderListAdapter()
     private var mFolderList: MutableList<Folder> = arrayListOf()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_folders)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_folder_list, container, false)
+    }
 
-        initToolbar(toolbar)
-        toolbar.title = "Select Folder"
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
         initAdapter()
+
     }
 
     private fun initAdapter() {
         mAdapter.setListener(object : FolderListAdapter.OnFolderClickListener{
             override fun onFolderClick(pData: Folder) {
-                val intent = Intent(this@ActivityFolders,ActivityImages::class.java)
-                intent.putExtra("id",pData.id)
-                startActivity(intent)
+                (activity as ActivityMain).startImageListFragment(pData.id)
             }
         })
-        recycler_view.layoutManager = LinearLayoutManager(this)
+        recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.adapter = mAdapter
 
         fetchFolders()
     }
 
     private fun fetchFolders() {
-        val bucketFetch = Single.fromCallable<ArrayList<Folder>> { FileManager.fetchLocalFolders(this) }
+        val bucketFetch = Single.fromCallable<ArrayList<Folder>> { FileManager.fetchLocalFolders(context!!) }
         bucketFetch
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -67,8 +84,10 @@ class ActivityFolders : ActivityBase() {
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        Log.e("Error loading buckets", e.message)
+                        //Log.e("Error loading buckets", e.message)
                     }
                 })
     }
+
+
 }

@@ -15,6 +15,7 @@
         app:srcCompat="@drawable/ic_person_black_24dp"/>
 
     <CheckBox
+        android:id="@+id/cb_btn_selection"
         android:layout_width="@dimen/length_40"
         android:layout_height="@dimen/length_40"
         android:layout_gravity="end|top"/>

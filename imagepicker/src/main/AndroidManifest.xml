@@ -3,10 +3,14 @@
     package="com.turtlebody.imagepicker">
 
     <application>
-        <activity android:name=".activities.ActivityImages"
+        <activity android:name=".activities.ActivityMain"
             android:theme="@style/PickerTheme"/>
-        <activity android:name=".activities.ActivityFolders"
-            android:theme="@style/PickerTheme"/>
+        <activity
+            android:name=".activities.ActivityImages"
+            android:theme="@style/PickerTheme" />
+        <activity
+            android:name=".activities.ActivityFolders"
+            android:theme="@style/PickerTheme" />
     </application>
 
 </manifest>

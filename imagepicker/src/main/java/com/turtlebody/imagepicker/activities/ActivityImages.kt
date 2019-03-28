@@ -8,7 +8,7 @@ import com.turtlebody.imagepicker.R
 import com.turtlebody.imagepicker.adapters.ImageListAdapter
 import com.turtlebody.imagepicker.base.ActivityBase
 import com.turtlebody.imagepicker.models.Image
-import com.turtlebody.imagepicker.utils.FileUtils
+import com.turtlebody.imagepicker.core.FileManager
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,7 +29,7 @@ class ActivityImages : ActivityBase() {
         setContentView(R.layout.activity_images)
 
         if(intent.extras!=null){
-            mFolderId = intent.getStringExtra("folderId")
+            mFolderId = intent.getStringExtra("id")
         }
 
         initAdapter()
@@ -44,7 +44,7 @@ class ActivityImages : ActivityBase() {
     private fun fetchFiles() {
         val fileItems = Single.fromCallable<Boolean> {
             mImageList.clear()
-            mImageList.addAll(FileUtils.getFilesInFolder(this, mFolderId))
+            mImageList.addAll(FileManager.getFilesInFolder(this, mFolderId))
             true
         }
 

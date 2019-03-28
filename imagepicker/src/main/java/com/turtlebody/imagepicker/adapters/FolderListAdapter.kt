@@ -43,11 +43,11 @@ class FolderListAdapter: RecyclerView.Adapter<FolderListAdapter.FolderVewHolder>
     inner class FolderVewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(pData: Folder){
 
-            itemView.folder_txt_folder_name.text = pData.folderName
-            itemView.folder_txt_total_items.text = "${pData.folderContentCount} items"
+            itemView.folder_txt_folder_name.text = pData.name
+            itemView.folder_txt_total_items.text = "${pData.contentCount} items"
 
             Glide.with(itemView)
-                    .load(File( pData.folderCoverImageFilePath))
+                    .load(File( pData.coverImageFilePath))
                     .into(itemView.folder_image_folder_icon)
 
             itemView.setOnClickListener {

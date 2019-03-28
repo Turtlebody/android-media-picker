@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.turtlebody.imagepicker.R
 import com.turtlebody.imagepicker.models.Image
 import kotlinx.android.synthetic.main.item_image.view.*
+import org.jetbrains.anko.sdk27.coroutines.onCheckedChange
 import java.io.File
 
 /**
@@ -40,22 +41,35 @@ class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ImageVewHolder>() 
         notifyDataSetChanged()
     }
 
+    fun updateIsSelected(pData: Image){
+        val pos = mData.indexOf(pData)
+        if(pos>=0){
+            mData[pos] = pData
+            notifyItemChanged(pos)
+        }
+    }
+
     inner class ImageVewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(pData: Image){
 
             Glide.with(itemView)
-                    .load(File(pData.imageThumbnailPath))
+                    .load(File(pData.thumbnailPath))
                     .into(itemView.iv_image)
 
+            itemView.cb_btn_selection.isChecked = pData.isSelected
+
             itemView.setOnClickListener {
-                mOnImageClickListener?.onImageClick(pData)
+                mOnImageClickListener?.onImageCheck(pData)
             }
 
+            itemView.cb_btn_selection.setOnClickListener {
+                mOnImageClickListener?.onImageCheck(pData)
+            }
         }
     }
 
 
     interface OnImageClickListener {
-        fun onImageClick(pData: Image)
+        fun onImageCheck(pData: Image)
     }
 }
