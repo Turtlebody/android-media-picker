@@ -2,15 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.turtlebody.imagepicker">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application>
         <activity android:name=".activities.ActivityMain"
-            android:theme="@style/PickerTheme"/>
-        <activity
-            android:name=".activities.ActivityImages"
-            android:theme="@style/PickerTheme" />
-        <activity
-            android:name=".activities.ActivityFolders"
-            android:theme="@style/PickerTheme" />
+           android:theme="@style/PickerTheme"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.turtlebody.imagepicker.myFileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths" />
+        </provider>
     </application>
 
 </manifest>

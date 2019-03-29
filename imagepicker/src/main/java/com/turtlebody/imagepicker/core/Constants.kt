@@ -20,13 +20,11 @@ object Constants {
         val IMAGE = arrayOf(
                 MediaStore.Images.Media._ID,
                 MediaStore.Images.Media.DISPLAY_NAME,
-                MediaStore.Images.Media.SIZE, MediaStore.Images.Media.DATA,
+                MediaStore.Images.Media.SIZE,
+                MediaStore.Images.Media.DATA,
                 MediaStore.Images.Media.BUCKET_ID,
                 MediaStore.Images.Thumbnails.DATA)
     }
-
-
-
 
     object Intent{
 

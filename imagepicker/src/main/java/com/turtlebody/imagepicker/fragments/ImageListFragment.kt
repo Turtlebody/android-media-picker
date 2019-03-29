@@ -1,6 +1,7 @@
 package com.turtlebody.imagepicker.fragments
 
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import com.turtlebody.imagepicker.adapters.ImageListAdapter
 import com.turtlebody.imagepicker.base.FragmentBase
 import com.turtlebody.imagepicker.models.Image
 import com.turtlebody.imagepicker.core.FileManager
+import com.turtlebody.imagepicker.core.PickerConfig
+import com.turtlebody.imagepicker.models.Folder
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,6 +24,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_image_list.*
 import kotlinx.android.synthetic.main.frame_progress.*
+import org.jetbrains.anko.info
+import java.io.File
 
 
 class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener {
@@ -37,12 +42,18 @@ class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener 
             return fragment
         }
 
+        val URI_LIST_KEY = "uriListKey"
+
     }
 
     private var mAdapter: ImageListAdapter = ImageListAdapter()
     private var mImageList: MutableList<Image> = arrayListOf()
     private var mFolderId: String = ""
     private var mSelectedList: MutableList<Image> = arrayListOf()
+
+    private var mUriList: MutableList<Uri> = arrayListOf()
+
+    private lateinit var mPickerConfig: PickerConfig
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -54,9 +65,10 @@ class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener 
         super.onActivityCreated(savedInstanceState)
 
         arguments?.let {
-            it.getString("folderId")?.let { id->
-                mFolderId = id
-            }
+            mFolderId = it.getString(Folder.FOLDER_ID,"")
+            mPickerConfig = it.getSerializable(PickerConfig.ARG_BUNDLE) as PickerConfig
+
+            info { "folderId: $mFolderId" }
         }
 
         (activity as ActivityMain).updateCounter(mSelectedList.size)
@@ -69,12 +81,32 @@ class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener 
             (activity as ActivityMain).onBackPressed()
         }
         btn_add_file.setOnClickListener {
-            (activity as ActivityMain).sendBackData(mSelectedList)
+            getAllUris()
+            //(activity as ActivityMain).sendBackData(mSelectedList)
+        }
+
+        if(!mPickerConfig.mAllowMultiImages){
+            ll_bottom_layout.visibility = View.GONE
+        }
+
+    }
+
+    private fun getAllUris() {
+        if(mSelectedList.isNotEmpty()){
+            for (i in mSelectedList){
+                mUriList.add(FileManager.getContentUri(context!!, File(i.filePath)))
+            }
+            (activity as ActivityMain).sendBackData(mUriList)
         }
     }
 
 
     override fun onImageCheck(pData: Image) {
+        if(!mPickerConfig.mAllowMultiImages){
+            (activity as ActivityMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
+            return
+        }
+
         val selectedIndex = mImageList.indexOf(pData)
 
         if(selectedIndex >= 0){
@@ -93,12 +125,7 @@ class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener 
         }
         (activity as ActivityMain).updateCounter(mSelectedList.size)
 
-//        if(mSelectedList.size>0){
-//            btn_add_file.visibility = View.VISIBLE
-//        }
-//        else{
-//            btn_add_file.visibility = View.GONE
-//        }
+        btn_add_file.isEnabled = mSelectedList.size>0
     }
 
 
@@ -130,7 +157,8 @@ class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener 
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        //Log.e("Error loading file ", e.message)
+                        progress_view.visibility = View.GONE
+                        info { "error: ${e.message}" }
                     }
                 })
     }

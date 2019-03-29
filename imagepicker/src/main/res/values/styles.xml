@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="PickerTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/pickerColorPrimary</item>
+        <item name="colorPrimaryDark">@color/pickerColorPrimaryDark</item>
+        <item name="colorAccent">@color/pickerColorAccent</item>
 
     </style>
 

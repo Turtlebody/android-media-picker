@@ -22,6 +22,7 @@
             tools:listitem="@layout/item_image"/>
 
         <LinearLayout
+            android:id="@+id/ll_bottom_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -35,34 +36,34 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/length_56"
-                android:background="@color/colorPrimary"
-                android:padding="@dimen/offset_4">
+                android:background="@color/pickerColorPrimary"
+                android:padding="@dimen/offset_6">
 
                 <ImageView
                     android:id="@+id/iv_cancel"
                     android:layout_width="@dimen/length_32"
                     android:layout_height="@dimen/length_32"
                     android:layout_gravity="start"
+                    android:padding="@dimen/offset_4"
                     app:srcCompat="@drawable/ic_close_black_24dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"/>
 
                 <Button
+                    android:enabled="false"
                     android:id="@+id/btn_add_file"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sc_button_round_accent"
-                    android:textColor="@color/md_white_1000"
                     android:text="Done"
                     android:textSize="@dimen/font_16"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
-
+                    android:layout_centerVertical="true"
+                    android:theme="@style/App.Button.Primary"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:textAppearance="@style/App.TextAppearance.h4.Title"
+                    android:textColor="@color/md_white_1000"/>
             </RelativeLayout>
-
         </LinearLayout>
-
-
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

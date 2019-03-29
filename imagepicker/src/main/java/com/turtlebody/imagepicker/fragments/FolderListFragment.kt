@@ -21,6 +21,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_folder_list.*
 import kotlinx.android.synthetic.main.frame_progress.*
+import org.jetbrains.anko.info
 
 
 class FolderListFragment : FragmentBase() {
@@ -84,7 +85,8 @@ class FolderListFragment : FragmentBase() {
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        //Log.e("Error loading buckets", e.message)
+                        progress_view.visibility = View.GONE
+                        info { "error: ${e.message}" }
                     }
                 })
     }

@@ -2,15 +2,17 @@ package com.turtlebody.imagepicker.core
 
 import android.content.Context
 import android.database.Cursor
-
+import android.net.Uri
+import androidx.core.content.FileProvider.getUriForFile
 import com.turtlebody.imagepicker.models.Folder
 import com.turtlebody.imagepicker.models.Image
-
-import java.util.ArrayList
-import java.util.HashMap
+import java.io.File
+import java.util.*
 
 
 object FileManager {
+
+    private val SHARED_PROVIDER_AUTHORITY = "com.turtlebody.imagepicker.myFileprovider"
 
     fun fetchLocalFolders(context: Context): ArrayList<Folder> {
         val folders = ArrayList<Folder>()
@@ -59,14 +61,23 @@ object FileManager {
             val columnIndexFileThumbPath = it.getColumnIndexOrThrow(projection[5])
 
             while (it.moveToNext()) {
-                val fileItem = Image(it.getString(columnIndexFileId),it.getString(columnIndexFileName),it.getString(columnIndexFilePath),
-                        it.getString(columnIndexFileSize),it.getString(columnIndexFileThumbPath),false)
-                fileItems.add(fileItem)
+
+                println("Size: $columnIndexFileSize")
+                if(columnIndexFileSize>0){
+                    val fileItem = Image(it.getString(columnIndexFileId),it.getString(columnIndexFileName),it.getString(columnIndexFilePath),
+                            it.getString(columnIndexFileSize),it.getString(columnIndexFileThumbPath),false)
+                    fileItems.add(fileItem)
+                }
+
             }
             cursor.close()
         }
-
         return fileItems
+    }
+
+
+    fun getContentUri(context: Context, newFile: File): Uri {
+        return getUriForFile(context, SHARED_PROVIDER_AUTHORITY , newFile)
     }
 }
 

@@ -15,8 +15,8 @@
         app:titleTextColor="@color/md_black_1000"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:background="@color/pickerColorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
             android:id="@+id/toolbar_txt_count"

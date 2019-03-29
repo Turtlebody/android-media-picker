@@ -7,4 +7,8 @@ data class Folder(var id: String = "",
              var name: String = "",
              var coverImageFilePath: String = "",
              var contentCount: Int = 0) {
+
+    companion object {
+        val FOLDER_ID = "folderId"
+    }
 }

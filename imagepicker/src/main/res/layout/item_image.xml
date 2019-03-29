@@ -4,20 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/offset_1">
 
-    <ImageView
+    <com.turtlebody.imagepicker.widget.SquareImage
         android:id="@+id/iv_image"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/length_200"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_person_black_24dp"/>
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"/>
 
     <CheckBox
         android:id="@+id/cb_btn_selection"
-        android:layout_width="@dimen/length_40"
-        android:layout_height="@dimen/length_40"
-        android:layout_gravity="end|top"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:layout_margin="@dimen/offset_4"/>
 
 </FrameLayout>
