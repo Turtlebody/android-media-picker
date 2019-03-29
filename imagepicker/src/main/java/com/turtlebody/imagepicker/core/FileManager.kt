@@ -61,13 +61,13 @@ object FileManager {
             val columnIndexFileThumbPath = it.getColumnIndexOrThrow(projection[5])
 
             while (it.moveToNext()) {
-
-                println("Size: $columnIndexFileSize")
-                if(columnIndexFileSize>0){
-                    val fileItem = Image(it.getString(columnIndexFileId),it.getString(columnIndexFileName),it.getString(columnIndexFilePath),
-                            it.getString(columnIndexFileSize),it.getString(columnIndexFileThumbPath),false)
-                    fileItems.add(fileItem)
-                }
+                val fileItem = Image(it.getString(columnIndexFileId),
+                        it.getString(columnIndexFileName),
+                        it.getString(columnIndexFilePath),
+                        it.getString(columnIndexFileSize),
+                        it.getString(columnIndexFileThumbPath),
+                        false)
+                fileItems.add(fileItem)
 
             }
             cursor.close()

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
@@ -10,6 +11,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -32,6 +34,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha04'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
+    implementation 'com.android.support:multidex:1.0.3'
+
     /*Anko*/
     implementation "org.jetbrains.anko:anko:0.10.8"
 
@@ -41,4 +45,10 @@ dependencies {
 
     //module
     implementation project(path: ':imagepicker')
+
+    /*Firebase*/
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
 }
+
+apply plugin: 'com.google.gms.google-services'

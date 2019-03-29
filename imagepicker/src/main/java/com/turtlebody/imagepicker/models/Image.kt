@@ -8,7 +8,7 @@ import java.io.Serializable
 data class Image(var id: String = "",
                  var name: String = "",
                  var filePath: String = "",
-                 var size: String = "",
+                 var size: String?,
                  var thumbnailPath: String = "",
                  var isSelected: Boolean = false ): Serializable {
 

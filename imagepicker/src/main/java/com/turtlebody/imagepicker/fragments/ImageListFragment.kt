@@ -1,11 +1,13 @@
 package com.turtlebody.imagepicker.fragments
 
 
+import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.turtlebody.imagepicker.R
@@ -29,8 +31,6 @@ import java.io.File
 
 
 class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener {
-
-
     companion object {
 
         @JvmStatic
@@ -82,7 +82,6 @@ class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener 
         }
         btn_add_file.setOnClickListener {
             getAllUris()
-            //(activity as ActivityMain).sendBackData(mSelectedList)
         }
 
         if(!mPickerConfig.mAllowMultiImages){
@@ -103,29 +102,41 @@ class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener 
 
     override fun onImageCheck(pData: Image) {
         if(!mPickerConfig.mAllowMultiImages){
-            (activity as ActivityMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
-            return
-        }
-
-        val selectedIndex = mImageList.indexOf(pData)
-
-        if(selectedIndex >= 0){
-            //toggle
-            mImageList[selectedIndex].isSelected = !(mImageList[selectedIndex].isSelected)
-            //update ui
-            mAdapter.updateIsSelected(mImageList[selectedIndex])
-
-            //update selectedList
-            if(mImageList[selectedIndex].isSelected){
-                mSelectedList.add(mImageList[selectedIndex])
+            if(mPickerConfig.mShowDialog){
+                val simpleAlert = AlertDialog.Builder(context!!)
+                simpleAlert.setMessage("Are you sure to select ${pData.name}")
+                        .setCancelable(false)
+                        .setPositiveButton("OK") { dialog, which ->
+                            (activity as ActivityMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
+                        }
+                        .setNegativeButton("Cancel") { dialog, which -> dialog.dismiss()  }
+                simpleAlert.show()
             }
             else{
-                mSelectedList.removeAt(mSelectedList.indexOf(pData))
+                (activity as ActivityMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
             }
         }
-        (activity as ActivityMain).updateCounter(mSelectedList.size)
+        else{
+            val selectedIndex = mImageList.indexOf(pData)
 
-        btn_add_file.isEnabled = mSelectedList.size>0
+            if(selectedIndex >= 0){
+                //toggle
+                mImageList[selectedIndex].isSelected = !(mImageList[selectedIndex].isSelected)
+                //update ui
+                mAdapter.updateIsSelected(mImageList[selectedIndex])
+
+                //update selectedList
+                if(mImageList[selectedIndex].isSelected){
+                    mSelectedList.add(mImageList[selectedIndex])
+                }
+                else{
+                    mSelectedList.removeAt(mSelectedList.indexOf(pData))
+                }
+            }
+            (activity as ActivityMain).updateCounter(mSelectedList.size)
+
+            btn_add_file.isEnabled = mSelectedList.size>0
+        }
     }
 
 
@@ -139,7 +150,14 @@ class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener 
     private fun fetchFiles() {
         val fileItems = Single.fromCallable<Boolean> {
             mImageList.clear()
-            mImageList.addAll(FileManager.getFilesInFolder(context!!, mFolderId))
+            val tempArray = FileManager.getFilesInFolder(context!!, mFolderId)
+
+            //include only valid files
+            for(i in tempArray){
+                if(File(i.filePath).length()>0){
+                    mImageList.add(i)
+                }
+            }
             true
         }
 
