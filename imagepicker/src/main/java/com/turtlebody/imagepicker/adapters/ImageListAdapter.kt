@@ -17,6 +17,7 @@ import java.io.File
 class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ImageVewHolder>() {
     private var mData: MutableList<Image> = arrayListOf()
     private var mOnImageClickListener: OnImageClickListener? = null
+    var mShowCheckBox: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageVewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
@@ -64,6 +65,13 @@ class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ImageVewHolder>() 
 
             itemView.cb_btn_selection.setOnClickListener {
                 mOnImageClickListener?.onImageCheck(pData)
+            }
+
+            if(!mShowCheckBox){
+                itemView.cb_btn_selection.visibility = View.GONE
+            }
+            else{
+                itemView.cb_btn_selection.visibility = View.VISIBLE
             }
         }
     }

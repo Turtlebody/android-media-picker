@@ -1,6 +1,43 @@
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    }
+}
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'fb-like'
+
+    publishedGroupId = 'com.turtlebody'
+    libraryName = 'ImagePicker'
+    artifact = 'imagepicker'
+
+    libraryDescription = 'Android Library for selecting images from local storage'
+
+    siteUrl = 'https://github.com/Turtlebody/android-image-picker'
+    gitUrl = 'https://github.com/Turtlebody/android-image-picker.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'wangsun6'
+    developerName = 'Wangsun Hakhun'
+    developerEmail = 'wangsunhakhun@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
 
 android {
     compileSdkVersion 28
@@ -52,3 +89,5 @@ dependencies {
 
     implementation 'com.github.wangsun6:CustomFilePicker:1.0.6'
 }
+
+apply from: 'https://raw.githubusercontent.com/LissF/JCenter/master/script.gradle'

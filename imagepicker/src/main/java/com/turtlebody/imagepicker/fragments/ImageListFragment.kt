@@ -142,6 +142,7 @@ class ImageListFragment : FragmentBase(), ImageListAdapter.OnImageClickListener 
 
     private fun initAdapter() {
         mAdapter.setListener(this)
+        mAdapter.mShowCheckBox = mPickerConfig.mAllowMultiImages
         recycler_view.layoutManager = GridLayoutManager(context,2)
         recycler_view.adapter = mAdapter
         fetchFiles()
