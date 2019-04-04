@@ -12,10 +12,11 @@ import com.turtlebody.imagepicker.R
 import com.turtlebody.imagepicker.base.ActivityBase
 import com.turtlebody.imagepicker.core.Constants
 import com.turtlebody.imagepicker.core.FileManager
+import com.turtlebody.imagepicker.core.ImagePicker
 import com.turtlebody.imagepicker.core.PickerConfig
 import com.turtlebody.imagepicker.fragments.FolderListFragment
 import com.turtlebody.imagepicker.fragments.ImageListFragment
-import com.turtlebody.imagepicker.models.Folder
+import com.turtlebody.imagepicker.models.ImageVideoFolder
 import com.wangsun.custompicker.api.FilePicker
 import com.wangsun.custompicker.api.Picker
 import com.wangsun.custompicker.api.callbacks.FilePickerCallback
@@ -32,6 +33,7 @@ class ActivityMain : ActivityBase() {
 
 
     private lateinit var mFilePicker: FilePicker
+    private var mFileType: Int = Constants.FileTypes.FILE_TYPE_IMAGE
     private lateinit var mMenuItem: MenuItem
     private lateinit var mPickerConfig: PickerConfig
 
@@ -40,12 +42,13 @@ class ActivityMain : ActivityBase() {
         setContentView(R.layout.activity_main2)
 
         initToolbar(R.drawable.ic_arrow_back_black_24dp,toolbar)
-        toolbar.title = "Select Folder"
+        toolbar.title = "Select ImageVideoFolder"
 
         mFilePicker = FilePicker(this)
 
         if(intent.extras!=null){
             mPickerConfig = intent.getSerializableExtra(PickerConfig.ARG_BUNDLE) as PickerConfig
+            mFileType = intent.getIntExtra(ImagePicker.FILE_TYPE,Constants.FileTypes.FILE_TYPE_IMAGE)
         }
 
     }
@@ -103,21 +106,25 @@ class ActivityMain : ActivityBase() {
         toolbar_txt_count.visibility = View.GONE
         mMenuItem.isVisible = true
 
-        val fragment = FolderListFragment.newInstance(Constants.Fragment.FOLDER_LIST, Bundle())
+        val bundle =  Bundle()
+        bundle.putInt(ImagePicker.FILE_TYPE,mFileType)
+
+        val fragment = FolderListFragment.newInstance(Constants.Fragment.FOLDER_LIST, bundle)
         val ft = supportFragmentManager.beginTransaction()
         ft.add(R.id.frame_content, fragment, FolderListFragment::class.java.simpleName)
                 .addToBackStack(null)
                 .commit()
     }
 
-    fun startImageListFragment(folderId: String){
+    fun startImageListFragment(folderId: String, fileType: Int){
         toolbar.title = "Choose Images"
         toolbar_txt_count.visibility = View.VISIBLE
         mMenuItem.isVisible = false
 
         val bundle =  Bundle()
-        bundle.putString(Folder.FOLDER_ID,folderId)
+        bundle.putString(ImageVideoFolder.FOLDER_ID,folderId)
         bundle.putSerializable(PickerConfig.ARG_BUNDLE, mPickerConfig)
+        bundle.putSerializable(ImagePicker.FILE_TYPE, mFileType)
 
         val fragment = ImageListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
         val ft = supportFragmentManager.beginTransaction()
@@ -141,7 +148,6 @@ class ActivityMain : ActivityBase() {
     }
 
     private fun startImagePicker() {
-
         mFilePicker.setFilePickerCallback(object : FilePickerCallback{
             override fun onFilesChosen(files: MutableList<ChosenFile>?) {
                 files?.let {

@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.turtlebody.imagepicker.R
-import com.turtlebody.imagepicker.models.Folder
+import com.turtlebody.imagepicker.models.ImageVideoFolder
 import kotlinx.android.synthetic.main.item_folder.view.*
 import java.io.File
 
 /**
  * Created by WANGSUN on 26-Mar-19.
  */
-class FolderListAdapter: RecyclerView.Adapter<FolderListAdapter.FolderVewHolder>() {
-    private var mData: MutableList<Folder> = arrayListOf()
+class ImageVideoFolderAdapter: RecyclerView.Adapter<ImageVideoFolderAdapter.FolderVewHolder>() {
+    private var mData: MutableList<ImageVideoFolder> = arrayListOf()
     private var mOnFolderClickListener: OnFolderClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FolderVewHolder {
@@ -35,13 +35,13 @@ class FolderListAdapter: RecyclerView.Adapter<FolderListAdapter.FolderVewHolder>
         mOnFolderClickListener = listener
     }
 
-    fun setData(pData: MutableList<Folder>){
+    fun setData(pData: MutableList<ImageVideoFolder>){
         mData = pData
         notifyDataSetChanged()
     }
 
     inner class FolderVewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        fun bind(pData: Folder){
+        fun bind(pData: ImageVideoFolder){
 
             itemView.folder_txt_folder_name.text = pData.name
             itemView.folder_txt_total_items.text = "${pData.contentCount} items"
@@ -59,6 +59,6 @@ class FolderListAdapter: RecyclerView.Adapter<FolderListAdapter.FolderVewHolder>
 
 
     interface OnFolderClickListener {
-        fun onFolderClick(pData: Folder)
+        fun onFolderClick(pData: ImageVideoFolder)
     }
 }

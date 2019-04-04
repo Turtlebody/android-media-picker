@@ -3,6 +3,7 @@ package com.turtlebody.imagepicker.sample
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.turtlebody.imagepicker.core.Constants
 import com.turtlebody.imagepicker.core.ImagePicker
 import com.turtlebody.imagepicker.core.PickerConfig
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     @SuppressLint("CheckResult")
     private fun startMultiPicker() {
-        ImagePicker.with(this, PickerConfig().setAllowMultiImages(true))
+        ImagePicker.with(this, PickerConfig().setAllowMultiImages(true), Constants.FileTypes.FILE_TYPE_AUDIO)
                 .onResult()
                 .subscribe({
                     info { "success: $it" }
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     @SuppressLint("CheckResult")
     private fun startSinglePicker() {
-        ImagePicker.with(this, PickerConfig().setShowDialog(true))
+        ImagePicker.with(this, PickerConfig().setShowDialog(true), Constants.FileTypes.FILE_TYPE_AUDIO)
                 .onResult()
                 .subscribe({
                     info { "success: $it" }

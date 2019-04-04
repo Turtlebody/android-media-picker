@@ -1,37 +1,58 @@
 package com.turtlebody.imagepicker.core
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.database.Cursor
-import android.net.Uri
 import android.provider.MediaStore
-import java.util.HashMap
 
 /**
  * Created by WANGSUN on 27-Mar-19.
  */
 object CursorHelper {
+    private val imageQueryUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+    private val videoQueryUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+    private val audioQueryUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
 
-    private val URI_MAP: Map<Int, Uri> = object : HashMap<Int, Uri>() {
-        init {
-            put(Constants.Query.FOLDER_IMAGE, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+    /**
+     * cursor for images and videos
+     */
+    @SuppressLint("Recycle")
+    fun getImageVideoFolderCursor(context: Context, fileType: Int): Cursor? {
+        return if(fileType == Constants.FileTypes.FILE_TYPE_IMAGE){
+            context.contentResolver.query(imageQueryUri, Constants.Projection.IMAGE_VIDEO_FOLDER,
+                    null, null, MediaStore.MediaColumns.DATE_ADDED + " DESC")
         }
+        else
+            context.contentResolver.query(videoQueryUri, Constants.Projection.IMAGE_VIDEO_FOLDER,
+                    null, null, MediaStore.MediaColumns.DATE_ADDED + " DESC")
     }
 
-    private val folderProjection = Constants.Projection.FOLDER
-    private val imageProjection = Constants.Projection.IMAGE
-    private val queryUri = URI_MAP[Constants.Query.FOLDER_IMAGE]
+    @SuppressLint("Recycle")
+    fun getImageVideoFileCursor(context: Context, folderId: String, fileType: Int): Cursor?{
 
-    /**
-     * cursor for folder
-     */
-    fun getFolderCursor(context: Context): Cursor? {
-        return context.contentResolver.query(queryUri!!, folderProjection, null, null, MediaStore.MediaColumns.DATE_ADDED + " DESC")
+        return if(fileType == Constants.FileTypes.FILE_TYPE_IMAGE){
+            context.contentResolver.query(imageQueryUri, Constants.Projection.IMAGE_VIDEO_FILE,
+                    Constants.Projection.IMAGE_VIDEO_FILE[4] + " = '" + folderId + "'", null,
+                    MediaStore.MediaColumns.DATE_ADDED + " DESC")
+        }
+        else
+            context.contentResolver.query(videoQueryUri, Constants.Projection.IMAGE_VIDEO_FILE,
+                Constants.Projection.IMAGE_VIDEO_FILE[4] + " = '" + folderId + "'", null,
+                MediaStore.MediaColumns.DATE_ADDED + " DESC")
     }
 
+
     /**
-     * cursor for image
+     * cursor for audio
      */
-    fun getImageCursor(context: Context, folderId: String): Cursor?{
-        return context.contentResolver.query(queryUri!!, imageProjection, imageProjection[4] + " = '" + folderId + "'", null, MediaStore.MediaColumns.DATE_ADDED + " DESC")
+    fun getAudioFolderCursor(context: Context): Cursor? {
+        return context.contentResolver.query(audioQueryUri, Constants.Projection.AUDIO_FOLDER,
+                null, null, MediaStore.MediaColumns.DATE_ADDED + " DESC")
+    }
+
+    fun getAudioFileCursor(context: Context, folderId: String): Cursor?{
+        return context.contentResolver.query(audioQueryUri, Constants.Projection.AUDIO_FILE,
+                Constants.Projection.AUDIO_FILE[4] + " = '" + folderId + "'", null,
+                MediaStore.MediaColumns.DATE_ADDED + " DESC")
     }
 }

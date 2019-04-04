@@ -6,16 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.turtlebody.imagepicker.R
-import com.turtlebody.imagepicker.models.Image
+import com.turtlebody.imagepicker.models.ImageVideo
 import kotlinx.android.synthetic.main.item_image.view.*
-import org.jetbrains.anko.sdk27.coroutines.onCheckedChange
 import java.io.File
 
 /**
  * Created by WANGSUN on 26-Mar-19.
  */
-class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ImageVewHolder>() {
-    private var mData: MutableList<Image> = arrayListOf()
+class ImageVideoAdapter: RecyclerView.Adapter<ImageVideoAdapter.ImageVewHolder>() {
+    private var mData: MutableList<ImageVideo> = arrayListOf()
     private var mOnImageClickListener: OnImageClickListener? = null
     var mShowCheckBox: Boolean = false
 
@@ -37,12 +36,12 @@ class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ImageVewHolder>() 
         mOnImageClickListener = listener
     }
 
-    fun setData(pData: MutableList<Image>){
+    fun setData(pData: MutableList<ImageVideo>){
         mData = pData
         notifyDataSetChanged()
     }
 
-    fun updateIsSelected(pData: Image){
+    fun updateIsSelected(pData: ImageVideo){
         val pos = mData.indexOf(pData)
         if(pos>=0){
             mData[pos] = pData
@@ -51,7 +50,7 @@ class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ImageVewHolder>() 
     }
 
     inner class ImageVewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        fun bind(pData: Image){
+        fun bind(pData: ImageVideo){
 
             Glide.with(itemView)
                     .load(File(pData.thumbnailPath))
@@ -78,6 +77,6 @@ class ImageListAdapter: RecyclerView.Adapter<ImageListAdapter.ImageVewHolder>() 
 
 
     interface OnImageClickListener {
-        fun onImageCheck(pData: Image)
+        fun onImageCheck(pData: ImageVideo)
     }
 }

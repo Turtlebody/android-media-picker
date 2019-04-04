@@ -17,6 +17,7 @@ import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import java.lang.ref.WeakReference
 
 /**
@@ -26,14 +27,15 @@ class ImagePicker {
 
     companion object {
         @JvmStatic
-        fun with(activity: FragmentActivity, pickerConfig: PickerConfig): FilePickerImpl {
-            return FilePickerImpl(activity, pickerConfig)
+        fun with(activity: FragmentActivity, pickerConfig: PickerConfig, fileType: Int): FilePickerImpl {
+            return FilePickerImpl(activity, pickerConfig, fileType )
         }
 
         private const val REQ_CODE = 500
+        val FILE_TYPE = "mFileType"
     }
 
-    class FilePickerImpl(activity: FragmentActivity, private var config: PickerConfig) : PickerFragment.OnPickerListener, AnkoLogger {
+    class FilePickerImpl(activity: FragmentActivity, private var config: PickerConfig,var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
         private lateinit var mEmitter: ObservableEmitter<MutableList<Uri>>
         private var mActivity: WeakReference<FragmentActivity> = WeakReference(activity)
 
@@ -79,9 +81,12 @@ class ImagePicker {
         private fun startFragment() {
             val bundle = Bundle()
             bundle.putSerializable(PickerConfig.ARG_BUNDLE, config)
+            bundle.putSerializable(FILE_TYPE, mFileType)
 
             val fragment = PickerFragment()
             fragment.arguments = bundle
+
+            info { "imagePicker mFileType: $mFileType" }
 
             fragment.setListener(this)
             mActivity.get()?.supportFragmentManager?.beginTransaction()?.add(fragment, PickerFragment::class.java.simpleName)?.commit()
@@ -100,9 +105,12 @@ class ImagePicker {
             super.onActivityCreated(savedInstanceState)
 
             val config = arguments?.getSerializable(PickerConfig.ARG_BUNDLE)
+            val fileType = arguments?.getInt(FILE_TYPE)
 
             val intent = Intent(context, ActivityMain::class.java)
             intent.putExtra(PickerConfig.ARG_BUNDLE, config)
+            intent.putExtra(FILE_TYPE, fileType)
+            //intent.putExtra("",arguments)
             startActivityForResult(intent, REQ_CODE)
         }
 

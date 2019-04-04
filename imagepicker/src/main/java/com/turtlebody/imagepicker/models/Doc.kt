@@ -5,12 +5,12 @@ import java.io.Serializable
 /**
  * Created by WANGSUN on 26-Mar-19.
  */
-data class Image(var id: String = "",
-                 var name: String = "",
-                 var filePath: String = "",
-                 var size: String?,
-                 var thumbnailPath: String = "",
-                 var isSelected: Boolean = false ): Serializable {
+data class Doc(var id: String = "",
+               var name: String = "",
+               var filePath: String = "",
+               var size: String?,
+               var thumbnailPath: String = "",
+               var isSelected: Boolean = false ): Serializable {
 
     companion object {
         val ARG_BUNDLE = javaClass.canonicalName + ".bundle_arg"
@@ -26,7 +26,7 @@ data class Image(var id: String = "",
             return false
         }
 
-        if (!(o is Image)) {
+        if (!(o is Doc)) {
             return false
         }
 

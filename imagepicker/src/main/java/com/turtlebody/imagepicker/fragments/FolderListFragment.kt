@@ -9,10 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.turtlebody.imagepicker.R
 import com.turtlebody.imagepicker.activities.ActivityMain
-import com.turtlebody.imagepicker.adapters.FolderListAdapter
+import com.turtlebody.imagepicker.adapters.AudioFolderAdapter
+import com.turtlebody.imagepicker.adapters.ImageVideoFolderAdapter
 import com.turtlebody.imagepicker.base.FragmentBase
-import com.turtlebody.imagepicker.models.Folder
+import com.turtlebody.imagepicker.core.Constants
+import com.turtlebody.imagepicker.models.ImageVideoFolder
 import com.turtlebody.imagepicker.core.FileManager
+import com.turtlebody.imagepicker.core.ImagePicker
+import com.turtlebody.imagepicker.models.AudioFolder
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -39,8 +43,12 @@ class FolderListFragment : FragmentBase() {
 
     }
 
-    private var mAdapter: FolderListAdapter = FolderListAdapter()
-    private var mFolderList: MutableList<Folder> = arrayListOf()
+    private var mImageVideoFolderAdapter: ImageVideoFolderAdapter = ImageVideoFolderAdapter()
+    private var mImageVideoFolderList: MutableList<ImageVideoFolder> = arrayListOf()
+    private var mFileType = Constants.FileTypes.FILE_TYPE_IMAGE
+
+    private var mAudioFolderAdapter: AudioFolderAdapter = AudioFolderAdapter()
+    private var mAudioFolderList: MutableList<AudioFolder> = arrayListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -51,36 +59,53 @@ class FolderListFragment : FragmentBase() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        initAdapter()
+        arguments?.let {
+            mFileType = it.getInt(ImagePicker.FILE_TYPE)
+        }
 
+        initAdapter()
     }
 
     private fun initAdapter() {
-        mAdapter.setListener(object : FolderListAdapter.OnFolderClickListener{
-            override fun onFolderClick(pData: Folder) {
-                (activity as ActivityMain).startImageListFragment(pData.id)
+        mImageVideoFolderAdapter.setListener(object : ImageVideoFolderAdapter.OnFolderClickListener{
+            override fun onFolderClick(pData: ImageVideoFolder) {
+                (activity as ActivityMain).startImageListFragment(pData.id,mFileType)
+            }
+        })
+
+        mAudioFolderAdapter.setListener(object : AudioFolderAdapter.OnAudioFolderClickListener {
+            override fun onFolderClick(pData: AudioFolder) {
+                (activity as ActivityMain).startImageListFragment(pData.id,mFileType)
             }
         })
         recycler_view.layoutManager = LinearLayoutManager(context)
-        recycler_view.adapter = mAdapter
 
-        fetchFolders()
+        if(mFileType==Constants.FileTypes.FILE_TYPE_AUDIO){
+            recycler_view.adapter = mAudioFolderAdapter
+            fetchAudioFolders()
+        }
+        else{
+            recycler_view.adapter = mImageVideoFolderAdapter
+            fetchImageVideoFolders()
+        }
+
+
     }
 
-    private fun fetchFolders() {
-        val bucketFetch = Single.fromCallable<ArrayList<Folder>> { FileManager.fetchLocalFolders(context!!) }
+    private fun fetchImageVideoFolders() {
+        val bucketFetch = Single.fromCallable<ArrayList<ImageVideoFolder>> { FileManager.fetchImageVideoFolders(context!!,mFileType) }
         bucketFetch
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<ArrayList<Folder>> {
+                .subscribe(object : SingleObserver<ArrayList<ImageVideoFolder>> {
 
                     override fun onSubscribe(@NonNull d: Disposable) {
                         progress_view.visibility = View.VISIBLE
                     }
 
-                    override fun onSuccess(@NonNull folders: ArrayList<Folder>) {
-                        mFolderList = folders
-                        mAdapter.setData(mFolderList)
+                    override fun onSuccess(@NonNull imageVideoFolders: ArrayList<ImageVideoFolder>) {
+                        mImageVideoFolderList = imageVideoFolders
+                        mImageVideoFolderAdapter.setData(mImageVideoFolderList)
                         progress_view.visibility = View.GONE
                     }
 
@@ -90,6 +115,32 @@ class FolderListFragment : FragmentBase() {
                     }
                 })
     }
+
+    private fun fetchAudioFolders() {
+        val bucketFetch = Single.fromCallable<ArrayList<AudioFolder>> { FileManager.fetchAudioFolders(context!!) }
+        bucketFetch
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : SingleObserver<ArrayList<AudioFolder>> {
+
+                    override fun onSubscribe(@NonNull d: Disposable) {
+                        progress_view.visibility = View.VISIBLE
+                    }
+
+                    override fun onSuccess(@NonNull audioFolders: ArrayList<AudioFolder>) {
+                        mAudioFolderList = audioFolders
+                        mAudioFolderAdapter.setData(mAudioFolderList)
+                        progress_view.visibility = View.GONE
+                    }
+
+                    override fun onError(@NonNull e: Throwable) {
+                        progress_view.visibility = View.GONE
+                        info { "error: ${e.message}" }
+                    }
+                })
+    }
+
+
 
 
 }

@@ -28,8 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_arrow_back_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\WANGSUN" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_group_video" />
+                            <entry key="sourceFile" value="D:\Adobe\Group 2876.svg" />
                           </map>
                         </option>
                       </PersistentState>
