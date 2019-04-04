@@ -9,27 +9,27 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.turtlebody.imagepicker.R
-import com.turtlebody.imagepicker.base.ActivityBase
+import com.turtlebody.imagepicker.base.ActivityMyBase
 import com.turtlebody.imagepicker.core.Constants
 import com.turtlebody.imagepicker.core.FileManager
 import com.turtlebody.imagepicker.core.ImagePicker
 import com.turtlebody.imagepicker.core.PickerConfig
 import com.turtlebody.imagepicker.fragments.FolderListFragment
-import com.turtlebody.imagepicker.fragments.ImageListFragment
+import com.turtlebody.imagepicker.fragments.FileListFragment
 import com.turtlebody.imagepicker.models.ImageVideoFolder
 import com.wangsun.custompicker.api.FilePicker
 import com.wangsun.custompicker.api.Picker
 import com.wangsun.custompicker.api.callbacks.FilePickerCallback
 import com.wangsun.custompicker.api.entity.ChosenFile
 import com.wangsun.custompicker.utils.MimeUtils
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.lib_toolbar.*
 import java.io.File
 import java.io.Serializable
 
 
 
 
-class ActivityMain : ActivityBase() {
+class ActivityMyLibMain : ActivityMyBase() {
 
 
     private lateinit var mFilePicker: FilePicker
@@ -39,10 +39,10 @@ class ActivityMain : ActivityBase() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.activity_lib_main)
 
-        initToolbar(R.drawable.ic_arrow_back_black_24dp,toolbar)
-        toolbar.title = "Select ImageVideoFolder"
+        initToolbar(R.drawable.ic_arrow_back_black_24dp,my_toolbar)
+        my_toolbar.title = "Select ImageVideoFolder"
 
         mFilePicker = FilePicker(this)
 
@@ -58,9 +58,9 @@ class ActivityMain : ActivityBase() {
         val fragment = supportFragmentManager.findFragmentById(R.id.frame_content)
         when (fragment) {
             is FolderListFragment -> finish()
-            is ImageListFragment -> {
+            is FileListFragment -> {
                 super.onBackPressed()
-                toolbar.title = "Select Folder"
+                my_toolbar.title = "Select Folder"
                 toolbar_txt_count.visibility = View.GONE
                 mMenuItem.isVisible = true
             }
@@ -102,7 +102,7 @@ class ActivityMain : ActivityBase() {
 
 
     private fun startFolderListFragment(){
-        toolbar.title = "Select Folder"
+        my_toolbar.title = "Select Folder"
         toolbar_txt_count.visibility = View.GONE
         mMenuItem.isVisible = true
 
@@ -117,7 +117,7 @@ class ActivityMain : ActivityBase() {
     }
 
     fun startImageListFragment(folderId: String, fileType: Int){
-        toolbar.title = "Choose Images"
+        my_toolbar.title = "Choose Images"
         toolbar_txt_count.visibility = View.VISIBLE
         mMenuItem.isVisible = false
 
@@ -126,9 +126,9 @@ class ActivityMain : ActivityBase() {
         bundle.putSerializable(PickerConfig.ARG_BUNDLE, mPickerConfig)
         bundle.putSerializable(ImagePicker.FILE_TYPE, mFileType)
 
-        val fragment = ImageListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
+        val fragment = FileListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
         val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.frame_content, fragment, ImageListFragment::class.java.simpleName)
+        ft.add(R.id.frame_content, fragment, FileListFragment::class.java.simpleName)
                 .addToBackStack(null)
                 .commit()
 
@@ -141,7 +141,7 @@ class ActivityMain : ActivityBase() {
     fun sendBackData(list: MutableList<Uri>){
         if(list.isNotEmpty()){
             val intent = Intent()
-            intent.putExtra(ImageListFragment.URI_LIST_KEY,list as Serializable)
+            intent.putExtra(FileListFragment.URI_LIST_KEY,list as Serializable)
             setResult(Activity.RESULT_OK, intent)
         }
         finish()
@@ -155,7 +155,7 @@ class ActivityMain : ActivityBase() {
                     if (!files.isEmpty()) {
                         for (i in files) {
                             if (i.isSuccess && i.size!=0L) {
-                                finalFiles.add(FileManager.getContentUri(this@ActivityMain, File(i.originalPath)))
+                                finalFiles.add(FileManager.getContentUri(this@ActivityMyLibMain, File(i.originalPath)))
                             }
                         }
                     }

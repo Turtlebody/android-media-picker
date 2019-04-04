@@ -6,41 +6,102 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="3"
     tools:context=".ActivityHome">
 
-    <FrameLayout
+    <include layout="@layout/toolbar"/>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-    </FrameLayout>
+        android:layout_height="1dp"
+        android:background="@color/md_black_1000_15"/>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:padding="@dimen/offset_16">
 
-        <TextView
-            style="@style/TextTitle"
-            android:text="Sound"
-            android:gravity="center"/>
-
-        <ImageView
+        <LinearLayout
+            android:id="@+id/home_ll_btn_images"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/length_104"
-            android:src="@drawable/ic_group_sound"
-            android:layout_gravity="center_horizontal|bottom"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/TextTitle"
+                android:text="Images"
+                android:padding="@dimen/offset_8"
+                android:gravity="center"/>
+
+            <ImageView
+                android:layout_marginStart="@dimen/offset_24"
+                android:layout_marginEnd="@dimen/offset_24"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/length_128"
+                android:src="@drawable/pic_image"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal|bottom"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/md_grey_300"/>
+
+        <LinearLayout
+            android:id="@+id/home_ll_btn_videos"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/TextTitle"
+                android:text="Video"
+                android:padding="@dimen/offset_8"
+                android:gravity="center"/>
+
+            <ImageView
+                android:layout_width="@dimen/length_104"
+                android:layout_height="@dimen/length_104"
+                android:src="@drawable/ic_video"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal|bottom"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/md_grey_300"/>
+
+        <LinearLayout
+            android:id="@+id/home_ll_btn_sounds"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/TextTitle"
+                android:text="Sound"
+                android:padding="@dimen/offset_8"
+                android:gravity="center"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/length_104"
+                android:src="@drawable/ic_sound"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal|bottom"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-
 </LinearLayout>

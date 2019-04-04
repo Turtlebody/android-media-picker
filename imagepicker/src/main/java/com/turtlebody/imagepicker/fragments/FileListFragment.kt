@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.turtlebody.imagepicker.R
-import com.turtlebody.imagepicker.activities.ActivityMain
+import com.turtlebody.imagepicker.activities.ActivityMyLibMain
 import com.turtlebody.imagepicker.adapters.AudioAdapter
 import com.turtlebody.imagepicker.adapters.ImageVideoAdapter
-import com.turtlebody.imagepicker.base.FragmentBase
+import com.turtlebody.imagepicker.base.FragmentMyBase
 import com.turtlebody.imagepicker.core.Constants
 import com.turtlebody.imagepicker.core.FileManager
 import com.turtlebody.imagepicker.core.ImagePicker
@@ -34,7 +34,7 @@ import org.jetbrains.anko.info
 import java.io.File
 
 
-class ImageListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener, AudioAdapter.OnAudioClickListener {
+class FileListFragment : FragmentMyBase(), ImageVideoAdapter.OnImageClickListener, AudioAdapter.OnAudioClickListener {
 
 
     companion object {
@@ -43,7 +43,7 @@ class ImageListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener
         fun newInstance(key: Int, b: Bundle?): Fragment {
             val bf: Bundle = b ?: Bundle()
             bf.putInt("fragment.key", key);
-            val fragment = ImageListFragment()
+            val fragment = FileListFragment()
             fragment.arguments = bf
             return fragment
         }
@@ -82,14 +82,14 @@ class ImageListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener
             info { "folderId: $mFolderId" }
         }
 
-        (activity as ActivityMain).updateCounter(mSelectedImageVideoList.size)
+        (activity as ActivityMyLibMain).updateCounter(mSelectedImageVideoList.size)
         initAdapter()
         initButton()
     }
 
     private fun initButton() {
         iv_cancel.setOnClickListener {
-            (activity as ActivityMain).onBackPressed()
+            (activity as ActivityMyLibMain).onBackPressed()
         }
         btn_add_file.setOnClickListener {
             getAllUris()
@@ -105,18 +105,20 @@ class ImageListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener
         if(mFileType == Constants.FileTypes.FILE_TYPE_AUDIO){
             if(mSelectedAudioList.isNotEmpty()){
                 for (i in mSelectedAudioList){
+                    info { "audio path: ${i.filePath}" }
                     mUriList.add(FileManager.getContentUri(context!!, File(i.filePath)))
                 }
-                (activity as ActivityMain).sendBackData(mUriList)
+                (activity as ActivityMyLibMain).sendBackData(mUriList)
             }
 
         }
         else{
             if(mSelectedImageVideoList.isNotEmpty()){
                 for (i in mSelectedImageVideoList){
+                    info { "path: ${i.filePath}" }
                     mUriList.add(FileManager.getContentUri(context!!, File(i.filePath)))
                 }
-                (activity as ActivityMain).sendBackData(mUriList)
+                (activity as ActivityMyLibMain).sendBackData(mUriList)
             }
         }
 
@@ -127,20 +129,19 @@ class ImageListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener
 
         //var directoryName = File(pData.filePath).parentFile.name
         //var dirPath = File(pData.filePath).parent
-
         if(!mPickerConfig.mAllowMultiImages){
             if(mPickerConfig.mShowDialog){
                 val simpleAlert = AlertDialog.Builder(context!!)
                 simpleAlert.setMessage("Are you sure to select ${pData.name}")
                         .setCancelable(false)
                         .setPositiveButton("OK") { dialog, which ->
-                            (activity as ActivityMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
+                            (activity as ActivityMyLibMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
                         }
                         .setNegativeButton("Cancel") { dialog, which -> dialog.dismiss()  }
                 simpleAlert.show()
             }
             else{
-                (activity as ActivityMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
+                (activity as ActivityMyLibMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
             }
         }
         else{
@@ -160,7 +161,7 @@ class ImageListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener
                     mSelectedImageVideoList.removeAt(mSelectedImageVideoList.indexOf(pData))
                 }
             }
-            (activity as ActivityMain).updateCounter(mSelectedImageVideoList.size)
+            (activity as ActivityMyLibMain).updateCounter(mSelectedImageVideoList.size)
             btn_add_file.isEnabled = mSelectedImageVideoList.size>0
         }
     }
@@ -172,13 +173,13 @@ class ImageListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener
                 simpleAlert.setMessage("Are you sure to select ${pData.name}")
                         .setCancelable(false)
                         .setPositiveButton("OK") { dialog, which ->
-                            (activity as ActivityMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
+                            (activity as ActivityMyLibMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
                         }
                         .setNegativeButton("Cancel") { dialog, which -> dialog.dismiss()  }
                 simpleAlert.show()
             }
             else{
-                (activity as ActivityMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
+                (activity as ActivityMyLibMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
             }
         }
         else{
@@ -198,7 +199,7 @@ class ImageListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener
                     mSelectedAudioList.removeAt(mSelectedAudioList.indexOf(pData))
                 }
             }
-            (activity as ActivityMain).updateCounter(mSelectedAudioList.size)
+            (activity as ActivityMyLibMain).updateCounter(mSelectedAudioList.size)
             btn_add_file.isEnabled = mSelectedAudioList.size>0
         }
     }

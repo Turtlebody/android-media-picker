@@ -8,7 +8,7 @@
 
     <androidx.appcompat.widget.Toolbar
         app:title="@string/app_name"
-        android:id="@+id/toolbar"
+        android:id="@+id/my_toolbar"
         app:layout_collapseMode="pin"
         app:titleTextAppearance="@style/App.TextAppearance.h4.Title"
         app:popupTheme="@style/AppTheme.PopupOverlay"

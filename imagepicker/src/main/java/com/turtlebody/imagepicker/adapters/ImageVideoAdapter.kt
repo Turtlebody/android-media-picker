@@ -62,10 +62,6 @@ class ImageVideoAdapter: RecyclerView.Adapter<ImageVideoAdapter.ImageVewHolder>(
                 mOnImageClickListener?.onImageCheck(pData)
             }
 
-            itemView.cb_btn_selection.setOnClickListener {
-                mOnImageClickListener?.onImageCheck(pData)
-            }
-
             if(!mShowCheckBox){
                 itemView.cb_btn_selection.visibility = View.GONE
             }

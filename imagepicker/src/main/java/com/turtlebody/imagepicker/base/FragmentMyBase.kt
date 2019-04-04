@@ -5,7 +5,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import org.jetbrains.anko.AnkoLogger
 
-abstract class FragmentBase : Fragment(),AnkoLogger, Toolbar.OnMenuItemClickListener {
+abstract class FragmentMyBase : Fragment(),AnkoLogger, Toolbar.OnMenuItemClickListener {
     private var toolbar: Toolbar? = null
 
 

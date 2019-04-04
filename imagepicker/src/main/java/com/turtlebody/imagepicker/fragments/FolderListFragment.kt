@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.turtlebody.imagepicker.R
-import com.turtlebody.imagepicker.activities.ActivityMain
+import com.turtlebody.imagepicker.activities.ActivityMyLibMain
 import com.turtlebody.imagepicker.adapters.AudioFolderAdapter
 import com.turtlebody.imagepicker.adapters.ImageVideoFolderAdapter
-import com.turtlebody.imagepicker.base.FragmentBase
+import com.turtlebody.imagepicker.base.FragmentMyBase
 import com.turtlebody.imagepicker.core.Constants
 import com.turtlebody.imagepicker.models.ImageVideoFolder
 import com.turtlebody.imagepicker.core.FileManager
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.frame_progress.*
 import org.jetbrains.anko.info
 
 
-class FolderListFragment : FragmentBase() {
+class FolderListFragment : FragmentMyBase() {
 
     companion object {
 
@@ -69,13 +69,13 @@ class FolderListFragment : FragmentBase() {
     private fun initAdapter() {
         mImageVideoFolderAdapter.setListener(object : ImageVideoFolderAdapter.OnFolderClickListener{
             override fun onFolderClick(pData: ImageVideoFolder) {
-                (activity as ActivityMain).startImageListFragment(pData.id,mFileType)
+                (activity as ActivityMyLibMain).startImageListFragment(pData.id,mFileType)
             }
         })
 
         mAudioFolderAdapter.setListener(object : AudioFolderAdapter.OnAudioFolderClickListener {
             override fun onFolderClick(pData: AudioFolder) {
-                (activity as ActivityMain).startImageListFragment(pData.id,mFileType)
+                (activity as ActivityMyLibMain).startImageListFragment(pData.id,mFileType)
             }
         })
         recycler_view.layoutManager = LinearLayoutManager(context)

@@ -3,11 +3,11 @@ package com.turtlebody.imagepicker.base
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.lib_toolbar.*
 import org.jetbrains.anko.AnkoLogger
 
 
-abstract class ActivityBase : AppCompatActivity(), AnkoLogger {
+abstract class ActivityMyBase : AppCompatActivity(), AnkoLogger {
     init {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     }
@@ -17,7 +17,7 @@ abstract class ActivityBase : AppCompatActivity(), AnkoLogger {
         set(value) {
             val actionBar = supportActionBar
             actionBar?.title = value
-//            toolbar.title = value
+//            lib_toolbar.title = value
         }
 
     fun initToolbar(toolbar: Toolbar) {

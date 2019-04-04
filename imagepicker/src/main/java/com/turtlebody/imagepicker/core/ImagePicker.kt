@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.turtlebody.imagepicker.activities.ActivityMain
-import com.turtlebody.imagepicker.fragments.ImageListFragment
+import com.turtlebody.imagepicker.activities.ActivityMyLibMain
+import com.turtlebody.imagepicker.fragments.FileListFragment
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -107,7 +107,7 @@ class ImagePicker {
             val config = arguments?.getSerializable(PickerConfig.ARG_BUNDLE)
             val fileType = arguments?.getInt(FILE_TYPE)
 
-            val intent = Intent(context, ActivityMain::class.java)
+            val intent = Intent(context, ActivityMyLibMain::class.java)
             intent.putExtra(PickerConfig.ARG_BUNDLE, config)
             intent.putExtra(FILE_TYPE, fileType)
             //intent.putExtra("",arguments)
@@ -117,7 +117,7 @@ class ImagePicker {
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             if (requestCode == REQ_CODE) {
                 if (resultCode == Activity.RESULT_OK) {
-                    val list = data?.extras?.getSerializable(ImageListFragment.URI_LIST_KEY) as MutableList<Uri>
+                    val list = data?.extras?.getSerializable(FileListFragment.URI_LIST_KEY) as MutableList<Uri>
                     mListener?.onData(list)
                 } else {
                     mListener?.onCancel("Cancelled")
