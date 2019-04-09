@@ -37,6 +37,7 @@
                 android:gravity="center"/>
 
             <ImageView
+                android:id="@+id/home_iv_select_images"
                 android:layout_marginStart="@dimen/offset_24"
                 android:layout_marginEnd="@dimen/offset_24"
                 android:layout_width="match_parent"

@@ -42,7 +42,7 @@ class ActivityMyLibMain : ActivityMyBase() {
         setContentView(R.layout.activity_lib_main)
 
         initToolbar(R.drawable.ic_arrow_back_black_24dp,my_toolbar)
-        my_toolbar.title = "Select ImageVideoFolder"
+        my_toolbar.title = "Select Folder"
 
         mFilePicker = FilePicker(this)
 
@@ -116,8 +116,13 @@ class ActivityMyLibMain : ActivityMyBase() {
                 .commit()
     }
 
-    fun startImageListFragment(folderId: String, fileType: Int){
-        my_toolbar.title = "Choose Images"
+    fun startImageListFragment(folderId: String){
+        when(mFileType){
+            Constants.FileTypes.FILE_TYPE_IMAGE -> my_toolbar.title = "Choose Image"
+            Constants.FileTypes.FILE_TYPE_VIDEO -> my_toolbar.title = "Choose Video"
+            Constants.FileTypes.FILE_TYPE_AUDIO -> my_toolbar.title = "Choose Audio"
+        }
+
         toolbar_txt_count.visibility = View.VISIBLE
         mMenuItem.isVisible = false
 
@@ -148,25 +153,75 @@ class ActivityMyLibMain : ActivityMyBase() {
     }
 
     private fun startImagePicker() {
-        mFilePicker.setFilePickerCallback(object : FilePickerCallback{
-            override fun onFilesChosen(files: MutableList<ChosenFile>?) {
-                files?.let {
-                    val finalFiles = ArrayList<Uri>()
-                    if (!files.isEmpty()) {
-                        for (i in files) {
-                            if (i.isSuccess && i.size!=0L) {
-                                finalFiles.add(FileManager.getContentUri(this@ActivityMyLibMain, File(i.originalPath)))
+
+        when(mFileType){
+            Constants.FileTypes.FILE_TYPE_IMAGE->{
+                mFilePicker.setFilePickerCallback(object : FilePickerCallback{
+                    override fun onFilesChosen(files: MutableList<ChosenFile>?) {
+                        files?.let {
+                            val finalFiles = ArrayList<Uri>()
+                            if (!files.isEmpty()) {
+                                for (i in files) {
+                                    if (i.isSuccess && i.size!=0L) {
+                                        finalFiles.add(FileManager.getContentUri(this@ActivityMyLibMain, File(i.originalPath)))
+                                    }
+                                }
                             }
+                            sendBackData(finalFiles)
                         }
                     }
-                    sendBackData(finalFiles)
-                }
+                    override fun onError(message: String?) {}
+                })
+                        .allowMultipleFiles(mPickerConfig.mAllowMultiImages)
+                        .setFileType(MimeUtils.FileType.IMAGE)
+                        .setMimeTypes(MimeUtils.MimeType.IMAGE)
+                        .pickFile()
             }
-            override fun onError(message: String?) {}
-        })
-                .allowMultipleFiles(mPickerConfig.mAllowMultiImages)
-                .setFileType(MimeUtils.FileType.IMAGE)
-                .setMimeTypes(MimeUtils.MimeType.IMAGE)
-                .pickFile()
+            Constants.FileTypes.FILE_TYPE_VIDEO->{
+                mFilePicker.setFilePickerCallback(object : FilePickerCallback{
+                    override fun onFilesChosen(files: MutableList<ChosenFile>?) {
+                        files?.let {
+                            val finalFiles = ArrayList<Uri>()
+                            if (!files.isEmpty()) {
+                                for (i in files) {
+                                    if (i.isSuccess && i.size!=0L) {
+                                        finalFiles.add(FileManager.getContentUri(this@ActivityMyLibMain, File(i.originalPath)))
+                                    }
+                                }
+                            }
+                            sendBackData(finalFiles)
+                        }
+                    }
+                    override fun onError(message: String?) {}
+                })
+                        .allowMultipleFiles(mPickerConfig.mAllowMultiImages)
+                        .setFileType(MimeUtils.FileType.VIDEO)
+                        .setMimeTypes(MimeUtils.MimeType.VIDEO)
+                        .pickFile()
+            }
+            Constants.FileTypes.FILE_TYPE_AUDIO->{
+                mFilePicker.setFilePickerCallback(object : FilePickerCallback{
+                    override fun onFilesChosen(files: MutableList<ChosenFile>?) {
+                        files?.let {
+                            val finalFiles = ArrayList<Uri>()
+                            if (!files.isEmpty()) {
+                                for (i in files) {
+                                    if (i.isSuccess && i.size!=0L) {
+                                        finalFiles.add(FileManager.getContentUri(this@ActivityMyLibMain, File(i.originalPath)))
+                                    }
+                                }
+                            }
+                            sendBackData(finalFiles)
+                        }
+                    }
+                    override fun onError(message: String?) {}
+                })
+                        .allowMultipleFiles(mPickerConfig.mAllowMultiImages)
+                        .setFileType(MimeUtils.FileType.AUDIO)
+                        .setMimeTypes(MimeUtils.MimeType.AUDIO)
+                        .pickFile()
+            }
+        }
+
     }
 }

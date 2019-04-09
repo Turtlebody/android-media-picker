@@ -46,6 +46,9 @@ dependencies {
     //module
     implementation project(path: ':imagepicker')
 
+    /* image */
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+
     /*Firebase*/
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'

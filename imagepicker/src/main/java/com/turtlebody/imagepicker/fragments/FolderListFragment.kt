@@ -69,13 +69,13 @@ class FolderListFragment : FragmentMyBase() {
     private fun initAdapter() {
         mImageVideoFolderAdapter.setListener(object : ImageVideoFolderAdapter.OnFolderClickListener{
             override fun onFolderClick(pData: ImageVideoFolder) {
-                (activity as ActivityMyLibMain).startImageListFragment(pData.id,mFileType)
+                (activity as ActivityMyLibMain).startImageListFragment(pData.id)
             }
         })
 
         mAudioFolderAdapter.setListener(object : AudioFolderAdapter.OnAudioFolderClickListener {
             override fun onFolderClick(pData: AudioFolder) {
-                (activity as ActivityMyLibMain).startImageListFragment(pData.id,mFileType)
+                (activity as ActivityMyLibMain).startImageListFragment(pData.id)
             }
         })
         recycler_view.layoutManager = LinearLayoutManager(context)

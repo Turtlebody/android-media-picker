@@ -13,10 +13,17 @@ class PickerConfig: Serializable {
         val ARG_BUNDLE = javaClass.canonicalName + ".bundle_arg"
     }
 
+    /**
+     *  Show dialog after selecting file
+     */
     fun setShowDialog(value: Boolean):PickerConfig {
         mShowDialog = value
         return this
     }
+
+    /**
+     * Allow multiple selection
+     */
     fun setAllowMultiImages(value: Boolean): PickerConfig{
         mAllowMultiImages = value
         return this
