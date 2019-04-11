@@ -3,7 +3,7 @@ package com.turtlebody.imagepicker.base
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
-import kotlinx.android.synthetic.main.lib_toolbar.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.AnkoLogger
 
 
@@ -17,7 +17,7 @@ abstract class ActivityMyBase : AppCompatActivity(), AnkoLogger {
         set(value) {
             val actionBar = supportActionBar
             actionBar?.title = value
-//            lib_toolbar.title = value
+//            toolbar.title = value
         }
 
     fun initToolbar(toolbar: Toolbar) {

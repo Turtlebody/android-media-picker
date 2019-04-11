@@ -5,9 +5,9 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
-import com.turtlebody.imagepicker.core.Constants
-import com.turtlebody.imagepicker.core.ImagePicker
-import com.turtlebody.imagepicker.core.PickerConfig
+import com.turtlebody.mediapicker.core.Constants
+import com.turtlebody.mediapicker.core.ImagePicker
+import com.turtlebody.mediapicker.core.PickerConfig
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.info

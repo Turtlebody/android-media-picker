@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_white_1000"
+    android:orientation="vertical"
+    tools:context=".ActivityLauncher">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <ImageView
+
+            android:layout_width="@dimen/length_144"
+            app:srcCompat="@drawable/ic_turtlebody"
+            android:scaleType="centerInside"
+            android:layout_height="@dimen/length_112" />
+        <TextView
+            android:textAppearance="@style/App.TextAppearance.h4.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/md_grey_600"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="@dimen/offset_16"
+            android:text="Media Picker" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/length_40"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="@dimen/length_64"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/length_32"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/ic_green_toad" />
+
+        <TextView
+            android:textAppearance="@style/App.TextAppearance.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="@dimen/offset_12"
+            android:textSize="@dimen/font_10"
+            android:text="Green Toad Product" />
+
+    </LinearLayout>
+
+</FrameLayout>

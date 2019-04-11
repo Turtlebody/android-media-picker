@@ -70,7 +70,7 @@
             <ImageView
                 android:layout_width="@dimen/length_104"
                 android:layout_height="@dimen/length_104"
-                android:src="@drawable/ic_video"
+                app:srcCompat="@drawable/ic_video"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal|bottom"/>
 
@@ -98,7 +98,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/length_104"
-                android:src="@drawable/ic_sound"
+                app:srcCompat="@drawable/ic_sound"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal|bottom"/>
 

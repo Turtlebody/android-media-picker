@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/offset_1">
+
+    <com.turtlebody.mediapicker.widget.SquareImage
+        android:id="@+id/iv_image"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"/>
+
+    <!--<CheckBox-->
+        <!--android:id="@+id/cb_btn_selection"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="end|top"-->
+        <!--android:layout_margin="@dimen/offset_4"/>-->
+
+    <com.turtlebody.mediapicker.widget.ImageViewCheckable
+        android:id="@+id/cb_btn_selection"
+        android:src="@drawable/sc_check_uncheck_file"
+        android:layout_width="@dimen/length_32"
+        android:layout_height="@dimen/length_32"
+        android:layout_gravity="end|top"
+        android:layout_margin="@dimen/offset_4"/>
+
+</FrameLayout>

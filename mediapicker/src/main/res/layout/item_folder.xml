@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/offset_14">
+
+
+    <ImageView
+        android:layout_width="@dimen/length_40"
+        android:layout_height="@dimen/length_40"
+        android:id="@+id/folder_image_folder_icon"
+        android:layout_margin="@dimen/offset_8"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_person_black_24dp"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/folder_txt_folder_name"
+            style="@style/TextTitle"
+            android:hint="Folder Name"/>
+
+        <TextView
+            android:id="@+id/folder_txt_total_items"
+            style="@style/TextNormal"
+            android:hint="24 items"
+            android:textSize="@dimen/font_14"/>
+    </LinearLayout>
+
+</LinearLayout>

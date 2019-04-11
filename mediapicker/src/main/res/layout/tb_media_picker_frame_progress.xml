@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_progress"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:visibility="gone">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tb_progress_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/offset_8"
+        app:cardBackgroundColor="?attr/colorPrimary"
+        app:cardCornerRadius="@dimen/offset_12"
+        app:cardElevation="@dimen/offset_3">
+
+        <FrameLayout
+            android:layout_width="@dimen/length_48"
+            android:layout_height="@dimen/length_48">
+            <ProgressBar
+                android:id="@+id/progress_view"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="@dimen/length_32"
+                android:layout_height="@dimen/length_32"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/offset_8"
+                android:theme="@style/TbMediaPicker.Progress.Light" />
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</FrameLayout>
+<!--
+
+
+<RelativeLayout
+    android:id="@+id/progress_view"
+    android:visibility="gone"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="#80212121">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/white">
+
+        <ProgressBar
+            android:layout_margin="16dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/id_bar_message"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please Wait..."
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+</RelativeLayout>-->

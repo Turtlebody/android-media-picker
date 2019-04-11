@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import com.turtlebody.imagepicker.R
 import com.turtlebody.imagepicker.base.ActivityMyBase
 import com.turtlebody.imagepicker.core.Constants
@@ -22,7 +23,7 @@ import com.wangsun.custompicker.api.Picker
 import com.wangsun.custompicker.api.callbacks.FilePickerCallback
 import com.wangsun.custompicker.api.entity.ChosenFile
 import com.wangsun.custompicker.utils.MimeUtils
-import kotlinx.android.synthetic.main.lib_toolbar.*
+import org.jetbrains.anko.find
 import java.io.File
 import java.io.Serializable
 
@@ -37,13 +38,15 @@ class ActivityMyLibMain : ActivityMyBase() {
     private lateinit var mMenuItem: MenuItem
     private lateinit var mPickerConfig: PickerConfig
 
+    private lateinit var vToolbarCounter: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lib_main)
 
-        initToolbar(R.drawable.ic_arrow_back_black_24dp,my_toolbar)
-        my_toolbar.title = "Select Folder"
-
+        initToolbar(R.drawable.ic_arrow_back_black_24dp,find(R.id.toolbar))
+        toolbarTitle = "Select Folder"
+        vToolbarCounter =  find(R.id.toolbar_txt_count)
         mFilePicker = FilePicker(this)
 
         if(intent.extras!=null){
@@ -60,8 +63,8 @@ class ActivityMyLibMain : ActivityMyBase() {
             is FolderListFragment -> finish()
             is FileListFragment -> {
                 super.onBackPressed()
-                my_toolbar.title = "Select Folder"
-                toolbar_txt_count.visibility = View.GONE
+                toolbarTitle = "Select Folder"
+                vToolbarCounter.visibility = View.GONE
                 mMenuItem.isVisible = true
             }
             else -> super.onBackPressed()
@@ -102,8 +105,8 @@ class ActivityMyLibMain : ActivityMyBase() {
 
 
     private fun startFolderListFragment(){
-        my_toolbar.title = "Select Folder"
-        toolbar_txt_count.visibility = View.GONE
+        toolbarTitle = "Select Folder"
+        vToolbarCounter.visibility = View.GONE
         mMenuItem.isVisible = true
 
         val bundle =  Bundle()
@@ -118,12 +121,12 @@ class ActivityMyLibMain : ActivityMyBase() {
 
     fun startImageListFragment(folderId: String){
         when(mFileType){
-            Constants.FileTypes.FILE_TYPE_IMAGE -> my_toolbar.title = "Choose Image"
-            Constants.FileTypes.FILE_TYPE_VIDEO -> my_toolbar.title = "Choose Video"
-            Constants.FileTypes.FILE_TYPE_AUDIO -> my_toolbar.title = "Choose Audio"
+            Constants.FileTypes.FILE_TYPE_IMAGE -> toolbarTitle = "Choose Image"
+            Constants.FileTypes.FILE_TYPE_VIDEO -> toolbarTitle = "Choose Video"
+            Constants.FileTypes.FILE_TYPE_AUDIO -> toolbarTitle = "Choose Audio"
         }
 
-        toolbar_txt_count.visibility = View.VISIBLE
+        vToolbarCounter.visibility = View.VISIBLE
         mMenuItem.isVisible = false
 
         val bundle =  Bundle()
@@ -140,7 +143,7 @@ class ActivityMyLibMain : ActivityMyBase() {
     }
 
     fun updateCounter(counter: Int){
-        toolbar_txt_count.text = "$counter"
+        vToolbarCounter.text = "$counter"
     }
 
     fun sendBackData(list: MutableList<Uri>){

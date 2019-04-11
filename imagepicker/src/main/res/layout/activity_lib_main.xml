@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".activities.ActivityMyLibMain">
 
-    <include layout="@layout/lib_toolbar"/>
+    <include layout="@layout/toolbar"/>
 
     <View
         android:layout_width="match_parent"

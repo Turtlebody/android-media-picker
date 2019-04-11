@@ -1,11 +1,12 @@
-package com.turtlebody.imagepicker.sample
+package com.turtlebody.imagepicker.sample.test
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.turtlebody.imagepicker.core.Constants
-import com.turtlebody.imagepicker.core.ImagePicker
-import com.turtlebody.imagepicker.core.PickerConfig
+import com.turtlebody.imagepicker.sample.R
+import com.turtlebody.mediapicker.core.Constants
+import com.turtlebody.mediapicker.core.ImagePicker
+import com.turtlebody.mediapicker.core.PickerConfig
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info

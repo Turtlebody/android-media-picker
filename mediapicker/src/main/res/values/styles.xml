@@ -1,0 +1,88 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="TbMediaPickerTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/pickerColorPrimary</item>
+        <item name="colorPrimaryDark">@color/pickerColorPrimaryDark</item>
+        <item name="colorAccent">@color/pickerColorAccent</item>
+
+    </style>
+
+    <!--<item name="drawerArrowStyle">@style/DrawerIconStyle</item>
+        <item name="actionOverflowButtonStyle">@style/customOptionOverflow</item>-->
+
+    <!--<style name="AppTheme.Transparent" parent="TbMediaPickerTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        &lt;!&ndash;<item name="android:windowIsFloating">true</item>&ndash;&gt;
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>-->
+
+    <style name="DrawerIconStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/md_text_white</item>
+    </style>
+
+    <style name="customOptionOverflow">
+        <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <!--Text -->
+    <style name="TextTitle" parent="App.TextAppearance.h4.Title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="TextNormal" parent="App.TextAppearance.Text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <!--Edit Text-->
+    <style name="EditText_SingleLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">start</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="EditText_MultiLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">start</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:maxLines">6</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+
+    <!--Button-->
+    <style name="ButtonNormal">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">30dp</item>
+    </style>
+
+
+    <!--ImageVideo-->
+    <style name="ImageIcon">
+        <item name="android:layout_width">@dimen/length_36</item>
+        <item name="android:layout_height">@dimen/length_36</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:padding">@dimen/offset_8</item>
+    </style>
+</resources>
