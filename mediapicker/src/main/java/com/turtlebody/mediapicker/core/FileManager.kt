@@ -158,7 +158,7 @@ object FileManager : AnkoLogger {
                 }
                 val fileItem = Audio(it.getString(columnIndexAudioId),
                         name,
-                        it.getString(columnIndexAudioSize),
+                        it.getInt(columnIndexAudioSize),
                         it.getString(columnIndexAudioPath),
                         //it.getString(columnIndexAudioArtist),
                         it.getString(columnIndexAudioMimeType),

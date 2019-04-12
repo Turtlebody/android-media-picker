@@ -1,4 +1,4 @@
-package com.turtlebody.mediapicker.fragments
+package com.turtlebody.mediapicker.ui.component.folder
 
 
 import android.os.Bundle
@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.turtlebody.mediapicker.activities.ActivityLibMain
-import com.turtlebody.imagepicker.adapters.AudioFolderAdapter
+import com.turtlebody.mediapicker.ui.ActivityLibMain
+import com.turtlebody.mediapicker.ui.component.folder.adapter.AudioFolderAdapter
 import com.turtlebody.imagepicker.adapters.ImageVideoFolderAdapter
-import com.turtlebody.mediapicker.base.FragmentBase
+import com.turtlebody.mediapicker.ui.base.FragmentBase
 import com.turtlebody.mediapicker.core.Constants
 import com.turtlebody.mediapicker.models.ImageVideoFolder
 import com.turtlebody.mediapicker.core.FileManager

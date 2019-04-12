@@ -1,12 +1,12 @@
-package com.turtlebody.mediapicker.core.base
+package com.turtlebody.mediapicker.ui.common
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.turtlebody.mediapicker.R
-import com.turtlebody.mediapicker.activities.ActivityLibMain
-import com.turtlebody.mediapicker.base.FragmentBase
+import com.turtlebody.mediapicker.ui.ActivityLibMain
+import com.turtlebody.mediapicker.ui.base.FragmentBase
 import com.turtlebody.mediapicker.core.PickerConfig
 import kotlinx.android.synthetic.main.tb_media_picker_image_fragment.*
 

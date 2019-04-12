@@ -1,4 +1,4 @@
-package com.turtlebody.imagepicker.adapters
+package com.turtlebody.mediapicker.ui.component.folder.adapter
 
 import android.view.LayoutInflater
 import android.view.View

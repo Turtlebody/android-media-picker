@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.turtlebody.mediapicker.R
-import com.turtlebody.mediapicker.activities.ActivityLibMain
-import com.turtlebody.mediapicker.adapters.AudioAdapter
+import com.turtlebody.mediapicker.ui.ActivityLibMain
+import com.turtlebody.mediapicker.ui.component.media.audio.adapter.AudioAdapter
 import com.turtlebody.mediapicker.adapters.ImageVideoAdapter
-import com.turtlebody.mediapicker.base.FragmentBase
+import com.turtlebody.mediapicker.ui.base.FragmentBase
 import com.turtlebody.mediapicker.core.Constants
 import com.turtlebody.mediapicker.core.FileManager
 import com.turtlebody.mediapicker.core.ImagePicker

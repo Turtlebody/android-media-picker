@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.turtlebody.mediapicker.activities.ActivityLibMain
+import com.turtlebody.mediapicker.ui.ActivityLibMain
 import com.turtlebody.mediapicker.fragments.FileListFragment
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter

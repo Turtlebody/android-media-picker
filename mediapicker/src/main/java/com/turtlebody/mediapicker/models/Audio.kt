@@ -7,7 +7,7 @@ import java.io.Serializable
  */
 data class Audio(var id: String = "",
                  var name: String = "",
-                 var size: String?,
+                 var size: Int,
                  var filePath: String = "",
         var mimeType:String? ="",
                  //TODo var artist: String = "",
@@ -15,19 +15,19 @@ data class Audio(var id: String = "",
 
 
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
             return true
         }
 
-        if (o == null) {
+        if (other == null) {
             return false
         }
 
-        if (!(o is Audio)) {
+        if (!(other is Audio)) {
             return false
         }
 
-        return id == o.id
+        return id == other.id
     }
 }

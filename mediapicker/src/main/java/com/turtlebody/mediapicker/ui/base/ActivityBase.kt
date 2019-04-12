@@ -1,4 +1,4 @@
-package com.turtlebody.mediapicker.base
+package com.turtlebody.mediapicker.ui.base
 
 import android.app.Activity
 import android.graphics.Color

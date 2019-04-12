@@ -1,4 +1,4 @@
-package com.turtlebody.mediapicker.activities
+package com.turtlebody.mediapicker.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,15 +11,15 @@ import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.turtlebody.mediapicker.R
-import com.turtlebody.mediapicker.fragments.FolderListFragment
-import com.turtlebody.mediapicker.base.ActivityBase
+import com.turtlebody.mediapicker.ui.component.folder.FolderListFragment
+import com.turtlebody.mediapicker.ui.base.ActivityBase
 import com.turtlebody.mediapicker.core.Constants
 import com.turtlebody.mediapicker.core.FileManager
 import com.turtlebody.mediapicker.core.ImagePicker
 import com.turtlebody.mediapicker.core.PickerConfig
-import com.turtlebody.mediapicker.core.base.MediaListFragment
+import com.turtlebody.mediapicker.ui.common.MediaListFragment
 import com.turtlebody.mediapicker.fragments.FileListFragment
-import com.turtlebody.mediapicker.fragments.medias.AudioListFragment
+import com.turtlebody.mediapicker.ui.component.media.audio.AudioListFragment
 import com.turtlebody.mediapicker.models.ImageVideoFolder
 import com.wangsun.custompicker.api.FilePicker
 import com.wangsun.custompicker.api.Picker

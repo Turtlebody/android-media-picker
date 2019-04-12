@@ -1,4 +1,4 @@
-package com.turtlebody.mediapicker.base
+package com.turtlebody.mediapicker.ui.base
 
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
