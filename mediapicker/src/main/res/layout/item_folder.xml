@@ -14,8 +14,7 @@
         android:layout_height="@dimen/length_40"
         android:id="@+id/folder_image_folder_icon"
         android:layout_margin="@dimen/offset_8"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_person_black_24dp"/>
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
         android:orientation="vertical"

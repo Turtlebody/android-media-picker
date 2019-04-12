@@ -32,14 +32,31 @@ object Constants {
          */
         val AUDIO_FOLDER = arrayOf(
                 MediaStore.Audio.Media.ALBUM_ID,
-                MediaStore.Audio.AudioColumns.ALBUM,
+                MediaStore.Audio.Media.ALBUM,
                 MediaStore.Audio.Media.DATA)
 
+        val AUDIO_FOLDER_NEW = arrayOf(
+                MediaStore.Files.FileColumns._ID,
+                MediaStore.Files.FileColumns.PARENT,
+                MediaStore.Files.FileColumns.DATA,
+                MediaStore.Files.FileColumns.DISPLAY_NAME,
+                "COUNT(" + MediaStore.Files.FileColumns.DATA + ") AS dataCount")
+
         val AUDIO_FILE = arrayOf(
-                MediaStore.Audio.Media._ID, MediaStore.Audio.Media.DISPLAY_NAME,
-                MediaStore.Audio.Media.SIZE, MediaStore.Audio.Media.DATA,
-                MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.ARTIST
+                MediaStore.Audio.Media._ID,
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.DISPLAY_NAME,
+                MediaStore.Audio.Media.SIZE,
+                MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.MIME_TYPE,
+                MediaStore.Audio.Media.DURATION
         )
+    }
+
+    object Selection{
+
+        val AUDIO_FOLDER = MediaStore.Files.FileColumns.MEDIA_TYPE+" = "+MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO+
+        ") GROUP BY (" + MediaStore.Files.FileColumns.PARENT
     }
 
     object Intent{
@@ -49,5 +66,6 @@ object Constants {
     object Fragment{
         val FOLDER_LIST = 101
         val IMAGE_LIST = 102
+        val AUDIO_LIST = 103
     }
 }

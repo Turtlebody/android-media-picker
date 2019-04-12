@@ -1,5 +1,4 @@
-package com.turtlebody.mediapicker.fragments
-
+package com.turtlebody.mediapicker.fragments.medias
 
 import android.net.Uri
 import android.os.Bundle
@@ -19,22 +18,27 @@ import com.turtlebody.mediapicker.core.Constants
 import com.turtlebody.mediapicker.core.FileManager
 import com.turtlebody.mediapicker.core.ImagePicker
 import com.turtlebody.mediapicker.core.PickerConfig
+import com.turtlebody.mediapicker.core.base.MediaListFragment
+import com.turtlebody.mediapicker.fragments.FileListFragment
 import com.turtlebody.mediapicker.models.Audio
-import com.turtlebody.mediapicker.models.ImageVideoFolder
+import com.turtlebody.mediapicker.models.AudioFolder
 import com.turtlebody.mediapicker.models.ImageVideo
+import com.turtlebody.mediapicker.models.ImageVideoFolder
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.tb_media_picker_image_fragment.*
 import kotlinx.android.synthetic.main.tb_media_picker_frame_progress.*
+import kotlinx.android.synthetic.main.tb_media_picker_image_fragment.*
 import org.jetbrains.anko.info
 import java.io.File
 
-
-class FileListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener, AudioAdapter.OnAudioClickListener {
+/**
+ * Created by niraj on 12-04-2019.
+ */
+class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener {
 
 
     companion object {
@@ -43,67 +47,45 @@ class FileListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener,
         fun newInstance(key: Int, b: Bundle?): Fragment {
             val bf: Bundle = b ?: Bundle()
             bf.putInt("fragment.key", key);
-            val fragment = FileListFragment()
+            val fragment = AudioListFragment()
             fragment.arguments = bf
             return fragment
         }
 
-        val URI_LIST_KEY = "uriListKey"
+        const val B_ARG_FOLDER_PATH = "args.folderPath"
+
 
     }
 
-    private var mFileType  = Constants.FileTypes.FILE_TYPE_IMAGE
-    private var mFolderId: String = ""
+    private var mFileType  = Constants.FileTypes.FILE_TYPE_AUDIO
     private var mFolderPath: String = ""
 
     private var mUriList: MutableList<Uri> = arrayListOf()
 
-    private var mImageVideoAdapter: ImageVideoAdapter = ImageVideoAdapter()
-    private var mImageVideoList: MutableList<ImageVideo> = arrayListOf()
-    private var mSelectedImageVideoList: MutableList<ImageVideo> = arrayListOf()
 
 
     private var mAudioAdapter: AudioAdapter = AudioAdapter()
     private var mAudioList: MutableList<Audio> = arrayListOf()
     private var mSelectedAudioList: MutableList<Audio> = arrayListOf()
 
-    private lateinit var mPickerConfig: PickerConfig
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.tb_media_picker_image_fragment, container, false)
-    }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        arguments?.let {
-            mFolderId = it.getString(ImageVideoFolder.FOLDER_ID,"")
-            mFileType = it.getInt(ImagePicker.FILE_TYPE)
-            mPickerConfig = it.getSerializable(PickerConfig.ARG_BUNDLE) as PickerConfig
-            info { "folderId: $mFolderId" }
-        }
-
-        (activity as ActivityLibMain).updateCounter(mSelectedImageVideoList.size)
         initAdapter()
-        initButton()
     }
 
-    private fun initButton() {
-        iv_cancel.setOnClickListener {
-            (activity as ActivityLibMain).onBackPressed()
+    override fun onRestoreState(savedInstanceState: Bundle?, args: Bundle?) {
+        arguments?.let {
+            mFolderPath= it.getString(B_ARG_FOLDER_PATH,"")
+            mFileType = it.getInt(ImagePicker.FILE_TYPE)
+            info { "folderPath: $mFolderPath" }
         }
-        btn_add_file.setOnClickListener {
-            getAllUris()
-        }
-
-        if(!mPickerConfig.mAllowMultiImages){
-            ll_bottom_layout.visibility = View.GONE
-        }
-
     }
 
-    private fun getAllUris() {
+
+    override fun getAllUris() {
         if(mFileType == Constants.FileTypes.FILE_TYPE_AUDIO){
             if(mSelectedAudioList.isNotEmpty()){
                 for (i in mSelectedAudioList){
@@ -114,59 +96,9 @@ class FileListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener,
             }
 
         }
-        else{
-            if(mSelectedImageVideoList.isNotEmpty()){
-                for (i in mSelectedImageVideoList){
-                    info { "path: ${i.filePath}" }
-                    mUriList.add(FileManager.getContentUri(context!!, File(i.filePath)))
-                }
-                (activity as ActivityLibMain).sendBackData(mUriList)
-            }
-        }
 
     }
 
-
-    override fun onImageCheck(pData: ImageVideo) {
-
-        //var directoryName = File(pData.filePath).parentFile.name
-        //var dirPath = File(pData.filePath).parent
-        if(!mPickerConfig.mAllowMultiImages){
-            if(mPickerConfig.mShowDialog){
-                val simpleAlert = AlertDialog.Builder(context!!)
-                simpleAlert.setMessage("Are you sure to select ${pData.name}")
-                        .setCancelable(false)
-                        .setPositiveButton("OK") { dialog, which ->
-                            (activity as ActivityLibMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
-                        }
-                        .setNegativeButton("Cancel") { dialog, which -> dialog.dismiss()  }
-                simpleAlert.show()
-            }
-            else{
-                (activity as ActivityLibMain).sendBackData(arrayListOf(FileManager.getContentUri(context!!, File(pData.filePath))))
-            }
-        }
-        else{
-            val selectedIndex = mImageVideoList.indexOf(pData)
-
-            if(selectedIndex >= 0){
-                //toggle
-                mImageVideoList[selectedIndex].isSelected = !(mImageVideoList[selectedIndex].isSelected)
-                //update ui
-                mImageVideoAdapter.updateIsSelected(mImageVideoList[selectedIndex])
-
-                //update selectedList
-                if(mImageVideoList[selectedIndex].isSelected){
-                    mSelectedImageVideoList.add(mImageVideoList[selectedIndex])
-                }
-                else{
-                    mSelectedImageVideoList.removeAt(mSelectedImageVideoList.indexOf(pData))
-                }
-            }
-            (activity as ActivityLibMain).updateCounter(mSelectedImageVideoList.size)
-            btn_add_file.isEnabled = mSelectedImageVideoList.size>0
-        }
-    }
 
     override fun onAudioCheck(pData: Audio) {
         if(!mPickerConfig.mAllowMultiImages){
@@ -208,9 +140,7 @@ class FileListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener,
 
 
     private fun initAdapter() {
-        mImageVideoAdapter.setListener(this)
         mAudioAdapter.setListener(this)
-        mImageVideoAdapter.mShowCheckBox = mPickerConfig.mAllowMultiImages
         mAudioAdapter.mShowCheckBox = mPickerConfig.mAllowMultiImages
 
         if(mFileType== Constants.FileTypes.FILE_TYPE_AUDIO){
@@ -218,50 +148,13 @@ class FileListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener,
             recycler_view.adapter = mAudioAdapter
             fetchAudioFiles()
         }
-        else{
-            recycler_view.layoutManager = GridLayoutManager(context,2)
-            recycler_view.adapter = mImageVideoAdapter
-            fetchImageFiles()
-        }
-    }
 
-    private fun fetchImageFiles() {
-        val fileItems = Single.fromCallable<Boolean> {
-            mImageVideoList.clear()
-            val tempArray = FileManager.getImageVideoFilesInFolder(context!!, mFolderId, mFileType)
-
-            //include only valid files
-            for(i in tempArray){
-                if(File(i.filePath).length()>0){
-                    mImageVideoList.add(i)
-                }
-            }
-            true
-        }
-
-        fileItems.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<Boolean> {
-                    override fun onSubscribe(@NonNull d: Disposable) {
-                        progress_view.visibility = View.VISIBLE
-                    }
-
-                    override fun onSuccess(t: Boolean) {
-                        mImageVideoAdapter.setData(mImageVideoList)
-                        progress_view.visibility = View.GONE
-                    }
-
-                    override fun onError(@NonNull e: Throwable) {
-                        progress_view.visibility = View.GONE
-                        info { "error: ${e.message}" }
-                    }
-                })
     }
 
     private fun fetchAudioFiles() {
         val fileItems = Single.fromCallable<Boolean> {
             mAudioList.clear()
-            val tempArray = FileManager.getAudioFilesInFolder(context!!, mFolderId)
+            val tempArray = FileManager.getAudioFilesInFolder(context!!, mFolderPath)
 
             //include only valid files
             for(i in tempArray){
@@ -290,6 +183,5 @@ class FileListFragment : FragmentBase(), ImageVideoAdapter.OnImageClickListener,
                     }
                 })
     }
-
 
 }

@@ -58,7 +58,7 @@ class AudioAdapter: RecyclerView.Adapter<AudioAdapter.AudioVewHolder>() {
             itemView.cb_btn_selection.isChecked = pData.isSelected
 
             itemView.txt_audio_name.text = pData.name
-            itemView.txt_audio_artist.text = pData.artist
+            itemView.txt_audio_artist.text = pData.size
 
             itemView.setOnClickListener {
                 mOnAudioClickListener?.onAudioCheck(pData)

@@ -69,13 +69,13 @@ class FolderListFragment : FragmentBase() {
     private fun initAdapter() {
         mImageVideoFolderAdapter.setListener(object : ImageVideoFolderAdapter.OnFolderClickListener{
             override fun onFolderClick(pData: ImageVideoFolder) {
-                (activity as ActivityLibMain).startImageListFragment(pData.id)
+                (activity as ActivityLibMain).startMediaListFragment(pData.id)
             }
         })
 
         mAudioFolderAdapter.setListener(object : AudioFolderAdapter.OnAudioFolderClickListener {
             override fun onFolderClick(pData: AudioFolder) {
-                (activity as ActivityLibMain).startImageListFragment(pData.id)
+                (activity as ActivityLibMain).startMediaListFragment(pData.path)
             }
         })
         recycler_view.layoutManager = LinearLayoutManager(context)
@@ -111,13 +111,15 @@ class FolderListFragment : FragmentBase() {
 
                     override fun onError(@NonNull e: Throwable) {
                         progress_view.visibility = View.GONE
+                        e.printStackTrace()
                         info { "error: ${e.message}" }
                     }
                 })
     }
 
     private fun fetchAudioFolders() {
-        val bucketFetch = Single.fromCallable<ArrayList<AudioFolder>> { FileManager.fetchAudioFolders(context!!) }
+        val bucketFetch = Single.fromCallable<ArrayList<AudioFolder>> {
+            FileManager.fetchAudioFolderList(context!!) }
         bucketFetch
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -129,12 +131,14 @@ class FolderListFragment : FragmentBase() {
 
                     override fun onSuccess(@NonNull audioFolders: ArrayList<AudioFolder>) {
                         mAudioFolderList = audioFolders
+                        info { "folders: $audioFolders" }
                         mAudioFolderAdapter.setData(mAudioFolderList)
                         progress_view.visibility = View.GONE
                     }
 
                     override fun onError(@NonNull e: Throwable) {
                         progress_view.visibility = View.GONE
+                        e.printStackTrace()
                         info { "error: ${e.message}" }
                     }
                 })

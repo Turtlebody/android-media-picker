@@ -103,7 +103,8 @@ object FileManager {
                 if (folderFileCountMap.containsKey(folderId)) {
                     folderFileCountMap[folderId] = folderFileCountMap[folderId]!! + 1
                 } else {
-                    val folder = AudioFolder(folderId,it.getString(columnIndexFolderName),it.getString(columnIndexFilePath), 0)
+                    val folder = AudioFolder(folderId, it.getString(columnIndexFolderName),
+                            it.getString(columnIndexFilePath), 0)
                     folders.add(folder)
                     folderFileCountMap[folderId] = 1
                 }

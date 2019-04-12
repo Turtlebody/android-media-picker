@@ -46,7 +46,7 @@ class AudioFolderAdapter: RecyclerView.Adapter<AudioFolderAdapter.FolderVewHolde
             itemView.folder_txt_total_items.text = "${pData.contentCount} items"
 
             Glide.with(itemView)
-                    .load(R.drawable.mp3_icon)
+                    .load(R.drawable.ic_music_folder)
                     .into(itemView.folder_image_folder_icon)
 
             itemView.setOnClickListener {
