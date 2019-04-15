@@ -1,4 +1,4 @@
-package com.turtlebody.mediapicker.models
+package com.turtlebody.mediapicker.ui.component.models
 
 /**
  * Created by WANGSUN on 26-Mar-19.

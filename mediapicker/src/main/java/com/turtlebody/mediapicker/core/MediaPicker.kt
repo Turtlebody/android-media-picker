@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.turtlebody.mediapicker.ui.ActivityLibMain
-import com.turtlebody.mediapicker.fragments.FileListFragment
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,7 +22,7 @@ import java.lang.ref.WeakReference
 /**
  * Created by WANGSUN on 29-Mar-19.
  */
-class ImagePicker {
+class MediaPicker {
 
     companion object {
         @JvmStatic
@@ -33,6 +32,7 @@ class ImagePicker {
 
         private const val REQ_CODE = 500
         val FILE_TYPE = "mFileType"
+        val URI_LIST_KEY = "uriListKey"
     }
 
     class FilePickerImpl(activity: FragmentActivity, private var config: PickerConfig, var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
@@ -117,7 +117,7 @@ class ImagePicker {
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             if (requestCode == REQ_CODE) {
                 if (resultCode == Activity.RESULT_OK) {
-                    val list = data?.extras?.getSerializable(FileListFragment.URI_LIST_KEY) as MutableList<Uri>
+                    val list = data?.extras?.getSerializable(URI_LIST_KEY) as MutableList<Uri>
                     mListener?.onData(list)
                 } else {
                     mListener?.onCancel("Cancelled")

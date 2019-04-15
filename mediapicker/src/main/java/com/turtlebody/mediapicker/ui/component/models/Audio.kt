@@ -1,4 +1,4 @@
-package com.turtlebody.mediapicker.models
+package com.turtlebody.mediapicker.ui.component.models
 
 import java.io.Serializable
 

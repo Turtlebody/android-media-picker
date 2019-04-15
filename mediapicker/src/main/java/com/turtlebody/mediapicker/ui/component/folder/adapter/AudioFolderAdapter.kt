@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.turtlebody.mediapicker.models.AudioFolder
+import com.turtlebody.mediapicker.ui.component.models.AudioFolder
 import com.turtlebody.mediapicker.R
-import kotlinx.android.synthetic.main.item_folder.view.*
+import kotlinx.android.synthetic.main.tb_media_picker_item_folder.view.*
 
 /**
  * Created by WANGSUN on 26-Mar-19.
@@ -17,7 +17,7 @@ class AudioFolderAdapter: RecyclerView.Adapter<AudioFolderAdapter.FolderVewHolde
     private var mOnAudioFolderClickListener: OnAudioFolderClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FolderVewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_folder, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.tb_media_picker_item_folder, parent, false)
         return FolderVewHolder(view)
     }
 
@@ -52,7 +52,6 @@ class AudioFolderAdapter: RecyclerView.Adapter<AudioFolderAdapter.FolderVewHolde
             itemView.setOnClickListener {
                 mOnAudioFolderClickListener?.onFolderClick(pData)
             }
-
         }
     }
 

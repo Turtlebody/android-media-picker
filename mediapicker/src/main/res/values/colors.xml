@@ -13,16 +13,6 @@
     <color name="colorAccentLight">@color/md_grey_100</color>-->
 
 
-
-
-
-
-
-
-
-
-
-
     <!--grey-->
     <array name="greys">
         <item>@color/md_grey_500</item>

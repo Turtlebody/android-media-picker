@@ -11,16 +11,18 @@ import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.turtlebody.mediapicker.R
-import com.turtlebody.mediapicker.ui.component.folder.FolderListFragment
-import com.turtlebody.mediapicker.ui.base.ActivityBase
 import com.turtlebody.mediapicker.core.Constants
 import com.turtlebody.mediapicker.core.FileManager
-import com.turtlebody.mediapicker.core.ImagePicker
+import com.turtlebody.mediapicker.core.MediaPicker
 import com.turtlebody.mediapicker.core.PickerConfig
+import com.turtlebody.mediapicker.ui.base.ActivityBase
 import com.turtlebody.mediapicker.ui.common.MediaListFragment
-import com.turtlebody.mediapicker.fragments.FileListFragment
+import com.turtlebody.mediapicker.ui.component.folder.AudioFolderFragment
+import com.turtlebody.mediapicker.ui.component.folder.ImageVideoFolderFragment
 import com.turtlebody.mediapicker.ui.component.media.audio.AudioListFragment
-import com.turtlebody.mediapicker.models.ImageVideoFolder
+import com.turtlebody.mediapicker.ui.component.media.audio.ImageListFragment
+import com.turtlebody.mediapicker.ui.component.media.audio.VideoListFragment
+import com.turtlebody.mediapicker.ui.component.models.ImageVideoFolder
 import com.wangsun.custompicker.api.FilePicker
 import com.wangsun.custompicker.api.Picker
 import com.wangsun.custompicker.api.callbacks.FilePickerCallback
@@ -29,8 +31,6 @@ import com.wangsun.custompicker.utils.MimeUtils
 import org.jetbrains.anko.find
 import java.io.File
 import java.io.Serializable
-
-
 
 
 class ActivityLibMain : ActivityBase() {
@@ -45,16 +45,16 @@ class ActivityLibMain : ActivityBase() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.turtlebody.mediapicker.R.layout.tb_media_picker_activity)
+        setContentView(R.layout.tb_media_picker_activity)
 
-        initToolbar(com.turtlebody.mediapicker.R.drawable.ic_arrow_back_black_24dp,find(R.id.toolbar))
+        initToolbar(R.drawable.ic_arrow_back_black_24dp,find(R.id.toolbar))
         toolbarTitle = "Select Folder"
         vToolbarCounter =  find<TextView>(R.id.toolbar_txt_count)
         mFilePicker = FilePicker(this)
 
         if(intent.extras!=null){
             mPickerConfig = intent.getSerializableExtra(PickerConfig.ARG_BUNDLE) as PickerConfig
-            mFileType = intent.getIntExtra(ImagePicker.FILE_TYPE,Constants.FileTypes.FILE_TYPE_IMAGE)
+            mFileType = intent.getIntExtra(MediaPicker.FILE_TYPE,Constants.FileTypes.FILE_TYPE_IMAGE)
         }
 
     }
@@ -63,8 +63,9 @@ class ActivityLibMain : ActivityBase() {
         //super.onBackPressed()
         val fragment = supportFragmentManager.findFragmentById(R.id.frame_content)
         when (fragment) {
-            is FolderListFragment -> finish()
-            is FileListFragment -> {
+            is ImageVideoFolderFragment -> finish()
+            is AudioFolderFragment -> finish()
+            is MediaListFragment -> {
                 super.onBackPressed()
                 toolbarTitle = "Select Folder"
                 vToolbarCounter.visibility = View.GONE
@@ -88,8 +89,8 @@ class ActivityLibMain : ActivityBase() {
                 onBackPressed()
                 return true
             }
-            com.turtlebody.mediapicker.R.id.action_open ->{
-                startImagePicker()
+            R.id.action_open ->{
+                startAndroidDefaultPicker()
             }
             else -> return super.onOptionsItemSelected(item)
         }
@@ -112,54 +113,51 @@ class ActivityLibMain : ActivityBase() {
         vToolbarCounter.visibility = View.GONE
         mMenuItem.isVisible = true
 
-        val bundle =  Bundle()
-        bundle.putInt(ImagePicker.FILE_TYPE,mFileType)
-
-        val fragment = FolderListFragment.newInstance(Constants.Fragment.FOLDER_LIST, bundle)
-        val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.frame_content, fragment, FolderListFragment::class.java.simpleName)
-                .addToBackStack(null)
-                .commit()
+        when(mFileType){
+            Constants.FileTypes.FILE_TYPE_AUDIO->{
+                startAudioFolderFragment()
+            }
+            else->startImageVideoFolderFragment()
+        }
     }
 
     /**
-     * @param folderInfo if(audio) then folderPath else folderId
+     * @param folderInfo if(audio) then folderPath else folderInfo
      */
     fun startMediaListFragment(folderInfo: String){
         val bundle =  Bundle()
-        bundle.putSerializable(ImagePicker.FILE_TYPE, mFileType)
+//        bundle.putSerializable(MediaPicker.FILE_TYPE, mFileType)
         bundle.putSerializable(MediaListFragment.B_ARG_PICKER_CONFIG, mPickerConfig)
-        var fragment : Fragment
-        var fragmentTag : String
+
+
+        val fragment : Fragment
+        val fragmentTag : String
         when(mFileType){
             Constants.FileTypes.FILE_TYPE_IMAGE -> {
                 toolbarTitle = "Choose Image"
                 bundle.putString(ImageVideoFolder.FOLDER_ID,folderInfo)
-                bundle.putSerializable(PickerConfig.ARG_BUNDLE, mPickerConfig)
-                fragment = FileListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
-                fragmentTag = FileListFragment::class.java.simpleName
+                fragment = ImageListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
+                fragmentTag = ImageListFragment::class.java.simpleName
             }
             Constants.FileTypes.FILE_TYPE_VIDEO -> {
                 toolbarTitle = "Choose Video"
                 bundle.putString(ImageVideoFolder.FOLDER_ID,folderInfo)
-                bundle.putSerializable(PickerConfig.ARG_BUNDLE, mPickerConfig)
-                fragment = FileListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
-                fragmentTag = FileListFragment::class.java.simpleName
+                fragment = VideoListFragment.newInstance(Constants.Fragment.VIDEO_LIST, bundle)
+                fragmentTag = VideoListFragment::class.java.simpleName
 
             }
             Constants.FileTypes.FILE_TYPE_AUDIO -> {
                 toolbarTitle = "Choose Audio"
                 bundle.putString(AudioListFragment.B_ARG_FOLDER_PATH,folderInfo)
+
                 fragment = AudioListFragment.newInstance(Constants.Fragment.AUDIO_LIST, bundle)
                 fragmentTag = AudioListFragment::class.java.simpleName
-
             }
             else ->{
                 toolbarTitle = "Choose Image"
                 bundle.putString(ImageVideoFolder.FOLDER_ID,folderInfo)
-                bundle.putSerializable(PickerConfig.ARG_BUNDLE, mPickerConfig)
-                fragment = FileListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
-                fragmentTag = FileListFragment::class.java.simpleName
+                fragment = ImageListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
+                fragmentTag = ImageListFragment::class.java.simpleName
             }
         }
 
@@ -172,30 +170,6 @@ class ActivityLibMain : ActivityBase() {
                 .commit()
     }
 
-    @Deprecated("irrelevant")
-    fun startImageListFragment(folderId: String){
-        when(mFileType){
-            Constants.FileTypes.FILE_TYPE_IMAGE -> toolbarTitle = "Choose Image"
-            Constants.FileTypes.FILE_TYPE_VIDEO -> toolbarTitle = "Choose Video"
-            Constants.FileTypes.FILE_TYPE_AUDIO -> toolbarTitle = "Choose Audio"
-        }
-
-        vToolbarCounter.visibility = View.VISIBLE
-        mMenuItem.isVisible = false
-
-        val bundle =  Bundle()
-        bundle.putString(ImageVideoFolder.FOLDER_ID,folderId)
-        bundle.putSerializable(PickerConfig.ARG_BUNDLE, mPickerConfig)
-        bundle.putSerializable(ImagePicker.FILE_TYPE, mFileType)
-
-        val fragment = FileListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
-        val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.frame_content, fragment, FileListFragment::class.java.simpleName)
-                .addToBackStack(null)
-                .commit()
-
-    }
-
     fun updateCounter(counter: Int){
         vToolbarCounter.text = "$counter"
     }
@@ -203,14 +177,13 @@ class ActivityLibMain : ActivityBase() {
     fun sendBackData(list: MutableList<Uri>){
         if(list.isNotEmpty()){
             val intent = Intent()
-            intent.putExtra(FileListFragment.URI_LIST_KEY,list as Serializable)
+            intent.putExtra(MediaPicker.URI_LIST_KEY,list as Serializable)
             setResult(Activity.RESULT_OK, intent)
         }
         finish()
     }
 
-    private fun startImagePicker() {
-
+    private fun startAndroidDefaultPicker() {
         when(mFileType){
             Constants.FileTypes.FILE_TYPE_IMAGE->{
                 mFilePicker.setFilePickerCallback(object : FilePickerCallback{
@@ -280,5 +253,25 @@ class ActivityLibMain : ActivityBase() {
             }
         }
 
+    }
+
+
+    private fun startImageVideoFolderFragment(){
+        val bundle =  Bundle()
+        bundle.putInt(MediaPicker.FILE_TYPE,mFileType)
+
+        val fragment = ImageVideoFolderFragment.newInstance(Constants.Fragment.IMAGE_VIDEO_FOLDER, bundle)
+        val ft = supportFragmentManager.beginTransaction()
+        ft.add(R.id.frame_content, fragment, ImageVideoFolderFragment::class.java.simpleName)
+                .addToBackStack(null)
+                .commit()
+    }
+
+    private fun startAudioFolderFragment(){
+        val fragment = AudioFolderFragment.newInstance(Constants.Fragment.AUDIO_FOLDER, Bundle())
+        val ft = supportFragmentManager.beginTransaction()
+        ft.add(R.id.frame_content, fragment, AudioFolderFragment::class.java.simpleName)
+                .addToBackStack(null)
+                .commit()
     }
 }

@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.turtlebody.imagepicker.sample.R
 import com.turtlebody.mediapicker.core.Constants
-import com.turtlebody.mediapicker.core.ImagePicker
+import com.turtlebody.mediapicker.core.MediaPicker
 import com.turtlebody.mediapicker.core.PickerConfig
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.AnkoLogger
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     @SuppressLint("CheckResult")
     private fun startMultiPicker() {
-        ImagePicker.with(this, PickerConfig().setAllowMultiImages(true), Constants.FileTypes.FILE_TYPE_AUDIO)
+        MediaPicker.with(this, PickerConfig().setAllowMultiImages(true), Constants.FileTypes.FILE_TYPE_AUDIO)
                 .onResult()
                 .subscribe({
                     info { "success: $it" }
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     @SuppressLint("CheckResult")
     private fun startSinglePicker() {
-        ImagePicker.with(this, PickerConfig().setShowDialog(true), Constants.FileTypes.FILE_TYPE_AUDIO)
+        MediaPicker.with(this, PickerConfig().setShowDialog(true), Constants.FileTypes.FILE_TYPE_AUDIO)
                 .onResult()
                 .subscribe({
                     info { "success: $it" }

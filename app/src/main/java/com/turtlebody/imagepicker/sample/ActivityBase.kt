@@ -44,6 +44,5 @@ abstract class ActivityBase : AppCompatActivity(), AnkoLogger {
         }
 
         UtilTheme.setLightStatusBar(window.decorView, this)
-
     }
 }

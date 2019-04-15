@@ -14,9 +14,9 @@ object UtilTheme {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-            var flags = view.getSystemUiVisibility()
+            var flags = view.systemUiVisibility
             flags = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            view.setSystemUiVisibility(flags)
+            view.systemUiVisibility = flags
             activity.window.statusBarColor = Color.WHITE
         }
     }

@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.turtlebody.mediapicker.core.Constants
-import com.turtlebody.mediapicker.core.ImagePicker
+import com.turtlebody.mediapicker.core.MediaPicker
 import com.turtlebody.mediapicker.core.PickerConfig
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -20,8 +20,6 @@ class ActivityHome : ActivityBase() {
 
         initToolbar(toolbar)
         toolbar.title = "Select Option"
-
-
         initButton()
     }
 
@@ -44,39 +42,26 @@ class ActivityHome : ActivityBase() {
 
     }
 
-
-    @SuppressLint("CheckResult")
-    private fun startMultiPicker(fileType: Int, allowMultiple: Boolean) {
-
-        if(allowMultiple){
-            ImagePicker.with(this, PickerConfig().setAllowMultiImages(true), fileType)
-                    .onResult()
-                    .subscribe({
-                        info { "success: $it" }
-                    },{
-                        info { "error: $it" }
-                    })
-        }
-        else{
-            ImagePicker.with(this, PickerConfig().setAllowMultiImages(false).setShowDialog(true), fileType)
-                    .onResult()
-                    .subscribe({
-                        info { "success: $it" }
-                    },{
-                        info { "error: $it" }
-                    })
-        }
-
-    }
-
     private fun showAlert(fileType: Int){
         AlertDialog.Builder(this)
                 //.setTitle("New User?")
                 .setMessage("Type of file selection?")
                 .setPositiveButton("Single") { dialog, which ->
-                    startMultiPicker(fileType,false)
+                    startMediaPicker(fileType,false)
                 }.setNegativeButton("Multiple") { dialog, which ->
-                    startMultiPicker(fileType,true)
+                    startMediaPicker(fileType,true)
                 }.show()
+    }
+
+
+    @SuppressLint("CheckResult")
+    private fun startMediaPicker(fileType: Int, allowMultiple: Boolean) {
+        MediaPicker.with(this, PickerConfig().setAllowMultiImages(allowMultiple).setShowDialog(true), fileType)
+                .onResult()
+                .subscribe({
+                    info { "success: $it" }
+                },{
+                    info { "error: $it" }
+                })
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-path name="athe" path="." />
+    <external-path name="media" path="." />
     <files-path name="inter" path="." />
-    <root-path name="athe2" path="/storage/" />
+    <root-path name="media2" path="/storage/" />
 </paths>

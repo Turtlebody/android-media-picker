@@ -1,30 +1,33 @@
-package com.turtlebody.imagepicker.adapters
+package com.turtlebody.mediapicker.ui.component.folder.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.turtlebody.mediapicker.models.ImageVideoFolder
+import com.turtlebody.mediapicker.ui.component.models.ImageVideoFolder
 import com.turtlebody.mediapicker.R
-import kotlinx.android.synthetic.main.item_folder.view.*
+import kotlinx.android.synthetic.main.tb_media_picker_item_folder.view.*
 import java.io.File
 
 /**
  * Created by WANGSUN on 26-Mar-19.
  */
 class ImageVideoFolderAdapter: RecyclerView.Adapter<ImageVideoFolderAdapter.FolderVewHolder>() {
+
+
     private var mData: MutableList<ImageVideoFolder> = arrayListOf()
     private var mOnFolderClickListener: OnFolderClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FolderVewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_folder, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.tb_media_picker_item_folder, parent, false)
         return FolderVewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return mData.size
     }
+
 
     override fun onBindViewHolder(holder: FolderVewHolder, position: Int) {
         holder.bind(mData[position])

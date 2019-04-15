@@ -7,11 +7,9 @@ import android.webkit.MimeTypeMap
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.turtlebody.mediapicker.R
-import com.turtlebody.mediapicker.models.Audio
+import com.turtlebody.mediapicker.ui.component.models.Audio
 import kotlinx.android.synthetic.main.tb_media_picker_audio_item.view.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-
 
 
 /**

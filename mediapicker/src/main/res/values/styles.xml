@@ -78,7 +78,7 @@
     </style>
 
 
-    <!--ImageVideo-->
+    <!--Image-->
     <style name="ImageIcon">
         <item name="android:layout_width">@dimen/length_36</item>
         <item name="android:layout_height">@dimen/length_36</item>

@@ -12,7 +12,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_folder"/>
+        tools:listitem="@layout/tb_media_picker_item_folder"/>
 
     <include layout="@layout/tb_media_picker_frame_progress"/>
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.turtlebody.mediapicker.adapters
+package com.turtlebody.mediapicker.ui.component.media.audio.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,20 +6,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.turtlebody.mediapicker.R
-import com.turtlebody.mediapicker.models.ImageVideo
-import kotlinx.android.synthetic.main.item_image.view.*
+import com.turtlebody.mediapicker.ui.component.models.Image
+import kotlinx.android.synthetic.main.tb_media_picker_item_image.view.*
 import java.io.File
 
 /**
  * Created by WANGSUN on 26-Mar-19.
  */
-class ImageVideoAdapter: RecyclerView.Adapter<ImageVideoAdapter.ImageVewHolder>() {
-    private var mData: MutableList<ImageVideo> = arrayListOf()
+class ImageAdapter: RecyclerView.Adapter<ImageAdapter.ImageVewHolder>() {
+    private var mData: MutableList<Image> = arrayListOf()
     private var mOnImageClickListener: OnImageClickListener? = null
     var mShowCheckBox: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageVewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.tb_media_picker_item_image, parent, false)
         return ImageVewHolder(view)
     }
 
@@ -36,12 +36,12 @@ class ImageVideoAdapter: RecyclerView.Adapter<ImageVideoAdapter.ImageVewHolder>(
         mOnImageClickListener = listener
     }
 
-    fun setData(pData: MutableList<ImageVideo>){
+    fun setData(pData: MutableList<Image>){
         mData = pData
         notifyDataSetChanged()
     }
 
-    fun updateIsSelected(pData: ImageVideo){
+    fun updateIsSelected(pData: Image){
         val pos = mData.indexOf(pData)
         if(pos>=0){
             mData[pos] = pData
@@ -50,7 +50,7 @@ class ImageVideoAdapter: RecyclerView.Adapter<ImageVideoAdapter.ImageVewHolder>(
     }
 
     inner class ImageVewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        fun bind(pData: ImageVideo){
+        fun bind(pData: Image){
 
             Glide.with(itemView)
                     .load(File(pData.thumbnailPath))
@@ -73,6 +73,6 @@ class ImageVideoAdapter: RecyclerView.Adapter<ImageVideoAdapter.ImageVewHolder>(
 
 
     interface OnImageClickListener {
-        fun onImageCheck(pData: ImageVideo)
+        fun onImageCheck(pData: Image)
     }
 }

@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.turtlebody.mediapicker.core.FileManager
-import com.turtlebody.mediapicker.ui.component.models.Audio
+import androidx.recyclerview.widget.GridLayoutManager
 import com.turtlebody.mediapicker.ui.ActivityLibMain
+import com.turtlebody.mediapicker.ui.component.media.audio.adapter.ImageAdapter
+import com.turtlebody.mediapicker.core.FileManager
 import com.turtlebody.mediapicker.ui.common.MediaListFragment
-import com.turtlebody.mediapicker.ui.component.media.audio.adapter.AudioAdapter
+import com.turtlebody.mediapicker.ui.component.models.Image
+import com.turtlebody.mediapicker.ui.component.models.ImageVideoFolder
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,7 +26,7 @@ import java.io.File
 /**
  * Created by niraj on 12-04-2019.
  */
-class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener {
+class ImageListFragment : MediaListFragment(), ImageAdapter.OnImageClickListener {
 
 
     companion object {
@@ -34,22 +35,19 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
         fun newInstance(key: Int, b: Bundle?): Fragment {
             val bf: Bundle = b ?: Bundle()
             bf.putInt("fragment.key", key);
-            val fragment = AudioListFragment()
+            val fragment = ImageListFragment()
             fragment.arguments = bf
             return fragment
         }
 
-        const val B_ARG_FOLDER_PATH = "args.folderPath"
     }
 
-    private var mFolderPath: String = ""
+    private var mFolderId: String = ""
     private var mUriList: MutableList<Uri> = arrayListOf()
 
-
-
-    private var mAudioAdapter: AudioAdapter = AudioAdapter()
-    private var mAudioList: MutableList<Audio> = arrayListOf()
-    private var mSelectedAudioList: MutableList<Audio> = arrayListOf()
+    private var mImageAdapter: ImageAdapter = ImageAdapter()
+    private var mImageList: MutableList<Image> = arrayListOf()
+    private var mSelectedImageList: MutableList<Image> = arrayListOf()
 
 
 
@@ -61,15 +59,15 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
 
     override fun onRestoreState(savedInstanceState: Bundle?, args: Bundle?) {
         arguments?.let {
-            mFolderPath= it.getString(B_ARG_FOLDER_PATH,"")
-            info { "folderPath: $mFolderPath" }
+            mFolderId= it.getString(ImageVideoFolder.FOLDER_ID,"")
+            info { "fileId: $mFolderId" }
         }
     }
 
 
     override fun getAllUris() {
-        if(mSelectedAudioList.isNotEmpty()){
-            for (i in mSelectedAudioList){
+        if(mSelectedImageList.isNotEmpty()){
+            for (i in mSelectedImageList){
                 info { "audio path: ${i.filePath}" }
                 mUriList.add(FileManager.getContentUri(context!!, File(i.filePath)))
             }
@@ -78,7 +76,7 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
     }
 
 
-    override fun onAudioCheck(pData: Audio) {
+    override fun onImageCheck(pData: Image) {
         if(!mPickerConfig.mAllowMultiImages){
             if(mPickerConfig.mShowDialog){
                 val simpleAlert = AlertDialog.Builder(context!!)
@@ -95,47 +93,46 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
             }
         }
         else{
-            val selectedIndex = mAudioList.indexOf(pData)
+            val selectedIndex = mImageList.indexOf(pData)
 
             if(selectedIndex >= 0){
                 //toggle
-                mAudioList[selectedIndex].isSelected = !(mAudioList[selectedIndex].isSelected)
+                mImageList[selectedIndex].isSelected = !(mImageList[selectedIndex].isSelected)
                 //update ui
-                mAudioAdapter.updateIsSelected(mAudioList[selectedIndex])
+                mImageAdapter.updateIsSelected(mImageList[selectedIndex])
 
                 //update selectedList
-                if(mAudioList[selectedIndex].isSelected){
-                    mSelectedAudioList.add(mAudioList[selectedIndex])
+                if(mImageList[selectedIndex].isSelected){
+                    mSelectedImageList.add(mImageList[selectedIndex])
                 }
                 else{
-                    mSelectedAudioList.removeAt(mSelectedAudioList.indexOf(pData))
+                    mSelectedImageList.removeAt(mSelectedImageList.indexOf(pData))
                 }
             }
-            (activity as ActivityLibMain).updateCounter(mSelectedAudioList.size)
-            btn_add_file.isEnabled = mSelectedAudioList.size>0
+            (activity as ActivityLibMain).updateCounter(mSelectedImageList.size)
+            btn_add_file.isEnabled = mSelectedImageList.size>0
         }
     }
 
 
     private fun initAdapter() {
-        mAudioAdapter.setListener(this)
-        mAudioAdapter.mShowCheckBox = mPickerConfig.mAllowMultiImages
-
-        recycler_view.layoutManager = LinearLayoutManager(context)
-        recycler_view.adapter = mAudioAdapter
-        fetchAudioFiles()
+        mImageAdapter.setListener(this)
+        mImageAdapter.mShowCheckBox = mPickerConfig.mAllowMultiImages
+        recycler_view.layoutManager = GridLayoutManager(context,2)
+        recycler_view.adapter = mImageAdapter
+        fetchImageFiles()
 
     }
 
-    private fun fetchAudioFiles() {
+    private fun fetchImageFiles() {
         val fileItems = Single.fromCallable<Boolean> {
-            mAudioList.clear()
-            val tempArray = FileManager.getAudioFilesInFolder(context!!, mFolderPath)
+            mImageList.clear()
+            val tempArray = FileManager.getImageFilesInFolder(context!!, mFolderId)
 
             //include only valid files
             for(i in tempArray){
                 if(File(i.filePath).length()>0){
-                    mAudioList.add(i)
+                    mImageList.add(i)
                 }
             }
             true
@@ -149,7 +146,7 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
                     }
 
                     override fun onSuccess(t: Boolean) {
-                        mAudioAdapter.setData(mAudioList)
+                        mImageAdapter.setData(mImageList)
                         progress_view.visibility = View.GONE
                     }
 
