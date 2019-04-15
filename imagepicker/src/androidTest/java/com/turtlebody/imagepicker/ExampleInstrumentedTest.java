@@ -1,4 +1,4 @@
-package com.turtlebody.imagepicker;
+package com.greentoad.turtlebody.mediapicker;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.turtlebody.imagepicker.test", appContext.getPackageName());
+        assertEquals("com.greentoad.turtlebody.imagepicker.test", appContext.getPackageName());
     }
 }

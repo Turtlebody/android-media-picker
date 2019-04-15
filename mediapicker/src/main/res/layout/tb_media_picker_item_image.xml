@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/offset_1">
 
-    <com.turtlebody.mediapicker.widget.SquareImage
+    <com.greentoad.turtlebody.mediapicker.widget.SquareImage
         android:id="@+id/iv_image"
         android:layout_gravity="center"
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
         <!--android:layout_gravity="end|top"-->
         <!--android:layout_margin="@dimen/offset_4"/>-->
 
-    <com.turtlebody.mediapicker.widget.ImageViewCheckable
+    <com.greentoad.turtlebody.mediapicker.widget.ImageViewCheckable
         android:id="@+id/cb_btn_selection"
         android:src="@drawable/sc_check_uncheck_file"
         android:layout_width="@dimen/length_32"

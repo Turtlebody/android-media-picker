@@ -14,7 +14,7 @@ import java.util.*
 
 object FileManager {
 
-    private val SHARED_PROVIDER_AUTHORITY = "com.turtlebody.imagepicker.myFileprovider"
+    private val SHARED_PROVIDER_AUTHORITY = "com.greentoad.turtlebody.imagepicker.myFileprovider"
 
 
     /**

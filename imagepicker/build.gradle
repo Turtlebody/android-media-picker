@@ -19,9 +19,9 @@ buildscript {
 
 ext {
     bintrayRepo = 'android-imagepicker'
-    bintrayName = 'com.turtlebody.imagepicker'
+    bintrayName = 'com.greentoad.turtlebody.imagepicker'
 
-    publishedGroupId = 'com.turtlebody'
+    publishedGroupId = 'com.greentoad.turtlebody'
     libraryName = 'ImagePicker'
     artifact = 'imagepicker'
 
