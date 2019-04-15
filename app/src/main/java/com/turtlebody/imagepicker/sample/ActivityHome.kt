@@ -22,7 +22,7 @@ class ActivityHome : ActivityBase() {
         toolbar.title = "Select Option"
         initButton()
 
-        info { "test" }
+        info { "test1" }
     }
 
     private fun initButton() {
