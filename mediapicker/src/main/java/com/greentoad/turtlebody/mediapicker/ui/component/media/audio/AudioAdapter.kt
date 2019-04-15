@@ -7,7 +7,7 @@ import android.webkit.MimeTypeMap
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.greentoad.turtlebody.mediapicker.R
-import kotlinx.android.synthetic.main.tb_media_picker_audio_item.view.*
+import kotlinx.android.synthetic.main.tb_media_picker_item_audio.view.*
 import org.jetbrains.anko.AnkoLogger
 
 
@@ -21,7 +21,7 @@ class AudioAdapter: RecyclerView.Adapter<AudioAdapter.AudioVewHolder>(), AnkoLog
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AudioVewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.tb_media_picker_audio_item, parent, false)
+                .inflate(R.layout.tb_media_picker_item_audio, parent, false)
         return AudioVewHolder(view)
     }
 

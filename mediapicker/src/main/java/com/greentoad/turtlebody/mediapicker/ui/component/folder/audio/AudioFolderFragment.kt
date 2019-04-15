@@ -61,8 +61,8 @@ class AudioFolderFragment : FragmentBase() {
             }
         })
 
-        recycler_view.layoutManager = LinearLayoutManager(context)
-        recycler_view.adapter = mAudioFolderAdapter
+        tb_media_picker_folder_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
+        tb_media_picker_folder_fragment_recycler_view.adapter = mAudioFolderAdapter
         fetchAudioFolders()
     }
 

@@ -47,7 +47,7 @@ class ActivityLibMain : ActivityBase() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tb_media_picker_activity)
 
-        initToolbar(R.drawable.ic_arrow_back_black_24dp,find(R.id.toolbar))
+        initToolbar(R.drawable.ic_arrow_back_black_24dp,find(R.id.tb_media_picker_activity_toolbar))
         toolbarTitle = "Select Folder"
         vToolbarCounter =  find<TextView>(R.id.toolbar_txt_count)
         mFilePicker = FilePicker(this)

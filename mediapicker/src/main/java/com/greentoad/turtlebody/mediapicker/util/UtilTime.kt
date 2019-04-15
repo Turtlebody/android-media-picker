@@ -1,4 +1,4 @@
-package com.greentoad.turtlebody.mediapicker.sample.utils
+package com.greentoad.turtlebody.mediapicker.util
 
 import java.util.concurrent.TimeUnit
 

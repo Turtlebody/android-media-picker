@@ -48,6 +48,8 @@ class ImageVideoFolderAdapter: RecyclerView.Adapter<ImageVideoFolderAdapter.Fold
             itemView.folder_txt_folder_name.text = pData.name
             itemView.folder_txt_total_items.text = "${pData.contentCount} items"
 
+            itemView.tb_media_picker_item_folder_small_icon.visibility = View.VISIBLE
+
             Glide.with(itemView)
                     .load(File( pData.coverImageFilePath))
                     .into(itemView.folder_image_folder_icon)

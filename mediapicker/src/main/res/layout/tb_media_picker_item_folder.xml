@@ -9,12 +9,34 @@
     android:paddingBottom="@dimen/offset_14">
 
 
-    <ImageView
+    <FrameLayout
         android:layout_width="@dimen/length_40"
         android:layout_height="@dimen/length_40"
-        android:id="@+id/folder_image_folder_icon"
-        android:layout_margin="@dimen/offset_8"
-        android:scaleType="centerCrop"/>
+        android:layout_margin="@dimen/offset_8">
+
+        <ImageView
+            android:layout_width="@dimen/length_40"
+            android:layout_height="@dimen/length_40"
+            android:id="@+id/folder_image_folder_icon"
+            android:scaleType="centerCrop"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/length_20"
+            android:layout_gravity="bottom"
+            android:background="@drawable/dr_rect_gradient_black">
+
+            <ImageView
+                android:id="@+id/tb_media_picker_item_folder_small_icon"
+                android:layout_width="@dimen/length_8"
+                android:layout_height="@dimen/length_8"
+                android:layout_margin="@dimen/offset_2"
+                app:srcCompat="@drawable/ic_iconfinder_ic_folder_48px_352374"
+                android:layout_gravity="bottom"/>
+        </FrameLayout>
+
+    </FrameLayout>
+
 
     <LinearLayout
         android:orientation="vertical"

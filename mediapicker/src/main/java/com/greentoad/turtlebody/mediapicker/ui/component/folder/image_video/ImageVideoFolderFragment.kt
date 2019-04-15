@@ -66,8 +66,8 @@ class ImageVideoFolderFragment : FragmentBase() {
                 (activity as ActivityLibMain).startMediaListFragment(pData.id)
             }
         })
-        recycler_view.layoutManager = LinearLayoutManager(context)
-        recycler_view.adapter = mImageVideoFolderAdapter
+        tb_media_picker_folder_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
+        tb_media_picker_folder_fragment_recycler_view.adapter = mImageVideoFolderAdapter
         fetchImageVideoFolders()
 
 

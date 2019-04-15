@@ -9,7 +9,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:padding="@dimen/offset_16"
-        android:id="@+id/recycler_view"
+        android:id="@+id/tb_media_picker_folder_fragment_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/tb_media_picker_item_folder"/>

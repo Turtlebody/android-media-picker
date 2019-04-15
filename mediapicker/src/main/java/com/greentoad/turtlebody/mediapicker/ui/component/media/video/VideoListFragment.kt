@@ -38,22 +38,15 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
             fragment.arguments = bf
             return fragment
         }
-
-
     }
 
 
     private var mFolderId: String = ""
-
     private var mUriList: MutableList<Uri> = arrayListOf()
-
-
 
     private var mVideoAdapter: VideoAdapter = VideoAdapter()
     private var mVideoModelList: MutableList<VideoModel> = arrayListOf()
     private var mSelectedVideoModelList: MutableList<VideoModel> = arrayListOf()
-
-
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
