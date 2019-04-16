@@ -60,9 +60,9 @@ PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setSho
 
 ## File types:
 The type of file user want to select(its a constant integer value).
-1. **Constants.FileTypes.FILE_TYPE_IMAGE** : for picking image files
-2. **Constants.FileTypes.FILE_TYPE_VIDEO** : for picking video files
-3. **Constants.FileTypes.FILE_TYPE_AUDIO** : for picking audio files
+1. **FILE_TYPE_IMAGE** : for picking image files
+2. **FILE_TYPE_VIDEO** : for picking video files
+3. **FILE_TYPE_AUDIO** : for picking audio files
 
 
 ## URI:
