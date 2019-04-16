@@ -66,7 +66,7 @@ The type of file user want to select(its a constant integer value).
 
 
 ## URI:
-We will be returning the list of Uri after selecting the files. That's why it is better to know Uri first.
+We will be returning the list of Uri after selecting the files. That's why it is better to know about Uri first.
 
 A Uniform Resource Identifier (URI) is a compact sequence of characters that identifies an abstract or physical resource.
 
