@@ -3,9 +3,15 @@ package com.greentoad.turtlebody.mediapicker.sample
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AlertDialog
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
 import com.bumptech.glide.Glide
 import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.core.MediaPicker
@@ -15,6 +21,8 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.info
 import java.io.Serializable
+
+
 
 class ActivityHome : ActivityBase() {
 
@@ -49,14 +57,23 @@ class ActivityHome : ActivityBase() {
     }
 
     private fun showAlert(fileType: Int){
-        AlertDialog.Builder(this)
-                //.setTitle("New User?")
-                .setMessage("Type of file selection?")
-                .setPositiveButton("Single") { dialog, which ->
-                    startMediaPicker(fileType,false)
-                }.setNegativeButton("Multiple") { dialog, which ->
-                    startMediaPicker(fileType,true)
-                }.show()
+        MaterialDialog(this).show {
+            customView(R.layout.dialog_view,scrollable = true)
+            this.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            val view = this.getCustomView()
+            val singleBtn = view.findViewById<Button>(R.id.activity_home_single_select)
+            val multiBtn = view.findViewById<Button>(R.id.activity_home_multi_select)
+
+            singleBtn.setOnClickListener {
+                this.dismiss()
+                startMediaPicker(fileType,false)
+            }
+            multiBtn.setOnClickListener {
+                this.dismiss()
+                startMediaPicker(fileType,true)
+            }
+        }
     }
 
 
@@ -66,16 +83,19 @@ class ActivityHome : ActivityBase() {
                 .onResult()
                 .subscribe({
                     info { "success: $it" }
-                    startActivityShowResuilt(it)
+                    startActivityShowResult(it)
 
                 },{
                     info { "error: $it" }
                 })
     }
 
-    private fun startActivityShowResuilt(it: MutableList<Uri>?) {
+    private fun startActivityShowResult(it: MutableList<Uri>?) {
         val intent = Intent(this,ActivityResults::class.java)
         intent.putExtra(MediaPicker.URI_LIST_KEY,it as Serializable)
         startActivity(intent)
     }
+
+
+
 }

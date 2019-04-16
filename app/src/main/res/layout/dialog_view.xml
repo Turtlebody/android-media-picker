@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:padding="24dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/dr_rect_round_white">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selection Type"
+        android:layout_gravity="center_horizontal"
+        android:textSize="18sp"
+        android:textColor="@color/md_black_1000"/>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/activity_home_single_select"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Single"
+            android:textSize="16sp"
+            android:layout_marginEnd="3dp"
+            android:textColor="@drawable/sc_text_color_toggle"
+            android:textAppearance="@style/App.TextAppearance.h4.Title"
+            android:background="@drawable/sc_button_blue"/>
+
+        <Button
+            android:id="@+id/activity_home_multi_select"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Multiple"
+            android:textSize="16sp"
+            android:layout_marginStart="3dp"
+            android:textColor="@drawable/sc_text_color_toggle"
+            android:textAppearance="@style/App.TextAppearance.h4.Title"
+            android:background="@drawable/sc_button_blue"/>
+    </LinearLayout>
+
+</LinearLayout>

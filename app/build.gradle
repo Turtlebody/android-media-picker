@@ -55,6 +55,9 @@ dependencies {
     /* Firebase */
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
+
+    /*Material Dialog*/
+    implementation 'com.afollestad.material-dialogs:core:2.7.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

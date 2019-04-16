@@ -24,12 +24,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/length_20"
             android:layout_gravity="bottom"
-            android:background="@drawable/dr_rect_gradient_black">
+            android:background="@drawable/dr_rect_gradient_light_to_black">
 
             <ImageView
                 android:id="@+id/tb_media_picker_item_folder_small_icon"
-                android:layout_width="@dimen/length_8"
-                android:layout_height="@dimen/length_8"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:layout_margin="@dimen/offset_2"
                 app:srcCompat="@drawable/ic_iconfinder_ic_folder_48px_352374"
                 android:layout_gravity="bottom"/>
