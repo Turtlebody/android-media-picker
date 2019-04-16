@@ -31,16 +31,16 @@ ext {
     siteUrl = 'https://github.com/Turtlebody/android-media-picker'
     gitUrl = 'https://github.com/Turtlebody/android-media-picker.git'
 
-    libraryVersionCode = 1
-    libraryVersion = '1.0.1'
+    libraryVersionCode = 2
+    libraryVersion = '1.0.2'
 
     developerId = 'greentoad'
     developerName = 'Green Toad'
     developerEmail = 'greentoad312@gmail.com'
 
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
+    licenseName = 'MIT License'
+    licenseUrl = 'https://github.com/Turtlebody/android-media-picker/blob/master/LICENSE'
+    allLicenses = ["MIT"]
 }
 
 
