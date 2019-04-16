@@ -83,6 +83,13 @@ File file = new File(uri.getPath());
 String mimeType = getContentResolver().getType(uri);
 ```
 
+3. Used in Glide:
+```
+Glide.with(context)
+     .load(uri)
+     .into(imageView);
+```
+
 
 
 

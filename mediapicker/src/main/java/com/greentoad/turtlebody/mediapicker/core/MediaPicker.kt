@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.tbruyelle.rxpermissions2.RxPermissions
 import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -18,6 +17,13 @@ import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.lang.ref.WeakReference
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.single.PermissionListener
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.listener.PermissionRequest
+
 
 /**
  * Created by WANGSUN on 29-Mar-19.
@@ -64,23 +70,29 @@ class MediaPicker {
         private fun getPermission() {
             mActivity.get()?.let {
                 it.runOnUiThread {
-                    val rxPermissions = RxPermissions(it)
-                    rxPermissions
-                            .request(
-                                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                            )
-                            .subscribe { granted ->
-                                if (granted) {
-                                    // All requested permissions are granted
+                    Dexter.withActivity(it)
+                            .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            .withListener(object : PermissionListener {
+                                override fun onPermissionGranted(response: PermissionGrantedResponse) {
                                     startFragment()
-                                } else {
-                                    Toast.makeText(it, "Need permission to do this task.", Toast.LENGTH_SHORT).show()
+                                    info { "accepted" }
                                 }
-                            }
+
+                                override fun onPermissionDenied(response: PermissionDeniedResponse) {
+                                    Toast.makeText(it, "Need permission to do this task.", Toast.LENGTH_SHORT).show()
+                                    info { "denied" }
+                                }
+                                override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest, token: PermissionToken) {
+                                    token.continuePermissionRequest()
+                                    info { "rational" }
+                                }
+                            }).check()
                 }
             }
         }
+
+
+
 
         private fun startFragment() {
             val bundle = Bundle()

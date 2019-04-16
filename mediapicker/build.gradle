@@ -34,9 +34,9 @@ ext {
     libraryVersionCode = 1
     libraryVersion = '1.0.1'
 
-    developerId = 'wangsun6'
-    developerName = 'Wangsun Hakhun'
-    developerEmail = 'wangsunhakhun@gmail.com'
+    developerId = 'greentoad'
+    developerName = 'Green Toad'
+    developerEmail = 'greentoad312@gmail.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
@@ -86,8 +86,7 @@ dependencies {
     /* image */
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
-    /*Permission //add this too maven { url 'https://jitpack.io' }*/
-    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation 'com.karumi:dexter:5.0.0'
 
     implementation 'com.github.wangsun6:CustomFilePicker:1.0.6'
 
