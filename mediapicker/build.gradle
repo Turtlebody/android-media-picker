@@ -2,14 +2,56 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+    }
+}
+
+
+ext {
+    bintrayRepo = 'android-media-picker'
+    bintrayName = 'com.greentoad.turtlebody.mediapicker'
+
+    publishedGroupId = 'com.greentoad.turtlebody'
+    libraryName = 'Android Mediapicker'
+    artifact = 'media-picker'
+
+    libraryDescription = 'Android Library for selecting images from local storage'
+
+    siteUrl = 'https://github.com/Turtlebody/android-media-picker'
+    gitUrl = 'https://github.com/Turtlebody/android-media-picker.git'
+
+    libraryVersionCode = 1
+    libraryVersion = '1.0.1'
+
+    developerId = 'wangsun6'
+    developerName = 'Wangsun Hakhun'
+    developerEmail = 'wangsunhakhun@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+
 android {
     compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode libraryVersionCode
+        versionName libraryVersion
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -53,6 +95,13 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0-alpha03'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha03'
 }
+
+repositories {
+    mavenCentral()
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 
 // issue duplicate
 //https://stackoverflow.com/questions/16204667/nosuchfielderror-on-findviewbyid
