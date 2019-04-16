@@ -14,7 +14,7 @@ class PickerConfig: Serializable {
     }
 
     /**
-     *  Show dialog after selecting file
+     *  Show confirmation dialog after selecting file (works only for single file selection)
      */
     fun setShowDialog(value: Boolean): PickerConfig {
         mShowDialog = value

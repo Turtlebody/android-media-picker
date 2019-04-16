@@ -41,7 +41,7 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
     }
 
     private var mFolderPath: String = ""
-    private var mUriList: MutableList<Uri> = arrayListOf()
+    private var mUriList: ArrayList<Uri> = arrayListOf()
 
 
 

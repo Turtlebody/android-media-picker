@@ -14,15 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".show_results.ActivityResults"></activity>
+        <activity android:name=".test.TestActivityPicker">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".show_results.ActivityResults" />
         <activity android:name=".ActivityLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityHome"></activity>
+        <activity android:name=".ActivityHome" />
         <activity android:name=".test.MainActivity">
 
             <!-- <intent-filter> -->

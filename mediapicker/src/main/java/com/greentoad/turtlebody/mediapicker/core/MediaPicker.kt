@@ -35,11 +35,11 @@ class MediaPicker {
         val URI_LIST_KEY = "uriListKey"
     }
 
-    class FilePickerImpl(activity: FragmentActivity, private var config: PickerConfig, var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
-        private lateinit var mEmitter: ObservableEmitter<MutableList<Uri>>
+    class FilePickerImpl(activity: FragmentActivity, private var config: PickerConfig,private var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
+        private lateinit var mEmitter: ObservableEmitter<ArrayList<Uri>>
         private var mActivity: WeakReference<FragmentActivity> = WeakReference(activity)
 
-        override fun onData(data: MutableList<Uri>) {
+        override fun onData(data: ArrayList<Uri>) {
             mEmitter.onNext(data)
             mEmitter.onComplete()
         }
@@ -49,10 +49,14 @@ class MediaPicker {
             mEmitter.onComplete()
         }
 
-        fun onResult(): Observable<MutableList<Uri>> {
-            return Observable.create<MutableList<Uri>> { emitter: ObservableEmitter<MutableList<Uri>> ->
+        fun onResult(): Observable<ArrayList<Uri>> {
+            return Observable.create<ArrayList<Uri>> { emitter: ObservableEmitter<ArrayList<Uri>> ->
                 this.mEmitter = emitter
-                getPermission()
+
+                if(mFileType==Constants.FileTypes.FILE_TYPE_AUDIO||mFileType==Constants.FileTypes.FILE_TYPE_VIDEO||mFileType==Constants.FileTypes.FILE_TYPE_IMAGE)
+                    getPermission()
+                else
+                    emitter.onError(Throwable("File type invalid."))
             }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
         }
 
@@ -117,7 +121,7 @@ class MediaPicker {
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             if (requestCode == REQ_CODE) {
                 if (resultCode == Activity.RESULT_OK) {
-                    val list = data?.extras?.getSerializable(URI_LIST_KEY) as MutableList<Uri>
+                    val list = data?.extras?.getSerializable(URI_LIST_KEY) as ArrayList<Uri>
                     mListener?.onData(list)
                 } else {
                     mListener?.onCancel("Cancelled")
@@ -133,7 +137,7 @@ class MediaPicker {
         }
 
         interface OnPickerListener {
-            fun onData(data: MutableList<Uri>)
+            fun onData(data: ArrayList<Uri>)
             fun onCancel(message: String)
         }
     }

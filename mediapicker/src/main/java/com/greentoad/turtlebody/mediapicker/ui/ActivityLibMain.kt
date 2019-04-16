@@ -174,7 +174,7 @@ class ActivityLibMain : ActivityBase() {
         vToolbarCounter.text = "$counter"
     }
 
-    fun sendBackData(list: MutableList<Uri>){
+    fun sendBackData(list: ArrayList<Uri>){
         if(list.isNotEmpty()){
             val intent = Intent()
             intent.putExtra(MediaPicker.URI_LIST_KEY,list as Serializable)
