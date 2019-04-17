@@ -48,6 +48,7 @@ class MediaPicker {
         private var mConfig: PickerConfig = PickerConfig()
         private var mOnMediaListener: OnMediaListener? = null
 
+
         override fun onData(data: ArrayList<Uri>) {
             mEmitter.onNext(data)
             mEmitter.onComplete()

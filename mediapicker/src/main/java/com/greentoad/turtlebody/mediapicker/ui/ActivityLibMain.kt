@@ -10,12 +10,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.greentoad.turtlebody.mediapicker.R
 import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.MediaPicker
-import com.greentoad.turtlebody.mediapicker.core.AlertMessage
 import com.greentoad.turtlebody.mediapicker.core.FileHelper
 import com.greentoad.turtlebody.mediapicker.core.PickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.base.ActivityBase
@@ -27,7 +25,6 @@ import com.greentoad.turtlebody.mediapicker.ui.component.media.audio.AudioListFr
 import com.greentoad.turtlebody.mediapicker.ui.component.media.image.ImageListFragment
 import com.greentoad.turtlebody.mediapicker.ui.component.media.video.VideoListFragment
 import com.greentoad.turtlebody.mediapicker.util.UtilMime
-import kotlinx.android.synthetic.main.tb_media_picker_activity_main.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.info
 import java.io.Serializable
@@ -100,36 +97,76 @@ class ActivityLibMain : ActivityBase() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == REQ_CODE) {
             info { "data: ${data?.data}" }
-            if (data?.clipData != null) {
-                var isMissing = false
-                val count = data.clipData.itemCount
-                val finalFiles: ArrayList<Uri> = arrayListOf()
-                for (i in 0 until count) {
-                    val uri = data.clipData.getItemAt(i).uri
-                    if(FileHelper.isFileExist(this,uri))
-                        finalFiles.add(uri)
-                    else
-                        isMissing = true
-                }
-                if (finalFiles.isNotEmpty())
-                    sendBackData(finalFiles,isMissing)
-                else
-                    if(mPickerConfig.mShowConfirmationDialog)
-                        Toast.makeText(this,"selected files are missing",Toast.LENGTH_LONG).show()
-
-
-
-            } else if (data?.data != null) {
-                val uri = data.data
-                if(FileHelper.isFileExist(this,uri))
-                    sendBackData(arrayListOf(uri))
-                else{
-                    if(mPickerConfig.mShowConfirmationDialog)
-                        Toast.makeText(this,"the file is missing",Toast.LENGTH_LONG).show()
-                }
-            }
+            handleFileData(data)
+//            if (data?.clipData != null) {
+//                var isMissing = false
+//                val count = data.clipData.itemCount
+//                val finalFiles: ArrayList<Uri> = arrayListOf()
+//                for (i in 0 until count) {
+//                    val uri = data.clipData.getItemAt(i).uri
+//                    info { "OnResult Uri: $uri" }
+//                    if(FileHelper.isFileExist(this,uri))
+//                        finalFiles.add(uri)
+//                    else
+//                        isMissing = true
+//                }
+//                if (finalFiles.isNotEmpty())
+//                    sendBackData(finalFiles,isMissing)
+//                else
+//                    if(mPickerConfig.mShowConfirmationDialog)
+//                        Toast.makeText(this,"selected files are missing",Toast.LENGTH_LONG).show()
+//
+//
+//
+//            } else if (data?.data != null) {
+//                val uri = data.data
+//                if(FileHelper.isFileExist(this,uri))
+//                    sendBackData(arrayListOf(uri))
+//                else{
+//                    if(mPickerConfig.mShowConfirmationDialog)
+//                        Toast.makeText(this,"the file is missing",Toast.LENGTH_LONG).show()
+//                }
+//            }
         } else
             super.onActivityResult(requestCode, resultCode, data)
+    }
+
+
+    private fun handleFileData(intent: Intent?) {
+        val uriList: ArrayList<Uri> = arrayListOf()
+        var isMissing = false
+        if (intent != null) {
+            if (intent.data != null) {
+                val uri = intent.data
+                info { "handleFileData: $uri" }
+                if(FileHelper.isFileExist(this,uri))
+                    uriList.add(uri)
+            }
+            else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                if (intent.clipData != null) {
+
+                    val clipData = intent.clipData
+                    info { "handleFileData: Multiple files with ClipData"}
+                    for (i in 0 until clipData!!.itemCount) {
+                        val item = clipData.getItemAt(i)
+                        info { "Item [" + i + "]: " + item.uri.toString()}
+                        if(FileHelper.isFileExist(this,item.uri))
+                            uriList.add(item.uri)
+                        else
+                            isMissing = true
+                    }
+                }
+            }
+            if (intent.hasExtra("uris")) {
+                val paths = intent.getParcelableArrayListExtra<Uri>("uris")
+                for (i in paths.indices) {
+                    uriList.add(paths[i])
+                }
+            }
+            if(uriList.isNotEmpty()){
+                sendBackData(uriList,isMissing)
+            }
+        }
     }
 
 

@@ -10,7 +10,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.greentoad.turtlebody.mediapicker.myFileprovider"
+            android:authorities="${applicationId}.greentoad.turtlebody.mediaprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

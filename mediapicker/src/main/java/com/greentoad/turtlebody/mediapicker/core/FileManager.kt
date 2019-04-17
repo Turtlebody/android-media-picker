@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import androidx.core.content.FileProvider.getUriForFile
+import com.greentoad.turtlebody.mediapicker.BuildConfig
 import com.greentoad.turtlebody.mediapicker.ui.component.folder.audio.AudioFolder
 import com.greentoad.turtlebody.mediapicker.ui.component.folder.image_video.ImageVideoFolder
 import com.greentoad.turtlebody.mediapicker.ui.component.media.audio.AudioModel
@@ -17,7 +18,6 @@ import java.util.*
 
 object FileManager : AnkoLogger {
 
-    private val SHARED_PROVIDER_AUTHORITY = "com.greentoad.turtlebody.mediapicker.myFileprovider"
 
 
     /**
@@ -267,6 +267,10 @@ object FileManager : AnkoLogger {
     }
 
     fun getContentUri(context: Context, newFile: File): Uri {
+        val SHARED_PROVIDER_AUTHORITY = context.packageName+ ".greentoad.turtlebody.mediaprovider"
+
+        info { "id: $SHARED_PROVIDER_AUTHORITY" }
+
         return getUriForFile(context, SHARED_PROVIDER_AUTHORITY, newFile)
     }
 }
