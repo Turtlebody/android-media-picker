@@ -4,7 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.greentoad.turtlebody.mediapicker.core.MediaPicker
+import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.sample.ActivityBase
 import com.greentoad.turtlebody.mediapicker.sample.R
 import kotlinx.android.synthetic.main.activity_results.*

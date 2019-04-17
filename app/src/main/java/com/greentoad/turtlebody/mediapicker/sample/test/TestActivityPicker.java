@@ -1,11 +1,9 @@
 package com.greentoad.turtlebody.mediapicker.sample.test;
 
 import androidx.appcompat.app.AppCompatActivity;
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.greentoad.turtlebody.mediapicker.core.Constants;
-import com.greentoad.turtlebody.mediapicker.core.MediaPicker;
+import com.greentoad.turtlebody.mediapicker.MediaPicker;
 import com.greentoad.turtlebody.mediapicker.core.PickerConfig;
 import com.greentoad.turtlebody.mediapicker.sample.R;
 

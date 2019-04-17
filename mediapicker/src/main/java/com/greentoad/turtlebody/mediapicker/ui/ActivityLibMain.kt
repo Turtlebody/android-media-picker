@@ -13,7 +13,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.greentoad.turtlebody.mediapicker.R
 import com.greentoad.turtlebody.mediapicker.core.Constants
-import com.greentoad.turtlebody.mediapicker.core.MediaPicker
+import com.greentoad.turtlebody.mediapicker.MediaPicker
+import com.greentoad.turtlebody.mediapicker.core.FileHelper
 import com.greentoad.turtlebody.mediapicker.core.PickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.base.ActivityBase
 import com.greentoad.turtlebody.mediapicker.ui.common.MediaListFragment
@@ -69,7 +70,6 @@ class ActivityLibMain : ActivityBase() {
             }
             else -> super.onBackPressed()
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -102,12 +102,15 @@ class ActivityLibMain : ActivityBase() {
                 val finalFiles = ArrayList<Uri>()
                 for (i in 0 until count) {
                     val uri = data.clipData.getItemAt(i).uri
-                    finalFiles.add(uri)
+                    if(FileHelper.isFileExistNew(this,uri))
+                        finalFiles.add(uri)
                 }
-                sendBackData(finalFiles)
+                if (finalFiles.isNotEmpty())
+                    sendBackData(finalFiles)
             } else if (data?.data != null) {
                 val uri = data.data
-                sendBackData(arrayListOf(uri))
+                if(FileHelper.isFileExistNew(this,uri))
+                    sendBackData(arrayListOf(uri))
             }
         } else
             super.onActivityResult(requestCode, resultCode, data)

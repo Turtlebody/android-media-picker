@@ -11,7 +11,7 @@ import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import com.greentoad.turtlebody.mediapicker.ui.base.FragmentBase
 import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.core.FileManager
-import com.greentoad.turtlebody.mediapicker.core.MediaPicker
+import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.R
 import io.reactivex.Single
 import io.reactivex.SingleObserver

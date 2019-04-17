@@ -1,4 +1,4 @@
-package com.turtlebody.imagepicker.core
+package com.greentoad.turtlebody.mediapicker
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -9,9 +9,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.tbruyelle.rxpermissions2.RxPermissions
-import com.turtlebody.imagepicker.activities.ActivityMyLibMain
-import com.turtlebody.imagepicker.fragments.FileListFragment
+import com.greentoad.turtlebody.mediapicker.core.Constants
+import com.greentoad.turtlebody.mediapicker.core.PickerConfig
+import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,27 +19,33 @@ import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.lang.ref.WeakReference
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.single.PermissionListener
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.listener.PermissionRequest
+
 
 /**
  * Created by WANGSUN on 29-Mar-19.
  */
-class ImagePicker {
+class MediaPicker {
 
     companion object {
         @JvmStatic
         fun with(activity: FragmentActivity, pickerConfig: PickerConfig, fileType: Int): FilePickerImpl {
-            return FilePickerImpl(activity, pickerConfig, fileType )
+            return FilePickerImpl(activity, pickerConfig, fileType)
         }
-
-        private const val REQ_CODE = 500
-        val FILE_TYPE = "mFileType"
+        const val FILE_TYPE = "mFileType"
+        const val URI_LIST_KEY = "uriListKey"
     }
 
-    class FilePickerImpl(activity: FragmentActivity, private var config: PickerConfig,var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
-        private lateinit var mEmitter: ObservableEmitter<MutableList<Uri>>
+    class FilePickerImpl(activity: FragmentActivity, private var config: PickerConfig, private var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
+        private lateinit var mEmitter: ObservableEmitter<ArrayList<Uri>>
         private var mActivity: WeakReference<FragmentActivity> = WeakReference(activity)
 
-        override fun onData(data: MutableList<Uri>) {
+        override fun onData(data: ArrayList<Uri>) {
             mEmitter.onNext(data)
             mEmitter.onComplete()
         }
@@ -49,10 +55,14 @@ class ImagePicker {
             mEmitter.onComplete()
         }
 
-        fun onResult(): Observable<MutableList<Uri>> {
-            return Observable.create<MutableList<Uri>> { emitter: ObservableEmitter<MutableList<Uri>> ->
+        fun onResult(): Observable<ArrayList<Uri>> {
+            return Observable.create<ArrayList<Uri>> { emitter: ObservableEmitter<ArrayList<Uri>> ->
                 this.mEmitter = emitter
-                getPermission()
+
+                if(mFileType== Constants.FileTypes.FILE_TYPE_AUDIO ||mFileType== Constants.FileTypes.FILE_TYPE_VIDEO ||mFileType== Constants.FileTypes.FILE_TYPE_IMAGE)
+                    getPermission()
+                else
+                    emitter.onError(Throwable("File type invalid."))
             }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
         }
 
@@ -60,23 +70,29 @@ class ImagePicker {
         private fun getPermission() {
             mActivity.get()?.let {
                 it.runOnUiThread {
-                    val rxPermissions = RxPermissions(it)
-                    rxPermissions
-                            .request(
-                                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                            )
-                            .subscribe { granted ->
-                                if (granted) {
-                                    // All requested permissions are granted
+                    Dexter.withActivity(it)
+                            .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            .withListener(object : PermissionListener {
+                                override fun onPermissionGranted(response: PermissionGrantedResponse) {
                                     startFragment()
-                                } else {
-                                    Toast.makeText(it, "Need permission to do this task.", Toast.LENGTH_SHORT).show()
+                                    info { "accepted" }
                                 }
-                            }
+
+                                override fun onPermissionDenied(response: PermissionDeniedResponse) {
+                                    Toast.makeText(it, "Need permission to do this task.", Toast.LENGTH_SHORT).show()
+                                    info { "denied" }
+                                }
+                                override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest, token: PermissionToken) {
+                                    token.continuePermissionRequest()
+                                    info { "rational" }
+                                }
+                            }).check()
                 }
             }
         }
+
+
+
 
         private fun startFragment() {
             val bundle = Bundle()
@@ -107,17 +123,17 @@ class ImagePicker {
             val config = arguments?.getSerializable(PickerConfig.ARG_BUNDLE)
             val fileType = arguments?.getInt(FILE_TYPE)
 
-            val intent = Intent(context, ActivityMyLibMain::class.java)
+            val intent = Intent(context, ActivityLibMain::class.java)
             intent.putExtra(PickerConfig.ARG_BUNDLE, config)
             intent.putExtra(FILE_TYPE, fileType)
             //intent.putExtra("",arguments)
-            startActivityForResult(intent, REQ_CODE)
+            startActivityForResult(intent, Constants.Intent.ACTIVITY_LIB_MAIN)
         }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            if (requestCode == REQ_CODE) {
+            if (requestCode == Constants.Intent.ACTIVITY_LIB_MAIN) {
                 if (resultCode == Activity.RESULT_OK) {
-                    val list = data?.extras?.getSerializable(FileListFragment.URI_LIST_KEY) as MutableList<Uri>
+                    val list = data?.extras?.getSerializable(URI_LIST_KEY) as ArrayList<Uri>
                     mListener?.onData(list)
                 } else {
                     mListener?.onCancel("Cancelled")
@@ -133,7 +149,7 @@ class ImagePicker {
         }
 
         interface OnPickerListener {
-            fun onData(data: MutableList<Uri>)
+            fun onData(data: ArrayList<Uri>)
             fun onCancel(message: String)
         }
     }

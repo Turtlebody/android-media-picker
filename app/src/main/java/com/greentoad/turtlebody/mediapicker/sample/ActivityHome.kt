@@ -8,13 +8,12 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
-import androidx.appcompat.app.AlertDialog
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.bumptech.glide.Glide
 import com.greentoad.turtlebody.mediapicker.core.Constants
-import com.greentoad.turtlebody.mediapicker.core.MediaPicker
+import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.core.PickerConfig
 import com.greentoad.turtlebody.mediapicker.sample.show_results.ActivityResults
 import kotlinx.android.synthetic.main.activity_home.*

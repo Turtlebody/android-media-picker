@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.greentoad.turtlebody.mediapicker.sample.R
 import com.greentoad.turtlebody.mediapicker.core.Constants
-import com.greentoad.turtlebody.mediapicker.core.MediaPicker
+import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.core.PickerConfig
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.AnkoLogger

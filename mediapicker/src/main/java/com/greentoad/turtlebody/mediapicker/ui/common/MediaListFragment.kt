@@ -53,7 +53,6 @@ abstract class MediaListFragment : FragmentBase() {
         if (!mPickerConfig.mAllowMultiImages) {
             ll_bottom_layout.visibility = View.GONE
         }
-
     }
 
     abstract fun getAllUris()
