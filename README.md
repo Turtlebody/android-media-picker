@@ -1,5 +1,6 @@
 # MediaPicker Library for Android
 
+[ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=1.0.2) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/1.0.2/link)
 
 A Media library for Android for single/selecting multiple files(image/video/audio).
 
@@ -10,28 +11,33 @@ Step 1: Add the dependency
 ```gradle
     dependencies {
         ...
-        implementation 'com.greentoad.turtlebody:media-picker:1.0.1'
+        implementation 'com.greentoad.turtlebody:media-picker:1.0.2'
     }
 ```
 
 ## Usage
-Step 1: Declare and Initialize media in Activity or Fragment.
+Step 1: Declare and Initialize MediaPicker.
 
 ```
     private void startPick() {
         PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setShowDialog(true);
         
-        MediaPicker.with(this, pickerConfig, Constants.FileTypes.FILE_TYPE_IMAGE)
+        MediaPicker.with(this,Constants.FileTypes.FILE_TYPE_IMAGE)
+                .setConfig(pickerConfig)
+                .setFileMissingListener(new MediaPicker.FilePickerImpl.OnMediaListener() {
+                    @Override
+                    public void onMissingFileWarning() {
+                        //trigger when some file are missing
+                    }
+                })
                 .onResult()
                 .subscribe(new Observer<ArrayList<Uri>>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-                    }
+                    public void onSubscribe(Disposable d) { }
 
                     @Override
                     public void onNext(ArrayList<Uri> uris) {
                         Log.i("tag", "next: " + uris.toString());
-                        //uris: list of uri
                     }
 
                     @Override
@@ -47,7 +53,7 @@ Step 1: Declare and Initialize media in Activity or Fragment.
     }
 ```
 
-## PickerConfig:
+## PickerConfig- ```.setConfig(pickerConfig)```:
 It is use to set the configuration.
 1. **.setAllowMultiImages(booleanValue)**: tells whether to select single file or multiple file.
 2. **.setAllowMultiImages(booleanValue)**: tells whether to show confirmation dialog on selecting the file(only work in single file selection).
@@ -58,8 +64,18 @@ eg.
 PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setShowDialog(true);
 ```
 
+## FileMissingListener- ```.setFileMissingListener()```
+In Android many times the file not exist physically but may contain uri. Such file(uri) may produce error. So in our library we are filtering out invalid uri. So if end-developer wants to know if library filtered out uris, they can set ```.setFileMissingListener()```.
+```
+    .setFileMissingListener(new MediaPicker.FilePickerImpl.OnMediaListener() {
+        @Override
+        public void onMissingFileWarning() {
+            //trigger when some file are missing
+        }
+    })
+```
 ## File types:
-The type of file user want to select(its a constant integer value).
+The type of file, user want to select(its a constant integer value).
 1. **FILE_TYPE_IMAGE** : for picking image files
 2. **FILE_TYPE_VIDEO** : for picking video files
 3. **FILE_TYPE_AUDIO** : for picking audio files

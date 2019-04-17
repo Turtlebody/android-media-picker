@@ -40,18 +40,17 @@ public class TestActivityPicker extends AppCompatActivity {
         PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
 
         MediaPicker.with(this,Constants.FileTypes.FILE_TYPE_IMAGE)
-                .setConfig(new PickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true))
+                .setConfig(pickerConfig)
                 .setFileMissingListener(new MediaPicker.FilePickerImpl.OnMediaListener() {
                     @Override
                     public void onMissingFileWarning() {
-                        //some file are missing
+                        //trigger when some file are missing
                     }
                 })
                 .onResult()
                 .subscribe(new Observer<ArrayList<Uri>>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-                    }
+                    public void onSubscribe(Disposable d) { }
 
                     @Override
                     public void onNext(ArrayList<Uri> uris) {
