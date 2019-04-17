@@ -100,8 +100,8 @@ class ActivityLibMain : ActivityBase() {
             if (data?.clipData != null) {
                 val count = data.clipData.itemCount
                 val finalFiles = ArrayList<Uri>()
-                for (i in 1..count) {
-                    val uri = data.clipData.getItemAt(i - 1).uri
+                for (i in 0 until count) {
+                    val uri = data.clipData.getItemAt(i).uri
                     finalFiles.add(uri)
                 }
                 sendBackData(finalFiles)
@@ -139,25 +139,25 @@ class ActivityLibMain : ActivityBase() {
         val fragmentTag: String
         when (mFileType) {
             Constants.FileTypes.FILE_TYPE_IMAGE -> {
-                toolbarTitle = "Choose ImageModel"
+                toolbarTitle = "Choose Image"
                 bundle.putString(ImageVideoFolder.FOLDER_ID, folderInfo)
                 fragment = ImageListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
                 fragmentTag = ImageListFragment::class.java.simpleName
             }
             Constants.FileTypes.FILE_TYPE_VIDEO -> {
-                toolbarTitle = "Choose VideoModel"
+                toolbarTitle = "Choose Video"
                 bundle.putString(ImageVideoFolder.FOLDER_ID, folderInfo)
                 fragment = VideoListFragment.newInstance(Constants.Fragment.VIDEO_LIST, bundle)
                 fragmentTag = VideoListFragment::class.java.simpleName
             }
             Constants.FileTypes.FILE_TYPE_AUDIO -> {
-                toolbarTitle = "Choose AudioModel"
+                toolbarTitle = "Choose Audio"
                 bundle.putString(AudioListFragment.B_ARG_FOLDER_PATH, folderInfo)
                 fragment = AudioListFragment.newInstance(Constants.Fragment.AUDIO_LIST, bundle)
                 fragmentTag = AudioListFragment::class.java.simpleName
             }
             else -> {
-                toolbarTitle = "Choose ImageModel"
+                toolbarTitle = "Choose Image"
                 bundle.putString(ImageVideoFolder.FOLDER_ID, folderInfo)
                 fragment = ImageListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
                 fragmentTag = ImageListFragment::class.java.simpleName
