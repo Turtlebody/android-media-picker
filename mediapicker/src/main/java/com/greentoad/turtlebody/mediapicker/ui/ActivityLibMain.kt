@@ -23,7 +23,7 @@ import com.greentoad.turtlebody.mediapicker.ui.component.folder.image_video.Imag
 import com.greentoad.turtlebody.mediapicker.ui.component.media.audio.AudioListFragment
 import com.greentoad.turtlebody.mediapicker.ui.component.media.image.ImageListFragment
 import com.greentoad.turtlebody.mediapicker.ui.component.media.video.VideoListFragment
-import com.wangsun.custompicker.utils.MimeUtils
+import com.greentoad.turtlebody.mediapicker.util.UtilMime
 import org.jetbrains.anko.find
 import org.jetbrains.anko.info
 import java.io.Serializable
@@ -194,20 +194,20 @@ class ActivityLibMain : ActivityBase() {
 
         when (mFileType) {
             Constants.FileTypes.FILE_TYPE_IMAGE -> {
-                fileType = MimeUtils.FileType.IMAGE
-                mimeType = MimeUtils.MimeType.IMAGE
+                fileType = UtilMime.FileType.IMAGE
+                mimeType = UtilMime.MimeType.IMAGE
             }
             Constants.FileTypes.FILE_TYPE_VIDEO -> {
-                fileType = MimeUtils.FileType.VIDEO
-                mimeType = MimeUtils.MimeType.VIDEO
+                fileType = UtilMime.FileType.VIDEO
+                mimeType = UtilMime.MimeType.VIDEO
             }
             Constants.FileTypes.FILE_TYPE_AUDIO -> {
-                fileType = MimeUtils.FileType.AUDIO
-                mimeType = MimeUtils.MimeType.AUDIO
+                fileType = UtilMime.FileType.AUDIO
+                mimeType = UtilMime.MimeType.AUDIO
             }
             else -> {
-                fileType = MimeUtils.FileType.IMAGE
-                mimeType = MimeUtils.MimeType.IMAGE
+                fileType = UtilMime.FileType.IMAGE
+                mimeType = UtilMime.MimeType.IMAGE
             }
         }
 
