@@ -53,7 +53,7 @@ Step 1: Declare and Initialize MediaPicker.
     }
 ```
 
-## PickerConfig- ```.setConfig(pickerConfig)```:
+#### PickerConfig- ```.setConfig(pickerConfig)```:
 It is use to set the configuration.
 1. **.setAllowMultiImages(booleanValue)**: tells whether to select single file or multiple file.
 2. **.setAllowMultiImages(booleanValue)**: tells whether to show confirmation dialog on selecting the file(only work in single file selection).
@@ -64,7 +64,7 @@ eg.
 PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setShowDialog(true);
 ```
 
-## FileMissingListener- ```.setFileMissingListener()```
+#### FileMissingListener- ```.setFileMissingListener()```
 In Android many times the file not exist physically but may contain uri. Such file(uri) may produce error. So in our library we are filtering out invalid uri. So if end-developer wants to know if library filtered out uris, they can set ```.setFileMissingListener()```.
 ```
     .setFileMissingListener(new MediaPicker.FilePickerImpl.OnMediaListener() {
@@ -74,14 +74,14 @@ In Android many times the file not exist physically but may contain uri. Such fi
         }
     })
 ```
-## File types:
+#### File types:
 The type of file, user want to select(its a constant integer value).
 1. **FILE_TYPE_IMAGE** : for picking image files
 2. **FILE_TYPE_VIDEO** : for picking video files
 3. **FILE_TYPE_AUDIO** : for picking audio files
 
 
-## URI:
+### URI:
 We will be returning the list of Uri after selecting the files. That's why it is better to know about Uri first.
 
 A Uniform Resource Identifier (URI) is a compact sequence of characters that identifies an abstract or physical resource.
