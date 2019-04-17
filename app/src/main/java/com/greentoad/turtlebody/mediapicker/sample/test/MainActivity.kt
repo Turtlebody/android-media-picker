@@ -31,7 +31,13 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     @SuppressLint("CheckResult")
     private fun startMultiPicker() {
-        MediaPicker.with(this, PickerConfig().setAllowMultiImages(true), Constants.FileTypes.FILE_TYPE_AUDIO)
+        MediaPicker.with(this, Constants.FileTypes.FILE_TYPE_AUDIO)
+                .setConfig(PickerConfig().setAllowMultiImages(true).setShowConfirmationDialog(true))
+                .setFileMissingListener(object : MediaPicker.FilePickerImpl.OnMediaListener{
+                    override fun onMissingFileWarning() {
+
+                    }
+                })
                 .onResult()
                 .subscribe({
                     info { "success: $it" }
@@ -42,7 +48,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     @SuppressLint("CheckResult")
     private fun startSinglePicker() {
-        MediaPicker.with(this, PickerConfig().setShowDialog(true), Constants.FileTypes.FILE_TYPE_AUDIO)
+        MediaPicker.with(this, Constants.FileTypes.FILE_TYPE_AUDIO)
                 .onResult()
                 .subscribe({
                     info { "success: $it" }

@@ -17,7 +17,7 @@ import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.tb_media_picker_frame_progress.*
-import kotlinx.android.synthetic.main.tb_media_picker_image_fragment.*
+import kotlinx.android.synthetic.main.tb_media_picker_file_fragment.*
 import org.jetbrains.anko.info
 import java.io.File
 
@@ -74,7 +74,7 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
 
     override fun onVideoCheck(pData: VideoModel) {
         if(!mPickerConfig.mAllowMultiImages){
-            if(mPickerConfig.mShowDialog){
+            if(mPickerConfig.mShowConfirmationDialog){
                 val simpleAlert = AlertDialog.Builder(context!!)
                 simpleAlert.setMessage("Are you sure to select ${pData.name}")
                         .setCancelable(false)
@@ -115,8 +115,8 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
         mVideoAdapter.setListener(this)
         mVideoAdapter.mShowCheckBox = mPickerConfig.mAllowMultiImages
 
-        recycler_view.layoutManager = GridLayoutManager(context,2)
-        recycler_view.adapter = mVideoAdapter
+        tb_media_picker_file_fragment_recycler_view.layoutManager = GridLayoutManager(context,2)
+        tb_media_picker_file_fragment_recycler_view.adapter = mVideoAdapter
         fetchVideoFiles()
 
     }

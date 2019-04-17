@@ -16,7 +16,7 @@ import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.tb_media_picker_frame_progress.*
-import kotlinx.android.synthetic.main.tb_media_picker_image_fragment.*
+import kotlinx.android.synthetic.main.tb_media_picker_file_fragment.*
 import org.jetbrains.anko.info
 import java.io.File
 
@@ -78,7 +78,7 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
 
     override fun onAudioCheck(pData: AudioModel) {
         if(!mPickerConfig.mAllowMultiImages){
-            if(mPickerConfig.mShowDialog){
+            if(mPickerConfig.mShowConfirmationDialog){
                 val simpleAlert = AlertDialog.Builder(context!!)
                 simpleAlert.setMessage("Are you sure to select ${pData.name}")
                         .setCancelable(false)
@@ -119,8 +119,8 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
         mAudioAdapter.setListener(this)
         mAudioAdapter.mShowCheckBox = mPickerConfig.mAllowMultiImages
 
-        recycler_view.layoutManager = LinearLayoutManager(context)
-        recycler_view.adapter = mAudioAdapter
+        tb_media_picker_file_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
+        tb_media_picker_file_fragment_recycler_view.adapter = mAudioAdapter
         fetchAudioFiles()
 
     }

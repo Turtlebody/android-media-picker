@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/tb_media_picker_activity_main_ll"
     tools:context=".ui.ActivityLibMain">
 
     <!--<include layout="@layout/toolbar"/>-->

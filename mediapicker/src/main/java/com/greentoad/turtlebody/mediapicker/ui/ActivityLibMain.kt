@@ -10,10 +10,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.greentoad.turtlebody.mediapicker.R
 import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.MediaPicker
+import com.greentoad.turtlebody.mediapicker.core.AlertMessage
 import com.greentoad.turtlebody.mediapicker.core.FileHelper
 import com.greentoad.turtlebody.mediapicker.core.PickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.base.ActivityBase
@@ -25,6 +27,7 @@ import com.greentoad.turtlebody.mediapicker.ui.component.media.audio.AudioListFr
 import com.greentoad.turtlebody.mediapicker.ui.component.media.image.ImageListFragment
 import com.greentoad.turtlebody.mediapicker.ui.component.media.video.VideoListFragment
 import com.greentoad.turtlebody.mediapicker.util.UtilMime
+import kotlinx.android.synthetic.main.tb_media_picker_activity_main.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.info
 import java.io.Serializable
@@ -40,11 +43,12 @@ class ActivityLibMain : ActivityBase() {
 
     companion object {
         val REQ_CODE = 5000
+        val FILE_MISSING = "fileMissing"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.tb_media_picker_activity)
+        setContentView(R.layout.tb_media_picker_activity_main)
 
         initToolbar(R.drawable.ic_arrow_back_black_24dp, find(R.id.tb_media_picker_activity_toolbar))
         toolbarTitle = "Select Folder"
@@ -54,7 +58,6 @@ class ActivityLibMain : ActivityBase() {
             mPickerConfig = intent.getSerializableExtra(PickerConfig.ARG_BUNDLE) as PickerConfig
             mFileType = intent.getIntExtra(MediaPicker.FILE_TYPE, Constants.FileTypes.FILE_TYPE_IMAGE)
         }
-
     }
 
     override fun onBackPressed() {
@@ -98,19 +101,32 @@ class ActivityLibMain : ActivityBase() {
         if (resultCode == Activity.RESULT_OK && requestCode == REQ_CODE) {
             info { "data: ${data?.data}" }
             if (data?.clipData != null) {
+                var isMissing = false
                 val count = data.clipData.itemCount
-                val finalFiles = ArrayList<Uri>()
+                val finalFiles: ArrayList<Uri> = arrayListOf()
                 for (i in 0 until count) {
                     val uri = data.clipData.getItemAt(i).uri
-                    if(FileHelper.isFileExistNew(this,uri))
+                    if(FileHelper.isFileExist(this,uri))
                         finalFiles.add(uri)
+                    else
+                        isMissing = true
                 }
                 if (finalFiles.isNotEmpty())
-                    sendBackData(finalFiles)
+                    sendBackData(finalFiles,isMissing)
+                else
+                    if(mPickerConfig.mShowConfirmationDialog)
+                        Toast.makeText(this,"selected files are missing",Toast.LENGTH_LONG).show()
+
+
+
             } else if (data?.data != null) {
                 val uri = data.data
-                if(FileHelper.isFileExistNew(this,uri))
+                if(FileHelper.isFileExist(this,uri))
                     sendBackData(arrayListOf(uri))
+                else{
+                    if(mPickerConfig.mShowConfirmationDialog)
+                        Toast.makeText(this,"the file is missing",Toast.LENGTH_LONG).show()
+                }
             }
         } else
             super.onActivityResult(requestCode, resultCode, data)
@@ -180,10 +196,13 @@ class ActivityLibMain : ActivityBase() {
         vToolbarCounter.text = "$counter"
     }
 
-    fun sendBackData(list: ArrayList<Uri>) {
+    fun sendBackData(list: ArrayList<Uri>,isFileMissing: Boolean=false) {
         if (list.isNotEmpty()) {
             val intent = Intent()
             intent.putExtra(MediaPicker.URI_LIST_KEY, list as Serializable)
+
+            if(isFileMissing)
+                intent.putExtra(FILE_MISSING, true)
             setResult(Activity.RESULT_OK, intent)
         }
         finish()

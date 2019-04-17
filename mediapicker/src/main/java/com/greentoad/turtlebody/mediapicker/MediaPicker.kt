@@ -33,17 +33,20 @@ import com.karumi.dexter.listener.PermissionRequest
 class MediaPicker {
 
     companion object {
-        @JvmStatic
-        fun with(activity: FragmentActivity, pickerConfig: PickerConfig, fileType: Int): FilePickerImpl {
-            return FilePickerImpl(activity, pickerConfig, fileType)
-        }
-        const val FILE_TYPE = "mFileType"
+        const val FILE_TYPE = "fileType"
         const val URI_LIST_KEY = "uriListKey"
+
+        @JvmStatic
+        fun with(activity: FragmentActivity, fileType: Int): FilePickerImpl {
+            return FilePickerImpl(activity, fileType)
+        }
     }
 
-    class FilePickerImpl(activity: FragmentActivity, private var config: PickerConfig, private var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
+    class FilePickerImpl(activity: FragmentActivity, private var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
         private lateinit var mEmitter: ObservableEmitter<ArrayList<Uri>>
         private var mActivity: WeakReference<FragmentActivity> = WeakReference(activity)
+        private var mConfig: PickerConfig = PickerConfig()
+        private var mOnMediaListener: OnMediaListener? = null
 
         override fun onData(data: ArrayList<Uri>) {
             mEmitter.onNext(data)
@@ -53,6 +56,25 @@ class MediaPicker {
         override fun onCancel(message: String) {
             mEmitter.onError(Throwable(message));
             mEmitter.onComplete()
+        }
+
+        override fun onMissingWarning() {
+            mActivity.get()?.let {
+                it.runOnUiThread {
+                    mOnMediaListener?.onMissingFileWarning()
+                }
+            }
+        }
+
+
+        fun setConfig(config: PickerConfig): FilePickerImpl{
+            mConfig = config
+            return this
+        }
+
+        fun setFileMissingListener(listener: OnMediaListener): FilePickerImpl{
+            mOnMediaListener = listener
+            return this
         }
 
         fun onResult(): Observable<ArrayList<Uri>> {
@@ -77,7 +99,6 @@ class MediaPicker {
                                     startFragment()
                                     info { "accepted" }
                                 }
-
                                 override fun onPermissionDenied(response: PermissionDeniedResponse) {
                                     Toast.makeText(it, "Need permission to do this task.", Toast.LENGTH_SHORT).show()
                                     info { "denied" }
@@ -92,30 +113,27 @@ class MediaPicker {
         }
 
 
-
-
         private fun startFragment() {
             val bundle = Bundle()
-            bundle.putSerializable(PickerConfig.ARG_BUNDLE, config)
+            bundle.putSerializable(PickerConfig.ARG_BUNDLE, mConfig)
             bundle.putSerializable(FILE_TYPE, mFileType)
 
             val fragment = PickerFragment()
             fragment.arguments = bundle
-
             info { "imagePicker mFileType: $mFileType" }
-
             fragment.setListener(this)
             mActivity.get()?.supportFragmentManager?.beginTransaction()?.add(fragment, PickerFragment::class.java.simpleName)?.commit()
         }
 
+        interface OnMediaListener {
+            fun onMissingFileWarning()
+        }
     }
 
 
     /**************************************************
      *              Fragment
      */
-
-
     class PickerFragment : Fragment(), AnkoLogger {
         override fun onActivityCreated(savedInstanceState: Bundle?) {
             super.onActivityCreated(savedInstanceState)
@@ -126,7 +144,6 @@ class MediaPicker {
             val intent = Intent(context, ActivityLibMain::class.java)
             intent.putExtra(PickerConfig.ARG_BUNDLE, config)
             intent.putExtra(FILE_TYPE, fileType)
-            //intent.putExtra("",arguments)
             startActivityForResult(intent, Constants.Intent.ACTIVITY_LIB_MAIN)
         }
 
@@ -135,7 +152,13 @@ class MediaPicker {
                 if (resultCode == Activity.RESULT_OK) {
                     val list = data?.extras?.getSerializable(URI_LIST_KEY) as ArrayList<Uri>
                     mListener?.onData(list)
-                } else {
+                    data.extras?.getBoolean(ActivityLibMain.FILE_MISSING,false)?.let {
+                        if(it){
+                            mListener?.onMissingWarning()
+                        }
+                    }
+                }
+                else {
                     mListener?.onCancel("Cancelled")
                 }
             } else
@@ -151,6 +174,7 @@ class MediaPicker {
         interface OnPickerListener {
             fun onData(data: ArrayList<Uri>)
             fun onCancel(message: String)
+            fun onMissingWarning()
         }
     }
 }

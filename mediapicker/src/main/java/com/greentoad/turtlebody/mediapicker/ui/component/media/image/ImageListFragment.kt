@@ -17,7 +17,7 @@ import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.tb_media_picker_frame_progress.*
-import kotlinx.android.synthetic.main.tb_media_picker_image_fragment.*
+import kotlinx.android.synthetic.main.tb_media_picker_file_fragment.*
 import org.jetbrains.anko.info
 import java.io.File
 
@@ -48,8 +48,6 @@ class ImageListFragment : MediaListFragment(), ImageAdapter.OnImageClickListener
     private var mSelectedImageModelList: MutableList<ImageModel> = arrayListOf()
 
 
-
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initAdapter()
@@ -76,7 +74,7 @@ class ImageListFragment : MediaListFragment(), ImageAdapter.OnImageClickListener
 
     override fun onImageCheck(pData: ImageModel) {
         if(!mPickerConfig.mAllowMultiImages){
-            if(mPickerConfig.mShowDialog){
+            if(mPickerConfig.mShowConfirmationDialog){
                 val simpleAlert = AlertDialog.Builder(context!!)
                 simpleAlert.setMessage("Are you sure to select ${pData.name}")
                         .setCancelable(false)
@@ -116,8 +114,8 @@ class ImageListFragment : MediaListFragment(), ImageAdapter.OnImageClickListener
     private fun initAdapter() {
         mImageAdapter.setListener(this)
         mImageAdapter.mShowCheckBox = mPickerConfig.mAllowMultiImages
-        recycler_view.layoutManager = GridLayoutManager(context,2)
-        recycler_view.adapter = mImageAdapter
+        tb_media_picker_file_fragment_recycler_view.layoutManager = GridLayoutManager(context,2)
+        tb_media_picker_file_fragment_recycler_view.adapter = mImageAdapter
         fetchImageFiles()
 
     }

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -78,12 +79,18 @@ class ActivityHome : ActivityBase() {
 
     @SuppressLint("CheckResult")
     private fun startMediaPicker(fileType: Int, allowMultiple: Boolean) {
-        MediaPicker.with(this, PickerConfig().setAllowMultiImages(allowMultiple).setShowDialog(true), fileType)
+        MediaPicker.with(this, fileType)
+                .setConfig(PickerConfig().setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true))
+                .setFileMissingListener(object : MediaPicker.FilePickerImpl.OnMediaListener{
+                    override fun onMissingFileWarning() {
+                        Toast.makeText(this@ActivityHome,"some file is missing",Toast.LENGTH_LONG).show()
+                    }
+                })
                 .onResult()
                 .subscribe({
                     info { "success: $it" }
+                    info { "list size: ${it.size}" }
                     startActivityShowResult(it)
-
                 },{
                     info { "error: $it" }
                 })

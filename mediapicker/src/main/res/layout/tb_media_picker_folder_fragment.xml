@@ -8,7 +8,10 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:padding="@dimen/offset_16"
+        android:paddingTop="@dimen/offset_2"
+        android:paddingBottom="@dimen/offset_2"
+        android:paddingStart="@dimen/offset_16"
+        android:paddingEnd="@dimen/offset_16"
         android:id="@+id/tb_media_picker_folder_fragment_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
