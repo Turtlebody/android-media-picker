@@ -13,7 +13,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.greentoad.turtlebody.mediapicker.R
 import com.greentoad.turtlebody.mediapicker.core.Constants
-import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.core.FileHelper
 import com.greentoad.turtlebody.mediapicker.core.PickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.base.ActivityBase
@@ -39,8 +38,10 @@ class ActivityLibMain : ActivityBase() {
     private lateinit var vToolbarCounter: TextView
 
     companion object {
-        val REQ_CODE = 5000
-        val FILE_MISSING = "fileMissing"
+        const val REQ_CODE = 5000
+        const val FILE_MISSING = "fileMissing"
+        const val FILE_TYPE_KEY = "fileTypeKey"
+        const val URI_LIST_KEY = "uriListKey"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +54,7 @@ class ActivityLibMain : ActivityBase() {
 
         if (intent.extras != null) {
             mPickerConfig = intent.getSerializableExtra(PickerConfig.ARG_BUNDLE) as PickerConfig
-            mFileType = intent.getIntExtra(MediaPicker.FILE_TYPE, Constants.FileTypes.MEDIA_TYPE_IMAGE)
+            mFileType = intent.getIntExtra(FILE_TYPE_KEY, Constants.FileTypes.MEDIA_TYPE_IMAGE)
         }
     }
 
@@ -98,35 +99,6 @@ class ActivityLibMain : ActivityBase() {
         if (resultCode == Activity.RESULT_OK && requestCode == REQ_CODE) {
             info { "data: ${data?.data}" }
             handleFileData(data)
-//            if (data?.clipData != null) {
-//                var isMissing = false
-//                val count = data.clipData.itemCount
-//                val finalFiles: ArrayList<Uri> = arrayListOf()
-//                for (i in 0 until count) {
-//                    val uri = data.clipData.getItemAt(i).uri
-//                    info { "OnResult Uri: $uri" }
-//                    if(FileHelper.isFileExist(this,uri))
-//                        finalFiles.add(uri)
-//                    else
-//                        isMissing = true
-//                }
-//                if (finalFiles.isNotEmpty())
-//                    sendBackData(finalFiles,isMissing)
-//                else
-//                    if(mPickerConfig.mShowConfirmationDialog)
-//                        Toast.makeText(this,"selected files are missing",Toast.LENGTH_LONG).show()
-//
-//
-//
-//            } else if (data?.data != null) {
-//                val uri = data.data
-//                if(FileHelper.isFileExist(this,uri))
-//                    sendBackData(arrayListOf(uri))
-//                else{
-//                    if(mPickerConfig.mShowConfirmationDialog)
-//                        Toast.makeText(this,"the file is missing",Toast.LENGTH_LONG).show()
-//                }
-//            }
         } else
             super.onActivityResult(requestCode, resultCode, data)
     }
@@ -150,8 +122,15 @@ class ActivityLibMain : ActivityBase() {
                     for (i in 0 until clipData!!.itemCount) {
                         val item = clipData.getItemAt(i)
                         info { "Item [" + i + "]: " + item.uri.toString()}
-                        if(FileHelper.isFileExist(this,item.uri))
-                            uriList.add(item.uri)
+
+                        if(FileHelper.isFileExist(this,item.uri)){
+                            //important as many time android return duplicate uri when selecting multiple media files
+                            if(!uriList.contains(item.uri)){
+                                uriList.add(item.uri)
+                            }
+                            else
+                                info { "duplicate uri found" }
+                        }
                         else
                             isMissing = true
                     }
@@ -236,7 +215,7 @@ class ActivityLibMain : ActivityBase() {
     fun sendBackData(list: ArrayList<Uri>,isFileMissing: Boolean=false) {
         if (list.isNotEmpty()) {
             val intent = Intent()
-            intent.putExtra(MediaPicker.URI_LIST_KEY, list as Serializable)
+            intent.putExtra(URI_LIST_KEY, list as Serializable)
 
             if(isFileMissing)
                 intent.putExtra(FILE_MISSING, true)
@@ -288,7 +267,7 @@ class ActivityLibMain : ActivityBase() {
 
     private fun startImageVideoFolderFragment() {
         val bundle = Bundle()
-        bundle.putInt(MediaPicker.FILE_TYPE, mFileType)
+        bundle.putInt(FILE_TYPE_KEY, mFileType)
 
         val fragment = ImageVideoFolderFragment.newInstance(Constants.Fragment.IMAGE_VIDEO_FOLDER, bundle)
         val ft = supportFragmentManager.beginTransaction()

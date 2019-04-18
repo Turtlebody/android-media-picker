@@ -34,6 +34,7 @@
             android:text="Single"
             android:textSize="16sp"
             android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
             android:textColor="@drawable/sc_text_color_toggle"
             android:textAppearance="@style/App.TextAppearance.h4.Title"
             android:background="@drawable/sc_button_blue"/>
@@ -46,6 +47,7 @@
             android:text="Multiple"
             android:textSize="16sp"
             android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
             android:textColor="@drawable/sc_text_color_toggle"
             android:textAppearance="@style/App.TextAppearance.h4.Title"
             android:background="@drawable/sc_button_blue"/>

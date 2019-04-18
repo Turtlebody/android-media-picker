@@ -17,6 +17,7 @@ import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.core.PickerConfig
 import com.greentoad.turtlebody.mediapicker.sample.show_results.ActivityResults
+import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.info
@@ -98,7 +99,7 @@ class ActivityHome : ActivityBase() {
 
     private fun startActivityShowResult(it: MutableList<Uri>?) {
         val intent = Intent(this,ActivityResults::class.java)
-        intent.putExtra(MediaPicker.URI_LIST_KEY,it as Serializable)
+        intent.putExtra(ActivityLibMain.URI_LIST_KEY,it as Serializable)
         startActivity(intent)
     }
 

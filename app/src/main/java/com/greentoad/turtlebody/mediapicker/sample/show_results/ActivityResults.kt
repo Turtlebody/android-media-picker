@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.sample.ActivityBase
 import com.greentoad.turtlebody.mediapicker.sample.R
+import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import kotlinx.android.synthetic.main.activity_results.*
 import org.jetbrains.anko.find
 
@@ -24,7 +25,7 @@ class ActivityResults : ActivityBase() {
 
 
         if(intent.extras!=null){
-            mList = intent.getSerializableExtra(MediaPicker.URI_LIST_KEY) as MutableList<Uri>
+            mList = intent.getSerializableExtra(ActivityLibMain.URI_LIST_KEY) as MutableList<Uri>
         }
 
         initAdapter()

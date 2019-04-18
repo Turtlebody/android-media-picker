@@ -54,7 +54,7 @@ class ImageVideoFolderFragment : FragmentBase() {
         super.onActivityCreated(savedInstanceState)
 
         arguments?.let {
-            mFileType = it.getInt(MediaPicker.FILE_TYPE)
+            mFileType = it.getInt(ActivityLibMain.FILE_TYPE_KEY)
         }
         initAdapter()
     }

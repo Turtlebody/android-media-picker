@@ -12,6 +12,12 @@ import androidx.fragment.app.FragmentActivity
 import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.core.PickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,12 +25,6 @@ import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.lang.ref.WeakReference
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.single.PermissionListener
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.listener.PermissionRequest
 
 
 /**
@@ -33,9 +33,6 @@ import com.karumi.dexter.listener.PermissionRequest
 class MediaPicker {
 
     companion object {
-        const val FILE_TYPE = "fileType"
-        const val URI_LIST_KEY = "uriListKey"
-
         @JvmStatic
         fun with(activity: FragmentActivity, fileType: Int): MediaPickerImpl {
             return MediaPickerImpl(activity, fileType)
@@ -117,7 +114,7 @@ class MediaPicker {
         private fun startFragment() {
             val bundle = Bundle()
             bundle.putSerializable(PickerConfig.ARG_BUNDLE, mConfig)
-            bundle.putSerializable(FILE_TYPE, mFileType)
+            bundle.putSerializable(ActivityLibMain.FILE_TYPE_KEY, mFileType)
 
             val fragment = PickerFragment()
             fragment.arguments = bundle
@@ -140,18 +137,18 @@ class MediaPicker {
             super.onActivityCreated(savedInstanceState)
 
             val config = arguments?.getSerializable(PickerConfig.ARG_BUNDLE)
-            val fileType = arguments?.getInt(FILE_TYPE)
+            val fileType = arguments?.getInt(ActivityLibMain.FILE_TYPE_KEY)
 
             val intent = Intent(context, ActivityLibMain::class.java)
             intent.putExtra(PickerConfig.ARG_BUNDLE, config)
-            intent.putExtra(FILE_TYPE, fileType)
+            intent.putExtra(ActivityLibMain.FILE_TYPE_KEY, fileType)
             startActivityForResult(intent, Constants.Intent.ACTIVITY_LIB_MAIN)
         }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             if (requestCode == Constants.Intent.ACTIVITY_LIB_MAIN) {
                 if (resultCode == Activity.RESULT_OK) {
-                    val list = data?.extras?.getSerializable(URI_LIST_KEY) as ArrayList<Uri>
+                    val list = data?.extras?.getSerializable(ActivityLibMain.URI_LIST_KEY) as ArrayList<Uri>
                     mListener?.onData(list)
                     data.extras?.getBoolean(ActivityLibMain.FILE_MISSING,false)?.let {
                         if(it){
