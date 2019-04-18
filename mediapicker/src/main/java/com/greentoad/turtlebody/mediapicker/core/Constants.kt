@@ -8,9 +8,9 @@ import android.provider.MediaStore
 object Constants {
 
     object FileTypes{
-        const val FILE_TYPE_IMAGE = 501
-        const val FILE_TYPE_VIDEO = 502
-        const val FILE_TYPE_AUDIO = 503
+        const val MEDIA_TYPE_IMAGE = 501
+        const val MEDIA_TYPE_VIDEO = 502
+        const val MEDIA_TYPE_AUDIO = 503
     }
 
     object Queries{

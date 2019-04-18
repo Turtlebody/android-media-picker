@@ -41,7 +41,7 @@ class ImageVideoFolderFragment : FragmentBase() {
 
     private var mImageVideoFolderAdapter: ImageVideoFolderAdapter = ImageVideoFolderAdapter()
     private var mImageVideoFolderList: MutableList<ImageVideoFolder> = arrayListOf()
-    private var mFileType = Constants.FileTypes.FILE_TYPE_IMAGE
+    private var mFileType = Constants.FileTypes.MEDIA_TYPE_IMAGE
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -75,7 +75,7 @@ class ImageVideoFolderFragment : FragmentBase() {
 
     private fun fetchImageVideoFolders() {
         val bucketFetch: Single<ArrayList<ImageVideoFolder>> =
-                if(mFileType==Constants.FileTypes.FILE_TYPE_VIDEO)
+                if(mFileType==Constants.FileTypes.MEDIA_TYPE_VIDEO)
                     Single.fromCallable<ArrayList<ImageVideoFolder>> { FileManager.fetchVideoFolders(context!!) }
                 else
                     Single.fromCallable<ArrayList<ImageVideoFolder>> { FileManager.fetchImageFolders(context!!) }

@@ -17,7 +17,7 @@ object CursorHelper {
      */
     @SuppressLint("Recycle")
     fun getImageVideoFolderCursor(context: Context, fileType: Int): Cursor? {
-        return if(fileType == Constants.FileTypes.FILE_TYPE_IMAGE){
+        return if(fileType == Constants.FileTypes.MEDIA_TYPE_IMAGE){
             context.contentResolver.query(Constants.Queries.imageQueryUri, Constants.Projection.IMAGE_FOLDER,
                     null, null, MediaStore.MediaColumns.DATE_ADDED + " DESC")
         }
@@ -28,7 +28,7 @@ object CursorHelper {
 
     @SuppressLint("Recycle")
     fun getImageVideoFileCursor(context: Context, folderId: String, fileType: Int): Cursor?{
-        return if(fileType == Constants.FileTypes.FILE_TYPE_IMAGE){
+        return if(fileType == Constants.FileTypes.MEDIA_TYPE_IMAGE){
             context.contentResolver.query(Constants.Queries.imageQueryUri, Constants.Projection.IMAGE_FILE,
                     Constants.Projection.IMAGE_FILE[4] + " = '" + folderId + "'", null,
                     MediaStore.MediaColumns.DATE_ADDED + " DESC")

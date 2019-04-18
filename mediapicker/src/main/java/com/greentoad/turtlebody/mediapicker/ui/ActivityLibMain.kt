@@ -32,7 +32,7 @@ import java.io.Serializable
 
 class ActivityLibMain : ActivityBase() {
 
-    private var mFileType: Int = Constants.FileTypes.FILE_TYPE_IMAGE
+    private var mFileType: Int = Constants.FileTypes.MEDIA_TYPE_IMAGE
     private lateinit var mMenuItem: MenuItem
     private lateinit var mPickerConfig: PickerConfig
 
@@ -53,7 +53,7 @@ class ActivityLibMain : ActivityBase() {
 
         if (intent.extras != null) {
             mPickerConfig = intent.getSerializableExtra(PickerConfig.ARG_BUNDLE) as PickerConfig
-            mFileType = intent.getIntExtra(MediaPicker.FILE_TYPE, Constants.FileTypes.FILE_TYPE_IMAGE)
+            mFileType = intent.getIntExtra(MediaPicker.FILE_TYPE, Constants.FileTypes.MEDIA_TYPE_IMAGE)
         }
     }
 
@@ -176,7 +176,7 @@ class ActivityLibMain : ActivityBase() {
         mMenuItem.isVisible = true
 
         when (mFileType) {
-            Constants.FileTypes.FILE_TYPE_AUDIO -> {
+            Constants.FileTypes.MEDIA_TYPE_AUDIO -> {
                 startAudioFolderFragment()
             }
             else -> startImageVideoFolderFragment()
@@ -194,19 +194,19 @@ class ActivityLibMain : ActivityBase() {
         val fragment: Fragment
         val fragmentTag: String
         when (mFileType) {
-            Constants.FileTypes.FILE_TYPE_IMAGE -> {
+            Constants.FileTypes.MEDIA_TYPE_IMAGE -> {
                 toolbarTitle = "Choose Image"
                 bundle.putString(ImageVideoFolder.FOLDER_ID, folderInfo)
                 fragment = ImageListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
                 fragmentTag = ImageListFragment::class.java.simpleName
             }
-            Constants.FileTypes.FILE_TYPE_VIDEO -> {
+            Constants.FileTypes.MEDIA_TYPE_VIDEO -> {
                 toolbarTitle = "Choose Video"
                 bundle.putString(ImageVideoFolder.FOLDER_ID, folderInfo)
                 fragment = VideoListFragment.newInstance(Constants.Fragment.VIDEO_LIST, bundle)
                 fragmentTag = VideoListFragment::class.java.simpleName
             }
-            Constants.FileTypes.FILE_TYPE_AUDIO -> {
+            Constants.FileTypes.MEDIA_TYPE_AUDIO -> {
                 toolbarTitle = "Choose Audio"
                 bundle.putString(AudioListFragment.B_ARG_FOLDER_PATH, folderInfo)
                 fragment = AudioListFragment.newInstance(Constants.Fragment.AUDIO_LIST, bundle)
@@ -252,15 +252,15 @@ class ActivityLibMain : ActivityBase() {
         var mimeType = arrayOf<String>()
 
         when (mFileType) {
-            Constants.FileTypes.FILE_TYPE_IMAGE -> {
+            Constants.FileTypes.MEDIA_TYPE_IMAGE -> {
                 fileType = UtilMime.FileType.IMAGE
                 mimeType = UtilMime.MimeType.IMAGE
             }
-            Constants.FileTypes.FILE_TYPE_VIDEO -> {
+            Constants.FileTypes.MEDIA_TYPE_VIDEO -> {
                 fileType = UtilMime.FileType.VIDEO
                 mimeType = UtilMime.MimeType.VIDEO
             }
-            Constants.FileTypes.FILE_TYPE_AUDIO -> {
+            Constants.FileTypes.MEDIA_TYPE_AUDIO -> {
                 fileType = UtilMime.FileType.AUDIO
                 mimeType = UtilMime.MimeType.AUDIO
             }

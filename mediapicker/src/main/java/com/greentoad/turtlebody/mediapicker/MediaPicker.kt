@@ -37,12 +37,12 @@ class MediaPicker {
         const val URI_LIST_KEY = "uriListKey"
 
         @JvmStatic
-        fun with(activity: FragmentActivity, fileType: Int): FilePickerImpl {
-            return FilePickerImpl(activity, fileType)
+        fun with(activity: FragmentActivity, fileType: Int): MediaPickerImpl {
+            return MediaPickerImpl(activity, fileType)
         }
     }
 
-    class FilePickerImpl(activity: FragmentActivity, private var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
+    class MediaPickerImpl(activity: FragmentActivity, private var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
         private lateinit var mEmitter: ObservableEmitter<ArrayList<Uri>>
         private var mActivity: WeakReference<FragmentActivity> = WeakReference(activity)
         private var mConfig: PickerConfig = PickerConfig()
@@ -68,12 +68,12 @@ class MediaPicker {
         }
 
 
-        fun setConfig(config: PickerConfig): FilePickerImpl{
+        fun setConfig(config: PickerConfig): MediaPickerImpl{
             mConfig = config
             return this
         }
 
-        fun setFileMissingListener(listener: OnMediaListener): FilePickerImpl{
+        fun setFileMissingListener(listener: OnMediaListener): MediaPickerImpl{
             mOnMediaListener = listener
             return this
         }
@@ -82,7 +82,7 @@ class MediaPicker {
             return Observable.create<ArrayList<Uri>> { emitter: ObservableEmitter<ArrayList<Uri>> ->
                 this.mEmitter = emitter
 
-                if(mFileType== Constants.FileTypes.FILE_TYPE_AUDIO ||mFileType== Constants.FileTypes.FILE_TYPE_VIDEO ||mFileType== Constants.FileTypes.FILE_TYPE_IMAGE)
+                if(mFileType== Constants.FileTypes.MEDIA_TYPE_AUDIO ||mFileType== Constants.FileTypes.MEDIA_TYPE_VIDEO ||mFileType== Constants.FileTypes.MEDIA_TYPE_IMAGE)
                     getPermission()
                 else
                     emitter.onError(Throwable("File type invalid."))

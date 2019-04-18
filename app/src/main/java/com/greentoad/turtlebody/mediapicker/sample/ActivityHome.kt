@@ -39,15 +39,15 @@ class ActivityHome : ActivityBase() {
 
     private fun initButton() {
         home_ll_btn_images.setOnClickListener {
-            showAlert(Constants.FileTypes.FILE_TYPE_IMAGE)
+            showAlert(Constants.FileTypes.MEDIA_TYPE_IMAGE)
         }
 
         home_ll_btn_videos.setOnClickListener {
-            showAlert(Constants.FileTypes.FILE_TYPE_VIDEO)
+            showAlert(Constants.FileTypes.MEDIA_TYPE_VIDEO)
         }
 
         home_ll_btn_sounds.setOnClickListener {
-            showAlert(Constants.FileTypes.FILE_TYPE_AUDIO)
+            showAlert(Constants.FileTypes.MEDIA_TYPE_AUDIO)
         }
 
         Glide.with(this)
@@ -81,7 +81,7 @@ class ActivityHome : ActivityBase() {
     private fun startMediaPicker(fileType: Int, allowMultiple: Boolean) {
         MediaPicker.with(this, fileType)
                 .setConfig(PickerConfig().setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true))
-                .setFileMissingListener(object : MediaPicker.FilePickerImpl.OnMediaListener{
+                .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
                     override fun onMissingFileWarning() {
                         Toast.makeText(this@ActivityHome,"some file is missing",Toast.LENGTH_LONG).show()
                     }

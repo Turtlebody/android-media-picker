@@ -4,7 +4,6 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import androidx.core.content.FileProvider.getUriForFile
-import com.greentoad.turtlebody.mediapicker.BuildConfig
 import com.greentoad.turtlebody.mediapicker.ui.component.folder.audio.AudioFolder
 import com.greentoad.turtlebody.mediapicker.ui.component.folder.image_video.ImageVideoFolder
 import com.greentoad.turtlebody.mediapicker.ui.component.media.audio.AudioModel
@@ -30,7 +29,7 @@ object FileManager : AnkoLogger {
         val projection = Constants.Projection.IMAGE_FOLDER
 
         //Create the cursor pointing to the SDCard
-        val cursor = CursorHelper.getImageVideoFolderCursor(context, Constants.FileTypes.FILE_TYPE_IMAGE)
+        val cursor = CursorHelper.getImageVideoFolderCursor(context, Constants.FileTypes.MEDIA_TYPE_IMAGE)
 
         cursor?.let {
             val columnIndexFolderId = it.getColumnIndexOrThrow(projection[0])
@@ -60,7 +59,7 @@ object FileManager : AnkoLogger {
         val projection = Constants.Projection.IMAGE_FILE
 
         //Create the cursor pointing to the SDCard
-        val cursor: Cursor? = CursorHelper.getImageVideoFileCursor(context, folderId, Constants.FileTypes.FILE_TYPE_IMAGE)
+        val cursor: Cursor? = CursorHelper.getImageVideoFileCursor(context, folderId, Constants.FileTypes.MEDIA_TYPE_IMAGE)
 
         cursor?.let {
             val columnIndexFileId = it.getColumnIndexOrThrow(projection[0])
@@ -94,7 +93,7 @@ object FileManager : AnkoLogger {
         val projection = Constants.Projection.VIDEO_FOLDER
 
         //Create the cursor pointing to the SDCard
-        val cursor = CursorHelper.getImageVideoFolderCursor(context, Constants.FileTypes.FILE_TYPE_VIDEO)
+        val cursor = CursorHelper.getImageVideoFolderCursor(context, Constants.FileTypes.MEDIA_TYPE_VIDEO)
 
         cursor?.let {
             val columnIndexFolderId = it.getColumnIndexOrThrow(projection[0])
@@ -124,7 +123,7 @@ object FileManager : AnkoLogger {
         val projection = Constants.Projection.VIDEO_FILE
 
         //Create the cursor pointing to the SDCard
-        val cursor: Cursor? = CursorHelper.getImageVideoFileCursor(context, folderId, Constants.FileTypes.FILE_TYPE_VIDEO)
+        val cursor: Cursor? = CursorHelper.getImageVideoFileCursor(context, folderId, Constants.FileTypes.MEDIA_TYPE_VIDEO)
 
         cursor?.let {
             val columnIndexFileId = it.getColumnIndexOrThrow(projection[0])
