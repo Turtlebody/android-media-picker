@@ -35,7 +35,7 @@ class ActivityHome : ActivityBase() {
         toolbar.title = "Select Option"
         initButton()
 
-        info { "test1" }
+        info { "test4" }
     }
 
     private fun initButton() {
