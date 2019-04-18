@@ -20,6 +20,24 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        dev {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "app"
+    productFlavors {
+        finalRelease {
+            applicationId "com.greentoad.turtlebody.mediapicker.sample"
+            resValue "string", "app_name", "Media Picker"
+            dimension "app"
+        }
+        development {
+            applicationId "com.greentoad.turtlebody.mediapicker.sample.dev"
+            resValue "string", "app_name", "Picker Sample"
+            dimension "app"
+        }
     }
 }
 

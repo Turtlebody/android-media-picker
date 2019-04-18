@@ -130,9 +130,7 @@
     <color name="description">#1a1a1a</color>
     <color name="chef">#777</color>
     <color name="timestamp">#777</color>
-
     <color name="black_overlay">#66000000</color>
-
     <color name="red">#FFD9C7</color>
 
 </resources>

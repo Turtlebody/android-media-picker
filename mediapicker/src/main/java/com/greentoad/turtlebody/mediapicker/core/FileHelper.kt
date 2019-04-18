@@ -20,12 +20,17 @@ object FileHelper : AnkoLogger{
             info { "path is empty" }
             return false
         }
+        //return  true
 
         return try {
             var inputStream = context.contentResolver.openInputStream(uri)
             true
         } catch (e: FileNotFoundException) {
             info { "file not found" }
+            false
+        }
+        catch (e: Exception) {
+            info { "error: ${e.printStackTrace()}" }
             false
         }
     }
