@@ -136,17 +136,17 @@ Glide.with(context)
 ### Quick Links
 
 *  [ChangeLog](https://github.com/Turtlebody/android-media-picker/blob/master/CHANGELOG.md)
-*  [Documentation](https://github.com/angular/flex-layout/wiki)
+*  [Documentation](https://github.com/Turtlebody/android-media-picker/wiki)
 
 ### Demos
 
-*  [Explore Examples Online](https://tburleson-layouts-demos.firebaseapp.com/)
-*  [Demo Source Code](https://github.com/angular/flex-layout/blob/master/src/apps/demo-app/src/app/app.module.ts)
+*  [Example](https://tburleson-layouts-demos.firebaseapp.com/)
+*  [Sample APK file](https://github.com/angular/flex-layout/blob/master/src/apps/demo-app/src/app/app.module.ts)
 
 ### Developers
 
-*  [API Documentation](https://github.com/angular/flex-layout/wiki/API-Documentation)
-*  [Developer Setup & Usage](https://github.com/angular/flex-layout/wiki/Developer-Setup)
+*  [API Documentation](https://github.com/Turtlebody/android-media-picker/wiki/API-Documentation)
+*  [Developer Setup & Usage](https://github.com/Turtlebody/android-media-picker/wiki/Developer-Setup)
 
 ---
 
