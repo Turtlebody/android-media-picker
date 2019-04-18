@@ -140,8 +140,8 @@ Glide.with(context)
 
 ### Demos
 
-*  [Example](https://tburleson-layouts-demos.firebaseapp.com/)
-*  [Sample APK file](https://github.com/angular/flex-layout/blob/master/src/apps/demo-app/src/app/app.module.ts)
+*  [Example]()
+*  [Sample APK file]()
 
 ### Developers
 
