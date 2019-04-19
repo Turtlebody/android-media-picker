@@ -58,6 +58,7 @@ class ActivityLibMain : ActivityBase() {
         }
     }
 
+
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(R.id.frame_content)
         when (fragment) {
@@ -68,6 +69,7 @@ class ActivityLibMain : ActivityBase() {
                 toolbarTitle = "Select Folder"
                 vToolbarCounter.visibility = View.GONE
                 mMenuItem.isVisible = true
+                updateCounter(0)
             }
             else -> super.onBackPressed()
         }

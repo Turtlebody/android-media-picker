@@ -2,7 +2,7 @@
 
 [ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=1.0.2) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/1.0.2/link)
 
-A Media library for Android for selecting single/multiple files(image/video/audio).
+A Media library for Android for selecting single/multiple media files(image/video/audio).
 
 
 ## Setup
