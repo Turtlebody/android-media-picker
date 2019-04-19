@@ -9,10 +9,10 @@ A Media library for Android for selecting single/multiple files(image/video/audi
 Step 1: Add the dependency
 
 ```gradle
-    dependencies {
-        ...
-        implementation 'com.greentoad.turtlebody:media-picker:1.0.2'
-    }
+dependencies {
+    ...
+    implementation 'com.greentoad.turtlebody:media-picker:1.0.2'
+}
 ```
 
 ## Usage
