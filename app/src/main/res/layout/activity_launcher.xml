@@ -13,9 +13,8 @@
         android:layout_gravity="center"
         android:orientation="vertical">
         <ImageView
-
             android:layout_width="@dimen/length_144"
-            app:srcCompat="@drawable/ic_turtlebody"
+            app:srcCompat="@drawable/ic_media_picker_logo"
             android:scaleType="centerInside"
             android:layout_height="@dimen/length_112" />
         <TextView
@@ -47,7 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingStart="@dimen/offset_12"
+            android:layout_marginStart="@dimen/offset_12"
+            android:layout_marginLeft="12dp"
             android:textSize="@dimen/font_10"
             android:text="Green Toad Product" />
 

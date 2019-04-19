@@ -9,10 +9,10 @@ A Media library for Android for selecting single/multiple files(image/video/audi
 Step 1: Add the dependency
 
 ```gradle
-    dependencies {
-        ...
-        implementation 'com.greentoad.turtlebody:media-picker:1.0.2'
-    }
+dependencies {
+    ...
+    implementation 'com.greentoad.turtlebody:media-picker:1.0.2'
+}
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ MediaPicker.with(this,Constants.FileTypes.FILE_TYPE_IMAGE)
 
             @Override
             public void onNext(ArrayList<Uri> uris) {
-                //uri: list of uri
+                //uris: list of uri
             }
 
             @Override
@@ -49,7 +49,7 @@ MediaPicker.with(this,Constants.FileTypes.FILE_TYPE_IMAGE)
 ```
 
 #### Kotlin
-```
+```kotlin
 val pickerConfig = PickerConfig().setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true)
 MediaPicker.with(this, fileType)
         .setConfig(pickerConfig)
@@ -74,7 +74,7 @@ It is use to set the configuration.
 2. **.setAllowMultiImages(booleanValue)**: tells whether to show confirmation dialog on selecting the file(only work in single file selection).
 
 eg.
-```
+```java
 //Pick single file with confirmation dialog
 PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
 ```
@@ -83,7 +83,7 @@ PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setSho
 In Android many times the file not exist physically but may contain uri. Such file(uri) may produce error. So in our library we are filtering out invalid uri. So if end-developer wants to know if library filtered out uris, they can set ```.setFileMissingListener()```.
 
 #### Java
-```Java
+```java
 .setFileMissingListener(new MediaPicker.MediaPickerImpl.OnMediaListener() {
     @Override
     public void onMissingFileWarning() {
@@ -92,7 +92,7 @@ In Android many times the file not exist physically but may contain uri. Such fi
 })
 ```
 #### Kotlin
-```
+```kotlin
 .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
     override fun onMissingFileWarning() {
         //trigger when some missing file are filtered out
@@ -115,17 +115,17 @@ In Android, Content providers manage access to a structured set of data. They en
 You can get almost all information from uri.
 #### URI usages:
 1. Get file from uri:
-```
+```java
 File file = new File(uri.getPath());
 ```
 
 2. Get mime from uri:
-```
+```java
 String mimeType = getContentResolver().getType(uri);
 ```
 
 3. Used in Glide:
-```
+```java
 Glide.with(context)
      .load(uri)
      .into(imageView);
@@ -135,12 +135,12 @@ Glide.with(context)
 ---
 ### Quick Links
 
-*  [ChangeLog](https://github.com/Turtlebody/android-media-picker/blob/master/CHANGELOG.md)
+*  [ChangeLog](/CHANGELOG.md)
 *  [Documentation](https://github.com/Turtlebody/android-media-picker/wiki)
 
 ### Demos
 
-*  [Example](https://github.com/Turtlebody/android-media-picker/blob/master/Example.md)
+*  [Example](/Example.md)
 *  [Sample APK file](https://github.com/Turtlebody/android-media-picker/blob/master/app-development-debug.apk)
 
 ### Developers
