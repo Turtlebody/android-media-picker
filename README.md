@@ -37,7 +37,7 @@ MediaPicker.with(this,Constants.FileTypes.FILE_TYPE_IMAGE)
 
             @Override
             public void onNext(ArrayList<Uri> uris) {
-                //uri: list of uri
+                //uris: list of uri
             }
 
             @Override
