@@ -74,7 +74,7 @@ It is use to set the configuration.
 2. **.setAllowMultiImages(booleanValue)**: tells whether to show confirmation dialog on selecting the file(only work in single file selection).
 
 eg.
-```
+```java
 //Pick single file with confirmation dialog
 PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
 ```
