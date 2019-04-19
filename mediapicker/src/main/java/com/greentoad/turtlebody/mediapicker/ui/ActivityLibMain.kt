@@ -38,10 +38,11 @@ class ActivityLibMain : ActivityBase() {
     private lateinit var vToolbarCounter: TextView
 
     companion object {
-        const val REQ_CODE = 5000
-        const val FILE_MISSING = "fileMissing"
-        const val FILE_TYPE_KEY = "fileTypeKey"
-        const val URI_LIST_KEY = "uriListKey"
+        const val MEDIA_REQ_CODE = 5000
+
+        const val B_ARG_FILE_MISSING = "activity.lib.main.file.missing"
+        const val B_ARG_FILE_TYPE = "activity.lib.main.file.type"
+        const val B_ARG_URI_LIST = "activity.lib.main.uri.list"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +55,7 @@ class ActivityLibMain : ActivityBase() {
 
         if (intent.extras != null) {
             mPickerConfig = intent.getSerializableExtra(PickerConfig.ARG_BUNDLE) as PickerConfig
-            mFileType = intent.getIntExtra(FILE_TYPE_KEY, Constants.FileTypes.MEDIA_TYPE_IMAGE)
+            mFileType = intent.getIntExtra(B_ARG_FILE_TYPE, Constants.FileTypes.MEDIA_TYPE_IMAGE)
         }
     }
 
@@ -98,7 +99,7 @@ class ActivityLibMain : ActivityBase() {
 
     @SuppressLint("CheckResult")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK && requestCode == REQ_CODE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == MEDIA_REQ_CODE) {
             info { "data: ${data?.data}" }
             handleFileData(data)
         } else
@@ -118,13 +119,11 @@ class ActivityLibMain : ActivityBase() {
             }
             else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 if (intent.clipData != null) {
-
                     val clipData = intent.clipData
                     info { "handleFileData: Multiple files with ClipData"}
                     for (i in 0 until clipData!!.itemCount) {
                         val item = clipData.getItemAt(i)
                         info { "Item [" + i + "]: " + item.uri.toString()}
-
                         if(FileHelper.isFileExist(this,item.uri)){
                             //important as many time android return duplicate uri when selecting multiple media files
                             if(!uriList.contains(item.uri)){
@@ -210,6 +209,9 @@ class ActivityLibMain : ActivityBase() {
                 .commit()
     }
 
+    /**
+     * @param counter counter for selecting multiple media files
+     */
     fun updateCounter(counter: Int) {
         vToolbarCounter.text = "$counter"
     }
@@ -217,10 +219,10 @@ class ActivityLibMain : ActivityBase() {
     fun sendBackData(list: ArrayList<Uri>,isFileMissing: Boolean=false) {
         if (list.isNotEmpty()) {
             val intent = Intent()
-            intent.putExtra(URI_LIST_KEY, list as Serializable)
+            intent.putExtra(B_ARG_URI_LIST, list as Serializable)
 
             if(isFileMissing)
-                intent.putExtra(FILE_MISSING, true)
+                intent.putExtra(B_ARG_FILE_MISSING, true)
             setResult(Activity.RESULT_OK, intent)
         }
         finish()
@@ -228,9 +230,8 @@ class ActivityLibMain : ActivityBase() {
 
 
     private fun createPickFromDocumentsIntent() {
-
-        var fileType = ""
-        var mimeType = arrayOf<String>()
+        val fileType: String
+        val mimeType: Array<String>
 
         when (mFileType) {
             Constants.FileTypes.MEDIA_TYPE_IMAGE -> {
@@ -256,20 +257,20 @@ class ActivityLibMain : ActivityBase() {
             intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, mPickerConfig.mAllowMultiImages)
             intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
         } else {
             intent = Intent(Intent.ACTION_GET_CONTENT)
         }
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         intent.type = fileType
-        startActivityForResult(intent, REQ_CODE)
+        startActivityForResult(intent, MEDIA_REQ_CODE)
     }
 
 
     private fun startImageVideoFolderFragment() {
         val bundle = Bundle()
-        bundle.putInt(FILE_TYPE_KEY, mFileType)
+        bundle.putInt(B_ARG_FILE_TYPE, mFileType)
 
         val fragment = ImageVideoFolderFragment.newInstance(Constants.Fragment.IMAGE_VIDEO_FOLDER, bundle)
         val ft = supportFragmentManager.beginTransaction()

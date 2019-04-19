@@ -74,7 +74,6 @@ class AudioFolderFragment : FragmentBase() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<ArrayList<AudioFolder>> {
-
                     override fun onSubscribe(@NonNull d: Disposable) {
                         progress_view.visibility = View.VISIBLE
                     }

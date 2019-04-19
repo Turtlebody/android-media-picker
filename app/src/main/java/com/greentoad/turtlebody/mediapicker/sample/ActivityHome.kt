@@ -99,7 +99,7 @@ class ActivityHome : ActivityBase() {
 
     private fun startActivityShowResult(it: MutableList<Uri>?) {
         val intent = Intent(this,ActivityResults::class.java)
-        intent.putExtra(ActivityLibMain.URI_LIST_KEY,it as Serializable)
+        intent.putExtra(ActivityLibMain.B_ARG_URI_LIST,it as Serializable)
         startActivity(intent)
     }
 

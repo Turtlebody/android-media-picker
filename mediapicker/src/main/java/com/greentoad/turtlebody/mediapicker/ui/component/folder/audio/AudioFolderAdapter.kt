@@ -29,10 +29,17 @@ class AudioFolderAdapter: RecyclerView.Adapter<AudioFolderAdapter.FolderVewHolde
     }
 
 
+    /**
+     * Register a callback to be invoked when folder view is clicked.
+     * @param listener The callback that will run
+     */
     fun setListener(listenerAudio : OnAudioFolderClickListener){
         mOnAudioFolderClickListener = listenerAudio
     }
 
+    /**
+     * @param pData mutable-list-of AudioFolder
+     */
     fun setData(pData: MutableList<AudioFolder>){
         mData = pData
         notifyDataSetChanged()

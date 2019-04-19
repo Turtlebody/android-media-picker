@@ -1,5 +1,6 @@
 package com.greentoad.turtlebody.mediapicker.ui.common
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -21,7 +22,9 @@ abstract class MediaListFragment : FragmentBase() {
         const val B_ARG_PICKER_CONFIG = "media_list_fragment.args.pickerConfig"
     }
 
-    lateinit var mPickerConfig: PickerConfig
+    var mPickerConfig: PickerConfig = PickerConfig()
+    var mFolderId: String = ""
+    var mUriList: ArrayList<Uri> = arrayListOf()
 
     abstract fun onRestoreState(savedInstanceState: Bundle?, args: Bundle?)
     override fun onCreate(savedInstanceState: Bundle?) {

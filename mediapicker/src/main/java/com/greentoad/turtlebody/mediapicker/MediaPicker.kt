@@ -65,16 +65,27 @@ class MediaPicker {
         }
 
 
+        /**
+         * set configuration
+         * @param config pass PickerConfig
+         */
         fun setConfig(config: PickerConfig): MediaPickerImpl{
             mConfig = config
             return this
         }
 
+        /**
+         * Register a callback to be invoked when missing files are filtered out.
+         * @param listener The callback that will run
+         */
         fun setFileMissingListener(listener: OnMediaListener): MediaPickerImpl{
             mOnMediaListener = listener
             return this
         }
 
+        /**
+         * @return observable uri list
+         */
         fun onResult(): Observable<ArrayList<Uri>> {
             return Observable.create<ArrayList<Uri>> { emitter: ObservableEmitter<ArrayList<Uri>> ->
                 this.mEmitter = emitter
@@ -86,6 +97,9 @@ class MediaPicker {
             }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
         }
 
+        /**
+         * run runtime-permission to read external file
+         */
         @SuppressLint("CheckResult")
         private fun getPermission() {
             mActivity.get()?.let {
@@ -114,7 +128,7 @@ class MediaPicker {
         private fun startFragment() {
             val bundle = Bundle()
             bundle.putSerializable(PickerConfig.ARG_BUNDLE, mConfig)
-            bundle.putSerializable(ActivityLibMain.FILE_TYPE_KEY, mFileType)
+            bundle.putSerializable(ActivityLibMain.B_ARG_FILE_TYPE, mFileType)
 
             val fragment = PickerFragment()
             fragment.arguments = bundle
@@ -137,20 +151,20 @@ class MediaPicker {
             super.onActivityCreated(savedInstanceState)
 
             val config = arguments?.getSerializable(PickerConfig.ARG_BUNDLE)
-            val fileType = arguments?.getInt(ActivityLibMain.FILE_TYPE_KEY)
+            val fileType = arguments?.getInt(ActivityLibMain.B_ARG_FILE_TYPE)
 
             val intent = Intent(context, ActivityLibMain::class.java)
             intent.putExtra(PickerConfig.ARG_BUNDLE, config)
-            intent.putExtra(ActivityLibMain.FILE_TYPE_KEY, fileType)
+            intent.putExtra(ActivityLibMain.B_ARG_FILE_TYPE, fileType)
             startActivityForResult(intent, Constants.Intent.ACTIVITY_LIB_MAIN)
         }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             if (requestCode == Constants.Intent.ACTIVITY_LIB_MAIN) {
                 if (resultCode == Activity.RESULT_OK) {
-                    val list = data?.extras?.getSerializable(ActivityLibMain.URI_LIST_KEY) as ArrayList<Uri>
+                    val list = data?.extras?.getSerializable(ActivityLibMain.B_ARG_URI_LIST) as ArrayList<Uri>
                     mListener?.onData(list)
-                    data.extras?.getBoolean(ActivityLibMain.FILE_MISSING,false)?.let {
+                    data.extras?.getBoolean(ActivityLibMain.B_ARG_FILE_MISSING,false)?.let {
                         if(it){
                             mListener?.onMissingWarning()
                         }

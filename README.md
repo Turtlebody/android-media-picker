@@ -3,9 +3,16 @@
 
 ---
 
-## MediaPicker Library for Android (AndroidX)
-
 [ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=1.0.2) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/1.0.2/link)
+
+### Demo:
+![](https://media.giphy.com/media/47Is8dxlpEL28stL0V/giphy.gif)
+
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt="Get it on Google Play"
+     height="80">](https://play.google.com/store/apps/details?id=com.greentoad.turtlebody.mediapicker.sample)
+
+## MediaPicker Library for Android (AndroidX)
 
 A Media library for Android for selecting single/multiple media files(image/video/audio).
 

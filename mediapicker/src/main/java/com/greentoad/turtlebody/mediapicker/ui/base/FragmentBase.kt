@@ -15,8 +15,6 @@ abstract class FragmentBase : Fragment(),AnkoLogger, Toolbar.OnMenuItemClickList
             field = value
         }
 
-    //protected abstract String getToolBarDefaultTitle();
-
     fun initToolbar(toolbar: Toolbar?, navigationDrawable: Int, isBackNavigationEnable: Boolean) {
 
         this.toolbar = toolbar

@@ -37,19 +37,14 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
             return fragment
         }
 
-        const val B_ARG_FOLDER_PATH = "args.folderPath"
+        const val B_ARG_FOLDER_PATH = "args.folder.path"
     }
 
     private var mFolderPath: String = ""
-    private var mUriList: ArrayList<Uri> = arrayListOf()
-
-
 
     private var mAudioAdapter: AudioAdapter = AudioAdapter()
     private var mAudioModelList: MutableList<AudioModel> = arrayListOf()
     private var mSelectedAudioModelList: MutableList<AudioModel> = arrayListOf()
-
-
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -101,7 +96,7 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
                 //update ui
                 mAudioAdapter.updateIsSelected(mAudioModelList[selectedIndex])
 
-                //update selectedList
+                //update selectedList (add/remove audio)
                 if(mAudioModelList[selectedIndex].isSelected){
                     mSelectedAudioModelList.add(mAudioModelList[selectedIndex])
                 }

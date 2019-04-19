@@ -40,9 +40,6 @@ class ImageListFragment : MediaListFragment(), ImageAdapter.OnImageClickListener
 
     }
 
-    private var mFolderId: String = ""
-    private var mUriList: ArrayList<Uri> = arrayListOf()
-
     private var mImageAdapter: ImageAdapter = ImageAdapter()
     private var mImageModelList: MutableList<ImageModel> = arrayListOf()
     private var mSelectedImageModelList: MutableList<ImageModel> = arrayListOf()

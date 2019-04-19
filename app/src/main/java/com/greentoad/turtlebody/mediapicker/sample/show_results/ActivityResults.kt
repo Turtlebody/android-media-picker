@@ -4,7 +4,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.sample.ActivityBase
 import com.greentoad.turtlebody.mediapicker.sample.R
 import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
@@ -25,7 +24,7 @@ class ActivityResults : ActivityBase() {
 
 
         if(intent.extras!=null){
-            mList = intent.getSerializableExtra(ActivityLibMain.URI_LIST_KEY) as MutableList<Uri>
+            mList = intent.getSerializableExtra(ActivityLibMain.B_ARG_URI_LIST) as MutableList<Uri>
         }
 
         initAdapter()

@@ -33,10 +33,17 @@ class ImageVideoFolderAdapter: RecyclerView.Adapter<ImageVideoFolderAdapter.Fold
     }
 
 
+    /**
+     * Register a callback to be invoked when folder view is clicked.
+     * @param listener The callback that will run
+     */
     fun setListener(listener : OnFolderClickListener){
         mOnFolderClickListener = listener
     }
 
+    /**
+     * @param pData mutable-list-of ImageVideoFolder
+     */
     fun setData(pData: MutableList<ImageVideoFolder>){
         mData = pData
         notifyDataSetChanged()

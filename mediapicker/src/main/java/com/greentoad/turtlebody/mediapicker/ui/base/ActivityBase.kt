@@ -22,7 +22,6 @@ abstract class ActivityBase : AppCompatActivity(), AnkoLogger {
         set(value) {
             val actionBar = supportActionBar
             actionBar?.title = value
-//            toolbar.title = value
         }
 
     fun initToolbar(toolbar: Toolbar) {
@@ -36,7 +35,7 @@ abstract class ActivityBase : AppCompatActivity(), AnkoLogger {
     }
 
 
-    fun setToolbarNavigationIcon(resId: Int, toolbar: Toolbar) {
+    private fun setToolbarNavigationIcon(resId: Int, toolbar: Toolbar) {
         toolbar.setNavigationIcon(resId)
     }
 
@@ -49,7 +48,7 @@ abstract class ActivityBase : AppCompatActivity(), AnkoLogger {
 
     }
 
-    fun setLightStatusBar(view: View, activity: Activity) {
+    private fun setLightStatusBar(view: View, activity: Activity) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 

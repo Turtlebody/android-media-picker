@@ -16,7 +16,6 @@ object Constants {
     object Queries{
         val imageQueryUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val videoQueryUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-        //private val audioQueryUri = MediaStore.AudioModel.Media.EXTERNAL_CONTENT_URI
         val audioQueryUri = MediaStore.Files.getContentUri("external")
     }
 
@@ -86,16 +85,16 @@ object Constants {
     }
 
     object Intent{
-        val ACTIVITY_LIB_MAIN = 201
+        const val ACTIVITY_LIB_MAIN = 201
 
     }
 
     object Fragment{
-        val IMAGE_VIDEO_FOLDER = 101
-        val AUDIO_FOLDER = 102
+        const val IMAGE_VIDEO_FOLDER = 101
+        const val AUDIO_FOLDER = 102
 
-        val IMAGE_LIST = 103
-        val VIDEO_LIST = 104
-        val AUDIO_LIST = 105
+        const val IMAGE_LIST = 103
+        const val VIDEO_LIST = 104
+        const val AUDIO_LIST = 105
     }
 }

@@ -41,9 +41,6 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
     }
 
 
-    private var mFolderId: String = ""
-    private var mUriList: ArrayList<Uri> = arrayListOf()
-
     private var mVideoAdapter: VideoAdapter = VideoAdapter()
     private var mVideoModelList: MutableList<VideoModel> = arrayListOf()
     private var mSelectedVideoModelList: MutableList<VideoModel> = arrayListOf()
