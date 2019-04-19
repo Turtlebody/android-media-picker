@@ -17,8 +17,6 @@ import java.util.*
 
 object FileManager : AnkoLogger {
 
-
-
     /**
      *   For ImageModel
      */
