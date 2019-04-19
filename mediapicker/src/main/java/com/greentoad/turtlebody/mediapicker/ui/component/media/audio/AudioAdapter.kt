@@ -59,7 +59,7 @@ class AudioAdapter: RecyclerView.Adapter<AudioAdapter.AudioVewHolder>(), AnkoLog
                     .into(itemView.tb_media_picker_audio_mimetype_icon)
 
             itemView.tb_media_picker_audio_checkbox.isChecked = pData.isSelected
-            var size = (pData.size/1000).toString()
+            val size = (pData.size/1000).toString()
 
             itemView.tb_media_picker_audio_name.text = pData.name
             itemView.tb_media_picker_audio_size.text = "$size KB"

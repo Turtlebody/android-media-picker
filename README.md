@@ -135,7 +135,7 @@ Glide.with(context)
 ---
 ### Quick Links
 
-*  [ChangeLog](https://github.com/Turtlebody/android-media-picker/blob/master/CHANGELOG.md)
+*  [ChangeLog](/CHANGELOG.md)
 *  [Documentation](https://github.com/Turtlebody/android-media-picker/wiki)
 
 ### Demos
