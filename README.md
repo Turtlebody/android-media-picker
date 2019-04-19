@@ -49,7 +49,7 @@ MediaPicker.with(this,Constants.FileTypes.FILE_TYPE_IMAGE)
 ```
 
 #### Kotlin
-```
+```kotlin
 val pickerConfig = PickerConfig().setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true)
 MediaPicker.with(this, fileType)
         .setConfig(pickerConfig)
@@ -83,7 +83,7 @@ PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setSho
 In Android many times the file not exist physically but may contain uri. Such file(uri) may produce error. So in our library we are filtering out invalid uri. So if end-developer wants to know if library filtered out uris, they can set ```.setFileMissingListener()```.
 
 #### Java
-```Java
+```java
 .setFileMissingListener(new MediaPicker.MediaPickerImpl.OnMediaListener() {
     @Override
     public void onMissingFileWarning() {
@@ -92,7 +92,7 @@ In Android many times the file not exist physically but may contain uri. Such fi
 })
 ```
 #### Kotlin
-```
+```kotlin
 .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
     override fun onMissingFileWarning() {
         //trigger when some missing file are filtered out
