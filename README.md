@@ -115,12 +115,12 @@ In Android, Content providers manage access to a structured set of data. They en
 You can get almost all information from uri.
 #### URI usages:
 1. Get file from uri:
-```
+```java
 File file = new File(uri.getPath());
 ```
 
 2. Get mime from uri:
-```
+```java
 String mimeType = getContentResolver().getType(uri);
 ```
 
