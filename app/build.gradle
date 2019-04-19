@@ -24,6 +24,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         dev {
@@ -35,6 +36,7 @@ android {
     flavorDimensions "app"
     productFlavors {
         finalRelease {
+            signingConfig signingConfigs.release
             applicationId "com.greentoad.turtlebody.mediapicker.sample"
             resValue "string", "app_name", "Media Picker"
             dimension "app"
@@ -85,7 +87,7 @@ dependencies {
 }
 
 def Properties props = new Properties()
-def propFile = new File('signing.properties')
+def propFile = rootProject.file('app/signing.properties')
 
 if (propFile.canRead()) {
     props.load(new FileInputStream(propFile))
