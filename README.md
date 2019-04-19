@@ -125,7 +125,7 @@ String mimeType = getContentResolver().getType(uri);
 ```
 
 3. Used in Glide:
-```
+```java
 Glide.with(context)
      .load(uri)
      .into(imageView);
