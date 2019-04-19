@@ -1,4 +1,9 @@
-# MediaPicker Library for Android (AndroidX)
+
+![](https://thedroid.io/assets/img/tb-media-picker.png)
+
+---
+
+## MediaPicker Library for Android (AndroidX)
 
 [ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=1.0.2) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/1.0.2/link)
 

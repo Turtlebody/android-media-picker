@@ -34,7 +34,8 @@
             android:layout_height="@dimen/length_20"
             app:srcCompat="@drawable/ic_video_camera"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/offset_16"/>
+            android:layout_marginStart="@dimen/offset_16"
+            android:layout_marginLeft="16dp"/>
 
         <TextView
             android:id="@+id/tb_media_picker_item_video_duration"
@@ -43,7 +44,8 @@
             android:layout_gravity="end|center_vertical"
             android:text="0"
             android:textColor="@color/md_white_1000"
-            android:layout_marginEnd="@dimen/offset_16"/>
+            android:layout_marginEnd="@dimen/offset_16"
+            android:layout_marginRight="16dp"/>
 
     </FrameLayout>
 

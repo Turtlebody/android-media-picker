@@ -5,14 +5,6 @@
     <color name="colorAccent">#2AE2FF</color>
 
 
-    <!--<color name="colorPrimary">#25bc91</color>
-    <color name="colorPrimaryDark">#31bd95</color>
-    <color name="colorPrimaryLight">#99ead2</color>
-    <color name="colorAccent">#757575</color>
-    <color name="colorAccentDark">@color/md_grey_800</color>
-    <color name="colorAccentLight">@color/md_grey_100</color>-->
-
-
 
     <!--grey-->
     <array name="greys">

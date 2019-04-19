@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="pickerColorPrimary">#FFFFFF</color>
-    <color name="pickerColorPrimaryDark">#707070</color>
-    <color name="pickerColorAccent">#2AE2FF</color>
+
+    <!--Image Picker Customization-->
+    <color name="tb_media_picker_primary">#FFFFFF</color>
+    <color name="tb_media_picker_primaryDark">#707070</color>
+    <color name="tb_media_picker_accent">#2AE2FF</color>
+
+    <color name="tb_media_picker_toolbar_text">#000000</color>
+    <color name="tb_media_picker_toolbar_counter_text">#000000</color>
+    <color name="tb_media_picker_toolbar_counter_background">#eeeeee</color>
 
 
     <!--<color name="colorPrimary">#25bc91</color>
@@ -133,5 +139,8 @@
     <color name="black_overlay">#66000000</color>
 
     <color name="red">#FFD9C7</color>
+
+
+
 
 </resources>

@@ -9,18 +9,16 @@
     android:id="@+id/tb_media_picker_activity_main_ll"
     tools:context=".ui.ActivityLibMain">
 
-    <!--<include layout="@layout/toolbar"/>-->
-
     <androidx.appcompat.widget.Toolbar
         app:title="@string/app_name"
         android:id="@+id/tb_media_picker_activity_toolbar"
         app:layout_collapseMode="pin"
         app:titleTextAppearance="@style/App.TextAppearance.h4.Title"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleTextColor="@color/md_black_1000"
+        app:titleTextColor="@color/tb_media_picker_toolbar_text"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/pickerColorPrimary"
+        android:background="@color/tb_media_picker_primary"
         android:theme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
@@ -30,12 +28,12 @@
             android:layout_gravity="end|center_vertical"
             android:gravity="center"
             android:layout_marginEnd="@dimen/offset_8"
-            android:textColor="@color/md_black_1000"
+            android:layout_marginRight="8dp"
+            android:textColor="@color/tb_media_picker_toolbar_counter_text"
             android:background="@drawable/dr_rect_round_light_grey"
             android:padding="@dimen/offset_4"
             android:text="0"
             android:textSize="@dimen/font_16"/>
-
     </androidx.appcompat.widget.Toolbar>
     <View
         android:layout_width="match_parent"

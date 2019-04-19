@@ -15,6 +15,6 @@
         app:titleTextColor="@color/md_black_1000"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/pickerColorPrimary"
+        android:background="@color/tb_media_picker_primary"
         android:theme="@style/ThemeOverlay.AppCompat.Light"/>
 </LinearLayout>

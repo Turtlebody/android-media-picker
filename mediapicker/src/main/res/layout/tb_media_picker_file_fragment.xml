@@ -37,7 +37,7 @@
                 android:layout_height="@dimen/length_56"
                 android:focusable="true"
                 android:clickable="true"
-                android:background="@color/pickerColorPrimary"
+                android:background="@color/tb_media_picker_primary"
                 android:padding="@dimen/offset_6">
 
                 <ImageView

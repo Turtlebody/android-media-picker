@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="@color/md_grey_200"/>
+    <solid android:color="@color/tb_media_picker_toolbar_counter_background"/>
     <corners android:radius="10dp"/>
 </shape>

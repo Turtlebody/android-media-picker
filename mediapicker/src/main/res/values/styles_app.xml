@@ -2,12 +2,12 @@
 <resources>
     <style name="App.Button.Primary" parent="ThemeOverlay.AppCompat.Dark">
         <item name="colorButtonNormal">@color/md_grey_500</item>
-        <item name="colorAccent">@color/pickerColorAccent</item>
+        <item name="colorAccent">@color/tb_media_picker_accent</item>
         <!--<item name="colorControlHighlight">@color/colorAccent</item>-->
     </style>
 
     <style name="App.ProgressBar.Primary" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@color/pickerColorAccent</item>
+        <item name="colorAccent">@color/tb_media_picker_accent</item>
     </style>
 
     <style name="App.Dialog.BottomSheet" parent="@style/Theme.Design.Light.BottomSheetDialog">
@@ -18,7 +18,7 @@
 
     <!--For progress indicator for progressBar-->
     <style name="LinearProgress" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@color/pickerColorAccent</item>
+        <item name="colorAccent">@color/tb_media_picker_accent</item>
         <!--<item name="android:progressBackgroundTint">@color/colorPrimary</item>-->
     </style>
 
