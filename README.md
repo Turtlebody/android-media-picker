@@ -140,7 +140,7 @@ Glide.with(context)
 
 ### Demos
 
-*  [Example](https://github.com/Turtlebody/android-media-picker/blob/master/Example.md)
+*  [Example](/Example.md)
 *  [Sample APK file](https://github.com/Turtlebody/android-media-picker/blob/master/app-development-debug.apk)
 
 ### Developers
