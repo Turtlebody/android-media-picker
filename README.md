@@ -23,7 +23,7 @@ Step 1: Add the dependency
 ```gradle
 dependencies {
     ...
-    implementation 'com.greentoad.turtlebody:media-picker:1.0.2'
+    implementation 'com.greentoad.turtlebody:media-picker:1.0.3'
 }
 ```
 
