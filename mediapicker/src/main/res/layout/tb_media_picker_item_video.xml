@@ -16,7 +16,7 @@
 
     <com.greentoad.turtlebody.mediapicker.widget.ImageViewCheckable
         android:id="@+id/tb_media_picker_item_video_checkbox"
-        android:src="@drawable/sc_check_uncheck_file"
+        android:src="@drawable/tb_media_picker_sc_check_file"
         android:layout_width="@dimen/length_32"
         android:layout_height="@dimen/length_32"
         android:layout_gravity="end|top"
@@ -26,13 +26,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/length_40"
         android:orientation="horizontal"
-        android:background="@drawable/dr_rect_gradient_black"
+        android:background="@drawable/tb_media_picker_dr_rect_gradient_black"
         android:layout_gravity="bottom">
 
         <ImageView
             android:layout_width="@dimen/offset_20"
             android:layout_height="@dimen/length_20"
-            app:srcCompat="@drawable/ic_video_camera"
+            app:srcCompat="@drawable/tb_media_picker_ic_video_camera"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/offset_16"
             android:layout_marginLeft="16dp"/>

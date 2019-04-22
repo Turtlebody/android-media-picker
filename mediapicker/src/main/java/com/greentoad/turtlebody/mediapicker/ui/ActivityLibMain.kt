@@ -77,7 +77,7 @@ class ActivityLibMain : ActivityBase() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.activity_main_menu, menu)
+        menuInflater.inflate(R.menu.tb_media_picker_activity_main, menu)
         mMenuItem = menu.getItem(0)
         startFolderListFragment()
         return true
@@ -97,7 +97,7 @@ class ActivityLibMain : ActivityBase() {
         }
     }
 
-    @SuppressLint("CheckResult")
+    //    @SuppressLint("CheckResult")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == MEDIA_REQ_CODE) {
             info { "data: ${data?.data}" }

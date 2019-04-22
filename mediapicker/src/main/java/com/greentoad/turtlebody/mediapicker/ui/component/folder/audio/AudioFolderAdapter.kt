@@ -54,7 +54,7 @@ class AudioFolderAdapter: RecyclerView.Adapter<AudioFolderAdapter.FolderVewHolde
             itemView.tb_media_picker_item_folder_small_icon.visibility = View.GONE
 
             Glide.with(itemView)
-                    .load(R.drawable.ic_music_folder)
+                    .load(R.drawable.tb_media_picker_ic_music_folder)
                     .into(itemView.folder_image_folder_icon)
 
             itemView.setOnClickListener {

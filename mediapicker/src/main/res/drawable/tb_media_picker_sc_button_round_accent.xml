@@ -3,8 +3,8 @@
     android:exitFadeDuration="200"
     android:enterFadeDuration="200">
 
-    <item android:drawable="@drawable/dr_rect_round_accent"
+    <item android:drawable="@drawable/tb_media_picker_dr_rect_round_accent"
         android:state_pressed="true" />
 
-    <item android:drawable="@drawable/dr_rect_round_accent" />
+    <item android:drawable="@drawable/tb_media_picker_dr_rect_round_accent" />
 </selector>

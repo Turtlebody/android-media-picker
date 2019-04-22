@@ -13,7 +13,8 @@ import java.io.FileNotFoundException
  */
 object FileHelper : AnkoLogger{
 
-    fun isFileExist(context: Context, uri: Uri): Boolean {
+    fun isFileExist(context: Context, uri: Uri?): Boolean {
+        if(uri==null)return false
         val path = UtilsFile.getFilePath(context, uri)
 
         if (TextUtils.isEmpty(path)) {

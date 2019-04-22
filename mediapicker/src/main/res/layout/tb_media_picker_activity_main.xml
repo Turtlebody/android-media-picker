@@ -30,7 +30,7 @@
             android:layout_marginEnd="@dimen/offset_8"
             android:layout_marginRight="8dp"
             android:textColor="@color/tb_media_picker_toolbar_counter_text"
-            android:background="@drawable/dr_rect_round_light_grey"
+            android:background="@drawable/tb_media_picker_dr_rect_round_light_grey"
             android:padding="@dimen/offset_4"
             android:text="0"
             android:textSize="@dimen/font_16"/>

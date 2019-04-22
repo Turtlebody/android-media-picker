@@ -100,7 +100,7 @@ class MediaPicker {
         /**
          * run runtime-permission to read external file
          */
-        @SuppressLint("CheckResult")
+//        @SuppressLint("CheckResult")
         private fun getPermission() {
             mActivity.get()?.let {
                 it.runOnUiThread {
@@ -143,8 +143,8 @@ class MediaPicker {
     }
 
 
-    /**************************************************
-     *              Fragment
+    /* ********************************************************************************************
+     *                                          Fragment
      */
     class PickerFragment : Fragment(), AnkoLogger {
         override fun onActivityCreated(savedInstanceState: Bundle?) {

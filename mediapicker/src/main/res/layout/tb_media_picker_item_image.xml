@@ -23,7 +23,7 @@
 
     <com.greentoad.turtlebody.mediapicker.widget.ImageViewCheckable
         android:id="@+id/tb_media_picker_item_image_checkbox"
-        android:src="@drawable/sc_check_uncheck_file"
+        android:src="@drawable/tb_media_picker_sc_check_file"
         android:layout_width="@dimen/length_32"
         android:layout_height="@dimen/length_32"
         android:layout_gravity="end|top"

@@ -16,14 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/length_24"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_iconfinder_clubs_2_753956"
+            app:srcCompat="@drawable/tb_media_picker_ic_audio_box"
             android:layout_gravity="center_vertical"/>
         <ImageView
             android:id="@+id/tb_media_picker_audio_mimetype_icon"
             android:layout_width="match_parent"
             android:layout_height="@dimen/length_20"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_audio_aud"
+            app:srcCompat="@drawable/tb_media_picker_ic_audio_aud"
             android:layout_gravity="bottom"/>
 
     </FrameLayout>

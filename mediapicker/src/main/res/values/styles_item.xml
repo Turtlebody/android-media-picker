@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="SubmitButton" parent="Widget.AppCompat.Button.Small">
-        <item name="android:background">@drawable/sc_button_round_accent</item>
+        <item name="android:background">@drawable/tb_media_picker_sc_button_round_accent</item>
         <item name="colorControlHighlight">?attr/colorAccent</item>
 
     </style>

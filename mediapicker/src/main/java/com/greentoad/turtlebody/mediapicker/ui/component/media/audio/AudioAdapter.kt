@@ -92,12 +92,12 @@ class AudioAdapter: RecyclerView.Adapter<AudioAdapter.AudioVewHolder>(), AnkoLog
                 }
             }
             return when(extType){
-                "mp3"-> R.drawable.ic_audio_mp3
-                "m4a"-> R.drawable.ic_audio_m4a
-                "mp4"-> R.drawable.ic_audio_m4a
-                "aac" -> R.drawable.ic_audio_aac
-                "wav" -> R.drawable.ic_audio_wav
-                else -> R.drawable.ic_audio_aud
+                "mp3"-> R.drawable.tb_media_picker_ic_audio_mp3
+                "m4a"-> R.drawable.tb_media_picker_ic_audio_m4a
+                "mp4"-> R.drawable.tb_media_picker_ic_audio_m4a
+                "aac" -> R.drawable.tb_media_picker_ic_audio_aac
+                "wav" -> R.drawable.tb_media_picker_ic_audio_wav
+                else -> R.drawable.tb_media_picker_ic_audio_aud
             }
         }
     }
