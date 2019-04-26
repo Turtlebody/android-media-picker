@@ -4,6 +4,9 @@
 ---
 
 [ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=1.0.3) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/1.0.3/link)
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Media%20Picker-green.svg?style=flat )]( https://android-arsenal.com/details/1/7635 )
+
+
 
 ### Demo:
 ![](https://media.giphy.com/media/47Is8dxlpEL28stL0V/giphy.gif)
