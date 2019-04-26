@@ -21,7 +21,7 @@
             tools:listitem="@layout/tb_media_picker_item_audio"/>
 
         <LinearLayout
-            android:id="@+id/ll_bottom_layout"
+            android:id="@+id/tb_media_picker_file_fragment_bottom_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -41,7 +41,7 @@
                 android:padding="@dimen/offset_6">
 
                 <ImageView
-                    android:id="@+id/iv_cancel"
+                    android:id="@+id/tb_media_picker_file_fragment_btn_cancel"
                     android:layout_width="@dimen/length_32"
                     android:layout_height="@dimen/length_32"
                     android:layout_gravity="start"
@@ -53,7 +53,7 @@
 
                 <Button
                     android:enabled="false"
-                    android:id="@+id/btn_add_file"
+                    android:id="@+id/tb_media_picker_file_fragment_btn_done"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Done"

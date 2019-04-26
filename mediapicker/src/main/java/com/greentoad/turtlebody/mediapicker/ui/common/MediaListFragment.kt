@@ -64,15 +64,15 @@ abstract class MediaListFragment : FragmentBase() {
     }
 
     private fun initButton() {
-        iv_cancel.setOnClickListener {
+        tb_media_picker_file_fragment_btn_cancel.setOnClickListener {
             (activity as ActivityLibMain).onBackPressed()
         }
-        btn_add_file.setOnClickListener {
+        tb_media_picker_file_fragment_btn_done.setOnClickListener {
             getAllUris()
         }
 
         if (!mPickerConfig.mAllowMultiImages) {
-            ll_bottom_layout.visibility = View.GONE
+            tb_media_picker_file_fragment_bottom_ll.visibility = View.GONE
         }
     }
 

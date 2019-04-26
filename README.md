@@ -83,7 +83,7 @@ MediaPicker.with(this, Constants.FileTypes.MEDIA_TYPE_IMAGE)
 #### 1. PickerConfig:
 It is use to set the configuration.
 1. **.setAllowMultiImages(booleanValue)**: tells whether to select single file or multiple file.
-2. **.setAllowMultiImages(booleanValue)**: tells whether to show confirmation dialog on selecting the file(only work in single file selection).
+2. **.setShowConfirmationDialog(booleanValue)**: tells whether to show confirmation dialog on selecting the file(only work in single file selection).
 
 eg.
 ```java
