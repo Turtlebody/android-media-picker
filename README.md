@@ -36,10 +36,10 @@ Step 1: Declare and Initialize MediaPicker.
 
 #### Java
 ```java
-PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
+PickerConfig imagePickerConfig = new PickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
         
 MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
-        .setConfig(pickerConfig)
+        .setConfig(imagePickerConfig)
         .setFileMissingListener(new MediaPicker.MediaPickerImpl.OnMediaListener() {
             @Override
             public void onMissingFileWarning() {
@@ -66,9 +66,9 @@ MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
 
 #### Kotlin
 ```kotlin
-val pickerConfig = PickerConfig().setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true)
+val imagePickerConfig = PickerConfig().setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true)
 MediaPicker.with(this, Constants.FileTypes.MEDIA_TYPE_IMAGE)
-        .setConfig(pickerConfig)
+        .setConfig(imagePickerConfig)
         .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
             override fun onMissingFileWarning() {
                 Toast.makeText(this@ActivityHome,"some file is missing",Toast.LENGTH_LONG).show()
@@ -92,7 +92,7 @@ It is use to set the configuration.
 eg.
 ```java
 //Pick single file with confirmation dialog
-PickerConfig pickerConfig = new PickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
+PickerConfig imagePickerConfig = new PickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
 ```
 
 #### 2. ExtraListener:

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.greentoad.turtlebody.mediapicker.core.PickerConfig
+import com.greentoad.turtlebody.mediapicker.core.ImagePickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import com.greentoad.turtlebody.mediapicker.ui.base.FragmentBase
 import kotlinx.android.synthetic.main.tb_media_picker_file_fragment.*
@@ -22,7 +22,7 @@ abstract class MediaListFragment : FragmentBase() {
         const val B_ARG_PICKER_CONFIG = "media_list_fragment.args.pickerConfig"
     }
 
-    var mPickerConfig: PickerConfig = PickerConfig()
+    var mImagePickerConfig: ImagePickerConfig = ImagePickerConfig()
     var mFolderId: String = ""
     var mUriList: ArrayList<Uri> = arrayListOf()
 
@@ -32,7 +32,7 @@ abstract class MediaListFragment : FragmentBase() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            mPickerConfig = it.getSerializable(B_ARG_PICKER_CONFIG) as PickerConfig
+            mImagePickerConfig = it.getSerializable(B_ARG_PICKER_CONFIG) as ImagePickerConfig
         }
         onRestoreState(savedInstanceState, arguments)
     }
@@ -50,7 +50,7 @@ abstract class MediaListFragment : FragmentBase() {
         /*******************************************************
          * Dynamically change marginBottom for recyclerView
          *******************************************************/
-        if(mPickerConfig.mAllowMultiImages){
+        if(mImagePickerConfig.mAllowMultiImages){
             val params = CoordinatorLayout.LayoutParams(
                     CoordinatorLayout.LayoutParams.MATCH_PARENT,
                     CoordinatorLayout.LayoutParams.MATCH_PARENT)
@@ -71,7 +71,7 @@ abstract class MediaListFragment : FragmentBase() {
             getAllUris()
         }
 
-        if (!mPickerConfig.mAllowMultiImages) {
+        if (!mImagePickerConfig.mAllowMultiImages) {
             tb_media_picker_file_fragment_bottom_ll.visibility = View.GONE
         }
     }

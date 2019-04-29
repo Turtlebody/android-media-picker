@@ -1,6 +1,5 @@
 package com.greentoad.turtlebody.mediapicker.ui.component.media.video
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -70,8 +69,8 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
     }
 
     override fun onVideoCheck(pData: VideoModel) {
-        if(!mPickerConfig.mAllowMultiImages){
-            if(mPickerConfig.mShowConfirmationDialog){
+        if(!mImagePickerConfig.mAllowMultiImages){
+            if(mImagePickerConfig.mShowConfirmationDialog){
                 val simpleAlert = AlertDialog.Builder(context!!)
                 simpleAlert.setMessage("Are you sure to select ${pData.name}")
                         .setCancelable(false)
@@ -110,7 +109,7 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
 
     private fun initAdapter() {
         mVideoAdapter.setListener(this)
-        mVideoAdapter.mShowCheckBox = mPickerConfig.mAllowMultiImages
+        mVideoAdapter.mShowCheckBox = mImagePickerConfig.mAllowMultiImages
 
         tb_media_picker_file_fragment_recycler_view.layoutManager = GridLayoutManager(context,2)
         tb_media_picker_file_fragment_recycler_view.adapter = mVideoAdapter

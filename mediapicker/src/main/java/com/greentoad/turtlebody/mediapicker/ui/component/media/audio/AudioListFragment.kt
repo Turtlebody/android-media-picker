@@ -1,6 +1,5 @@
 package com.greentoad.turtlebody.mediapicker.ui.component.media.audio
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -72,8 +71,8 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
 
 
     override fun onAudioCheck(pData: AudioModel) {
-        if(!mPickerConfig.mAllowMultiImages){
-            if(mPickerConfig.mShowConfirmationDialog){
+        if(!mImagePickerConfig.mAllowMultiImages){
+            if(mImagePickerConfig.mShowConfirmationDialog){
                 val simpleAlert = AlertDialog.Builder(context!!)
                 simpleAlert.setMessage("Are you sure to select ${pData.name}")
                         .setCancelable(false)
@@ -112,7 +111,7 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
 
     private fun initAdapter() {
         mAudioAdapter.setListener(this)
-        mAudioAdapter.mShowCheckBox = mPickerConfig.mAllowMultiImages
+        mAudioAdapter.mShowCheckBox = mImagePickerConfig.mAllowMultiImages
 
         tb_media_picker_file_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
         tb_media_picker_file_fragment_recycler_view.adapter = mAudioAdapter

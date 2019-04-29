@@ -15,7 +15,7 @@ import com.afollestad.materialdialogs.customview.getCustomView
 import com.bumptech.glide.Glide
 import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.MediaPicker
-import com.greentoad.turtlebody.mediapicker.core.PickerConfig
+import com.greentoad.turtlebody.mediapicker.core.ImagePickerConfig
 import com.greentoad.turtlebody.mediapicker.sample.show_results.ActivityResults
 import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import kotlinx.android.synthetic.main.activity_home.*
@@ -54,7 +54,6 @@ class ActivityHome : ActivityBase() {
         Glide.with(this)
                 .load(R.drawable.pic_image)
                 .into(home_iv_select_images)
-
     }
 
     private fun showAlert(fileType: Int){
@@ -81,7 +80,7 @@ class ActivityHome : ActivityBase() {
     @SuppressLint("CheckResult")
     private fun startMediaPicker(fileType: Int, allowMultiple: Boolean) {
         MediaPicker.with(this, fileType)
-                .setConfig(PickerConfig().setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true))
+                .setConfig(ImagePickerConfig().setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true))
                 .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
                     override fun onMissingFileWarning() {
                         Toast.makeText(this@ActivityHome,"some file is missing",Toast.LENGTH_LONG).show()

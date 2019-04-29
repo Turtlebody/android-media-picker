@@ -1,6 +1,5 @@
 package com.greentoad.turtlebody.mediapicker.ui
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -14,7 +13,7 @@ import androidx.fragment.app.Fragment
 import com.greentoad.turtlebody.mediapicker.R
 import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.core.FileHelper
-import com.greentoad.turtlebody.mediapicker.core.PickerConfig
+import com.greentoad.turtlebody.mediapicker.core.ImagePickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.base.ActivityBase
 import com.greentoad.turtlebody.mediapicker.ui.common.MediaListFragment
 import com.greentoad.turtlebody.mediapicker.ui.component.folder.audio.AudioFolderFragment
@@ -33,7 +32,7 @@ class ActivityLibMain : ActivityBase() {
 
     private var mFileType: Int = Constants.FileTypes.MEDIA_TYPE_IMAGE
     private lateinit var mMenuItem: MenuItem
-    private lateinit var mPickerConfig: PickerConfig
+    private lateinit var mImagePickerConfig: ImagePickerConfig
 
     private lateinit var vToolbarCounter: TextView
 
@@ -54,7 +53,7 @@ class ActivityLibMain : ActivityBase() {
         vToolbarCounter = find<TextView>(R.id.toolbar_txt_count)
 
         if (intent.extras != null) {
-            mPickerConfig = intent.getSerializableExtra(PickerConfig.ARG_BUNDLE) as PickerConfig
+            mImagePickerConfig = intent.getSerializableExtra(ImagePickerConfig.ARG_BUNDLE) as ImagePickerConfig
             mFileType = intent.getIntExtra(B_ARG_FILE_TYPE, Constants.FileTypes.MEDIA_TYPE_IMAGE)
         }
     }
@@ -168,7 +167,7 @@ class ActivityLibMain : ActivityBase() {
      */
     fun startMediaListFragment(folderInfo: String) {
         val bundle = Bundle()
-        bundle.putSerializable(MediaListFragment.B_ARG_PICKER_CONFIG, mPickerConfig)
+        bundle.putSerializable(MediaListFragment.B_ARG_PICKER_CONFIG, mImagePickerConfig)
 
 
         val fragment: Fragment
@@ -255,7 +254,7 @@ class ActivityLibMain : ActivityBase() {
         val intent: Intent
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, mPickerConfig.mAllowMultiImages)
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, mImagePickerConfig.mAllowMultiImages)
             intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
             intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
         } else {
