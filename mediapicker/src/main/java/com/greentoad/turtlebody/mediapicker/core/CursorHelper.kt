@@ -45,16 +45,16 @@ object CursorHelper {
      */
     fun getAudioFolderCursor(context: Context): Cursor? {
         return context.contentResolver.query(Constants.Queries.audioQueryUri, Constants.Projection.AUDIO_FOLDER,
-                Constants.Selection.AUDIO_FOLDER, null, MediaStore.MediaColumns.DATE_ADDED + " DESC")
+                Constants.Selection.AUDIO_FOLDER, null, MediaStore.MediaColumns.DATE_ADDED + " DESC")//arrayOf("%.ogg")
     }
 
     fun getAudioFilesInFolderCursor(context: Context, folderPath: String): Cursor?{
         val path = "$folderPath/"
         return context.contentResolver.query(Constants.Queries.audioQueryUri, Constants.Projection.AUDIO_FILE,
                 MediaStore.Audio.Media.DATA + " LIKE ? AND " + MediaStore.Audio.Media.DATA + " NOT LIKE ? "
-
-                        +" AND "+ MediaStore.Audio.Media.MIME_TYPE +" LIKE ?",
-                arrayOf("$path%", "$path%/%", "audio%"),
+                        +" AND ("+ MediaStore.Audio.Media.MIME_TYPE +" LIKE ?"
+                                +" OR "+ MediaStore.Audio.Media.MIME_TYPE +" LIKE ?)",
+                arrayOf("$path%", "$path%/%","audio%","application/ogg"),//"audio%"
                 MediaStore.MediaColumns.DATE_ADDED + " DESC")
     }
 }

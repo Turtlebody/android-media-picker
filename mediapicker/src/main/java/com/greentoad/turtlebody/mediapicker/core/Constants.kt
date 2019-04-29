@@ -81,6 +81,7 @@ object Constants {
 
     object Selection{
         val AUDIO_FOLDER = MediaStore.Files.FileColumns.MEDIA_TYPE+" = "+MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO+
+                //" AND "+ MediaStore.Files.FileColumns.DATA +" NOT LIKE ?"+
         ") GROUP BY (" + MediaStore.Files.FileColumns.PARENT
     }
 

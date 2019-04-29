@@ -27,7 +27,12 @@ Step 1: Add the dependency
 ```gradle
 dependencies {
     ...
+    /* media picker */
     implementation 'com.greentoad.turtlebody:media-picker:1.0.3'
+
+    /* rxjava */
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 }
 ```
 
@@ -36,7 +41,7 @@ Step 1: Declare and Initialize MediaPicker.
 
 #### Java
 ```java
-PickerConfig imagePickerConfig = new PickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
+PickerConfig imagePickerConfig = new PickerConfig().setAllowMultiImages(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
         
 MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
         .setConfig(imagePickerConfig)
@@ -66,7 +71,7 @@ MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
 
 #### Kotlin
 ```kotlin
-val imagePickerConfig = PickerConfig().setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true)
+val imagePickerConfig = PickerConfig().setAllowMultiImages(allowMultiple).setUriPermanentAccess(true).setShowConfirmationDialog(true)
 MediaPicker.with(this, Constants.FileTypes.MEDIA_TYPE_IMAGE)
         .setConfig(imagePickerConfig)
         .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
@@ -87,12 +92,16 @@ MediaPicker.with(this, Constants.FileTypes.MEDIA_TYPE_IMAGE)
 #### 1. PickerConfig:
 It is use to set the configuration.
 1. **.setAllowMultiImages(booleanValue)**: tells whether to select single file or multiple file.
-2. **.setShowConfirmationDialog(booleanValue)**: tells whether to show confirmation dialog on selecting the file(only work in single file selection).
+2. **.setUriPermanentAccess(booleanValue)**: grant uri access permission. 
+* Temporary uri may not work once your app terminates(so storaring temporary uri in database is not good practise, so use permanent uri in such case).
+* This option only works while selecting file from default android intent.
+* The file user select from our custom ui always return uri with permanent access grant.
+3. **.setShowConfirmationDialog(booleanValue)**: tells whether to show confirmation dialog on selecting the file(only work in single file selection).
 
 eg.
 ```java
-//Pick single file with confirmation dialog
-PickerConfig imagePickerConfig = new PickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
+//Pick single file with permanent access uri and confirmation dialog
+PickerConfig imagePickerConfig = new PickerConfig().setAllowMultiImages(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
 ```
 
 #### 2. ExtraListener:

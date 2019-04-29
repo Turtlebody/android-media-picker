@@ -126,8 +126,11 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
 
             //include only valid files
             for(i in tempArray){
-                if(File(i.filePath).length()>0){
+                if(i.size>0){
                     mAudioModelList.add(i)
+                    info { "size: ${i.size}" }
+                    info { "mimetype: ${i.mimeType}" }
+                    //info { "size: ${File(i.filePath).length()}" }
                 }
             }
             true

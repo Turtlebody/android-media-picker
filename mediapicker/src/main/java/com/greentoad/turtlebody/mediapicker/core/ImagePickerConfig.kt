@@ -8,6 +8,8 @@ import java.io.Serializable
 class ImagePickerConfig: Serializable {
     var mShowConfirmationDialog: Boolean = false
     var mAllowMultiImages: Boolean = false
+    var mUriPermanentAccess: Boolean = false
+
 
     companion object {
         val ARG_BUNDLE = javaClass.canonicalName + ".bundle_arg"
@@ -26,6 +28,14 @@ class ImagePickerConfig: Serializable {
      */
     fun setAllowMultiImages(value: Boolean): ImagePickerConfig {
         mAllowMultiImages = value
+        return this
+    }
+
+    /**
+     * Allow multiple selection
+     */
+    fun setUriPermanentAccess(value: Boolean): ImagePickerConfig {
+        mUriPermanentAccess = value
         return this
     }
 }

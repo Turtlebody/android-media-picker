@@ -253,7 +253,10 @@ class ActivityLibMain : ActivityBase() {
 
         val intent: Intent
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent = if(mImagePickerConfig.mUriPermanentAccess)
+                Intent(Intent.ACTION_OPEN_DOCUMENT)
+            else
+                Intent(Intent.ACTION_GET_CONTENT)
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, mImagePickerConfig.mAllowMultiImages)
             intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
             intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
