@@ -103,7 +103,7 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
                 }
             }
             (activity as ActivityLibMain).updateCounter(mSelectedVideoModelList.size)
-            btn_add_file.isEnabled = mSelectedVideoModelList.size>0
+            tb_media_picker_file_fragment_btn_done.isEnabled = mSelectedVideoModelList.size>0
         }
     }
 
@@ -125,7 +125,7 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
 
             //include only valid files
             for(i in tempArray){
-                if(File(i.filePath).length()>0){
+                if(i.size>0){
                     mVideoModelList.add(i)
                 }
             }
@@ -136,16 +136,16 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<Boolean> {
                     override fun onSubscribe(@NonNull d: Disposable) {
-                        progress_view.visibility = View.VISIBLE
+                        tb_media_picker_frame_progress.visibility = View.VISIBLE
                     }
 
                     override fun onSuccess(t: Boolean) {
                         mVideoAdapter.setData(mVideoModelList)
-                        progress_view.visibility = View.GONE
+                        tb_media_picker_frame_progress.visibility = View.GONE
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        progress_view.visibility = View.GONE
+                        tb_media_picker_frame_progress.visibility = View.GONE
                         info { "error: ${e.message}" }
                     }
                 })

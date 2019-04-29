@@ -7,7 +7,7 @@ import java.io.Serializable
  */
 data class AudioModel(var id: String = "",
                       var name: String = "",
-                      var size: Int,
+                      var size: Int=0,
                       var filePath: String = "",
                       var mimeType:String? ="",
                  //TODo var artist: String = "",

@@ -75,18 +75,18 @@ class AudioFolderFragment : FragmentBase() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<ArrayList<AudioFolder>> {
                     override fun onSubscribe(@NonNull d: Disposable) {
-                        progress_view.visibility = View.VISIBLE
+                        tb_media_picker_frame_progress.visibility = View.VISIBLE
                     }
 
                     override fun onSuccess(@NonNull audioFolders: ArrayList<AudioFolder>) {
                         mAudioFolderList = audioFolders
                         info { "folders: $audioFolders" }
                         mAudioFolderAdapter.setData(mAudioFolderList)
-                        progress_view.visibility = View.GONE
+                        tb_media_picker_frame_progress.visibility = View.GONE
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        progress_view.visibility = View.GONE
+                        tb_media_picker_frame_progress.visibility = View.GONE
                         e.printStackTrace()
                         info { "error: ${e.message}" }
                     }

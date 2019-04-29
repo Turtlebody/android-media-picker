@@ -85,17 +85,17 @@ class ImageVideoFolderFragment : FragmentBase() {
                 .subscribe(object : SingleObserver<ArrayList<ImageVideoFolder>> {
 
                     override fun onSubscribe(@NonNull d: Disposable) {
-                        progress_view.visibility = View.VISIBLE
+                        tb_media_picker_frame_progress.visibility = View.VISIBLE
                     }
 
                     override fun onSuccess(@NonNull imageVideoFolders: ArrayList<ImageVideoFolder>) {
                         mImageVideoFolderList = imageVideoFolders
                         mImageVideoFolderAdapter.setData(mImageVideoFolderList)
-                        progress_view.visibility = View.GONE
+                        tb_media_picker_frame_progress.visibility = View.GONE
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        progress_view.visibility = View.GONE
+                        tb_media_picker_frame_progress.visibility = View.GONE
                         e.printStackTrace()
                         info { "error: ${e.message}" }
                     }

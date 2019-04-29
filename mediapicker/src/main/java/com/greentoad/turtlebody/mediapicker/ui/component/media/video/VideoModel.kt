@@ -7,7 +7,7 @@ import java.io.Serializable
  */
 data class VideoModel(var id: String = "",
                       var name: String = "",
-                      var size: String?,
+                      var size: Int = 0,
                       var filePath: String = "",
                       var thumbnailPath: String = "",
                       var duration: String = "",

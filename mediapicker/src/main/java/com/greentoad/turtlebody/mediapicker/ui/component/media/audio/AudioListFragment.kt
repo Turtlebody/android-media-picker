@@ -105,7 +105,7 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
                 }
             }
             (activity as ActivityLibMain).updateCounter(mSelectedAudioModelList.size)
-            btn_add_file.isEnabled = mSelectedAudioModelList.size>0
+            tb_media_picker_file_fragment_btn_done.isEnabled = mSelectedAudioModelList.size>0
         }
     }
 
@@ -138,16 +138,16 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<Boolean> {
                     override fun onSubscribe(@NonNull d: Disposable) {
-                        progress_view.visibility = View.VISIBLE
+                        tb_media_picker_frame_progress.visibility = View.VISIBLE
                     }
 
                     override fun onSuccess(t: Boolean) {
                         mAudioAdapter.setData(mAudioModelList)
-                        progress_view.visibility = View.GONE
+                        tb_media_picker_frame_progress.visibility = View.GONE
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        progress_view.visibility = View.GONE
+                        tb_media_picker_frame_progress.visibility = View.GONE
                         info { "error: ${e.message}" }
                     }
                 })

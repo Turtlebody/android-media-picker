@@ -69,7 +69,7 @@ object FileManager : AnkoLogger {
             while (it.moveToNext()) {
                 val fileItem = ImageModel(it.getString(columnIndexFileId),
                         it.getString(columnIndexFileName),
-                        it.getString(columnIndexFileSize),
+                        it.getInt(columnIndexFileSize),
                         it.getString(columnIndexFilePath),
                         it.getString(columnIndexFileThumbPath), false)
                 fileItems.add(fileItem)
@@ -134,7 +134,7 @@ object FileManager : AnkoLogger {
             while (it.moveToNext()) {
                 val fileItem = VideoModel(it.getString(columnIndexFileId),
                         it.getString(columnIndexFileName),
-                        it.getString(columnIndexFileSize),
+                        it.getInt(columnIndexFileSize),
                         it.getString(columnIndexFilePath),
                         it.getString(columnIndexFileThumbPath),
                         it.getString(columnIndexFileDuration), false)

@@ -103,7 +103,7 @@ class ImageListFragment : MediaListFragment(), ImageAdapter.OnImageClickListener
                 }
             }
             (activity as ActivityLibMain).updateCounter(mSelectedImageModelList.size)
-            btn_add_file.isEnabled = mSelectedImageModelList.size>0
+            tb_media_picker_file_fragment_btn_done.isEnabled = mSelectedImageModelList.size>0
         }
     }
 
@@ -124,7 +124,8 @@ class ImageListFragment : MediaListFragment(), ImageAdapter.OnImageClickListener
 
             //include only valid files
             for(i in tempArray){
-                if(File(i.filePath).length()>0){
+                info { "size: ${i.size}" }
+                if(i.size > 0){
                     mImageModelList.add(i)
                 }
             }
@@ -135,16 +136,16 @@ class ImageListFragment : MediaListFragment(), ImageAdapter.OnImageClickListener
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<Boolean> {
                     override fun onSubscribe(@NonNull d: Disposable) {
-                        progress_view.visibility = View.VISIBLE
+                        tb_media_picker_frame_progress.visibility = View.VISIBLE
                     }
 
                     override fun onSuccess(t: Boolean) {
                         mImageAdapter.setData(mImageModelList)
-                        progress_view.visibility = View.GONE
+                        tb_media_picker_frame_progress.visibility = View.GONE
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        progress_view.visibility = View.GONE
+                        tb_media_picker_frame_progress.visibility = View.GONE
                         info { "error: ${e.message}" }
                     }
                 })

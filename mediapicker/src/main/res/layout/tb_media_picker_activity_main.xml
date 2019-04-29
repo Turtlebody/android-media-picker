@@ -41,7 +41,7 @@
         android:background="@color/md_black_1000_15"/>
 
     <FrameLayout
-        android:id="@+id/frame_content"
+        android:id="@+id/tb_media_picker_frame_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

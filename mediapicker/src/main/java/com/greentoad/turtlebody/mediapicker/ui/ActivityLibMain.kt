@@ -61,7 +61,7 @@ class ActivityLibMain : ActivityBase() {
 
 
     override fun onBackPressed() {
-        val fragment = supportFragmentManager.findFragmentById(R.id.frame_content)
+        val fragment = supportFragmentManager.findFragmentById(R.id.tb_media_picker_frame_content)
         when (fragment) {
             is ImageVideoFolderFragment -> finish()
             is AudioFolderFragment -> finish()
@@ -204,7 +204,7 @@ class ActivityLibMain : ActivityBase() {
         mMenuItem.isVisible = false
 
         val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.frame_content, fragment, fragmentTag)
+        ft.add(R.id.tb_media_picker_frame_content, fragment, fragmentTag)
                 .addToBackStack(null)
                 .commit()
     }
@@ -274,7 +274,7 @@ class ActivityLibMain : ActivityBase() {
 
         val fragment = ImageVideoFolderFragment.newInstance(Constants.Fragment.IMAGE_VIDEO_FOLDER, bundle)
         val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.frame_content, fragment, ImageVideoFolderFragment::class.java.simpleName)
+        ft.add(R.id.tb_media_picker_frame_content, fragment, ImageVideoFolderFragment::class.java.simpleName)
                 .addToBackStack(null)
                 .commit()
     }
@@ -282,7 +282,7 @@ class ActivityLibMain : ActivityBase() {
     private fun startAudioFolderFragment() {
         val fragment = AudioFolderFragment.newInstance(Constants.Fragment.AUDIO_FOLDER, Bundle())
         val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.frame_content, fragment, AudioFolderFragment::class.java.simpleName)
+        ft.add(R.id.tb_media_picker_frame_content, fragment, AudioFolderFragment::class.java.simpleName)
                 .addToBackStack(null)
                 .commit()
     }
