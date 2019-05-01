@@ -10,9 +10,10 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.R
-import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.core.FileHelper
+import com.greentoad.turtlebody.mediapicker.core.MediaConstants
 import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.base.ActivityBase
 import com.greentoad.turtlebody.mediapicker.ui.common.MediaListFragment
@@ -30,7 +31,7 @@ import java.io.Serializable
 
 class ActivityLibMain : ActivityBase() {
 
-    private var mFileType: Int = Constants.FileTypes.MEDIA_TYPE_IMAGE
+    private var mFileType: Int = MediaPicker.MediaTypes.IMAGE
     private lateinit var mMenuItem: MenuItem
     private lateinit var mMediaPickerConfig: MediaPickerConfig
 
@@ -54,7 +55,7 @@ class ActivityLibMain : ActivityBase() {
 
         if (intent.extras != null) {
             mMediaPickerConfig = intent.getSerializableExtra(MediaPickerConfig.ARG_BUNDLE) as MediaPickerConfig
-            mFileType = intent.getIntExtra(B_ARG_FILE_TYPE, Constants.FileTypes.MEDIA_TYPE_IMAGE)
+            mFileType = intent.getIntExtra(B_ARG_FILE_TYPE, MediaPicker.MediaTypes.IMAGE)
         }
     }
 
@@ -155,7 +156,7 @@ class ActivityLibMain : ActivityBase() {
         mMenuItem.isVisible = true
 
         when (mFileType) {
-            Constants.FileTypes.MEDIA_TYPE_AUDIO -> {
+            MediaPicker.MediaTypes.AUDIO -> {
                 startAudioFolderFragment()
             }
             else -> startImageVideoFolderFragment()
@@ -173,28 +174,28 @@ class ActivityLibMain : ActivityBase() {
         val fragment: Fragment
         val fragmentTag: String
         when (mFileType) {
-            Constants.FileTypes.MEDIA_TYPE_IMAGE -> {
+            MediaPicker.MediaTypes.IMAGE -> {
                 toolbarTitle = "Choose Image"
                 bundle.putString(ImageVideoFolder.FOLDER_ID, folderInfo)
-                fragment = ImageListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
+                fragment = ImageListFragment.newInstance(MediaConstants.Fragment.IMAGE_LIST, bundle)
                 fragmentTag = ImageListFragment::class.java.simpleName
             }
-            Constants.FileTypes.MEDIA_TYPE_VIDEO -> {
+            MediaPicker.MediaTypes.VIDEO -> {
                 toolbarTitle = "Choose Video"
                 bundle.putString(ImageVideoFolder.FOLDER_ID, folderInfo)
-                fragment = VideoListFragment.newInstance(Constants.Fragment.VIDEO_LIST, bundle)
+                fragment = VideoListFragment.newInstance(MediaConstants.Fragment.VIDEO_LIST, bundle)
                 fragmentTag = VideoListFragment::class.java.simpleName
             }
-            Constants.FileTypes.MEDIA_TYPE_AUDIO -> {
+            MediaPicker.MediaTypes.AUDIO -> {
                 toolbarTitle = "Choose Audio"
                 bundle.putString(AudioListFragment.B_ARG_FOLDER_PATH, folderInfo)
-                fragment = AudioListFragment.newInstance(Constants.Fragment.AUDIO_LIST, bundle)
+                fragment = AudioListFragment.newInstance(MediaConstants.Fragment.AUDIO_LIST, bundle)
                 fragmentTag = AudioListFragment::class.java.simpleName
             }
             else -> {
                 toolbarTitle = "Choose Image"
                 bundle.putString(ImageVideoFolder.FOLDER_ID, folderInfo)
-                fragment = ImageListFragment.newInstance(Constants.Fragment.IMAGE_LIST, bundle)
+                fragment = ImageListFragment.newInstance(MediaConstants.Fragment.IMAGE_LIST, bundle)
                 fragmentTag = ImageListFragment::class.java.simpleName
             }
         }
@@ -233,15 +234,15 @@ class ActivityLibMain : ActivityBase() {
         val mimeType: Array<String>
 
         when (mFileType) {
-            Constants.FileTypes.MEDIA_TYPE_IMAGE -> {
+            MediaPicker.MediaTypes.IMAGE -> {
                 fileType = UtilMime.FileType.IMAGE
                 mimeType = UtilMime.MimeType.IMAGE
             }
-            Constants.FileTypes.MEDIA_TYPE_VIDEO -> {
+            MediaPicker.MediaTypes.VIDEO -> {
                 fileType = UtilMime.FileType.VIDEO
                 mimeType = UtilMime.MimeType.VIDEO
             }
-            Constants.FileTypes.MEDIA_TYPE_AUDIO -> {
+            MediaPicker.MediaTypes.AUDIO -> {
                 fileType = UtilMime.FileType.AUDIO
                 mimeType = UtilMime.MimeType.AUDIO
             }
@@ -274,7 +275,7 @@ class ActivityLibMain : ActivityBase() {
         val bundle = Bundle()
         bundle.putInt(B_ARG_FILE_TYPE, mFileType)
 
-        val fragment = ImageVideoFolderFragment.newInstance(Constants.Fragment.IMAGE_VIDEO_FOLDER, bundle)
+        val fragment = ImageVideoFolderFragment.newInstance(MediaConstants.Fragment.IMAGE_VIDEO_FOLDER, bundle)
         val ft = supportFragmentManager.beginTransaction()
         ft.add(R.id.tb_media_picker_frame_content, fragment, ImageVideoFolderFragment::class.java.simpleName)
                 .addToBackStack(null)
@@ -282,7 +283,7 @@ class ActivityLibMain : ActivityBase() {
     }
 
     private fun startAudioFolderFragment() {
-        val fragment = AudioFolderFragment.newInstance(Constants.Fragment.AUDIO_FOLDER, Bundle())
+        val fragment = AudioFolderFragment.newInstance(MediaConstants.Fragment.AUDIO_FOLDER, Bundle())
         val ft = supportFragmentManager.beginTransaction()
         ft.add(R.id.tb_media_picker_frame_content, fragment, AudioFolderFragment::class.java.simpleName)
                 .addToBackStack(null)

@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import androidx.core.content.FileProvider.getUriForFile
+import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.ui.component.folder.audio.AudioFolder
 import com.greentoad.turtlebody.mediapicker.ui.component.folder.image_video.ImageVideoFolder
 import com.greentoad.turtlebody.mediapicker.ui.component.media.audio.AudioModel
@@ -24,10 +25,10 @@ object FileManager : AnkoLogger {
         val folders = ArrayList<ImageVideoFolder>()
         val folderFileCountMap = HashMap<String, Int>()
 
-        val projection = Constants.Projection.IMAGE_FOLDER
+        val projection = MediaConstants.Projection.IMAGE_FOLDER
 
         //Create the cursor pointing to the SDCard
-        val cursor = CursorHelper.getImageVideoFolderCursor(context, Constants.FileTypes.MEDIA_TYPE_IMAGE)
+        val cursor = CursorHelper.getImageVideoFolderCursor(context, MediaPicker.MediaTypes.IMAGE)
 
         cursor?.let {
             val columnIndexFolderId = it.getColumnIndexOrThrow(projection[0])
@@ -54,10 +55,10 @@ object FileManager : AnkoLogger {
 
     fun getImageFilesInFolder(context: Context, folderId: String): ArrayList<ImageModel> {
         val fileItems = ArrayList<ImageModel>()
-        val projection = Constants.Projection.IMAGE_FILE
+        val projection = MediaConstants.Projection.IMAGE_FILE
 
         //Create the cursor pointing to the SDCard
-        val cursor: Cursor? = CursorHelper.getImageVideoFileCursor(context, folderId, Constants.FileTypes.MEDIA_TYPE_IMAGE)
+        val cursor: Cursor? = CursorHelper.getImageVideoFileCursor(context, folderId, MediaPicker.MediaTypes.IMAGE)
 
         cursor?.let {
             val columnIndexFileId = it.getColumnIndexOrThrow(projection[0])
@@ -88,10 +89,10 @@ object FileManager : AnkoLogger {
         val folders = ArrayList<ImageVideoFolder>()
         val folderFileCountMap = HashMap<String, Int>()
 
-        val projection = Constants.Projection.VIDEO_FOLDER
+        val projection = MediaConstants.Projection.VIDEO_FOLDER
 
         //Create the cursor pointing to the SDCard
-        val cursor = CursorHelper.getImageVideoFolderCursor(context, Constants.FileTypes.MEDIA_TYPE_VIDEO)
+        val cursor = CursorHelper.getImageVideoFolderCursor(context, MediaPicker.MediaTypes.VIDEO)
 
         cursor?.let {
             val columnIndexFolderId = it.getColumnIndexOrThrow(projection[0])
@@ -118,10 +119,10 @@ object FileManager : AnkoLogger {
 
     fun getVideoFilesInFolder(context: Context, folderId: String): ArrayList<VideoModel> {
         val fileItems = ArrayList<VideoModel>()
-        val projection = Constants.Projection.VIDEO_FILE
+        val projection = MediaConstants.Projection.VIDEO_FILE
 
         //Create the cursor pointing to the SDCard
-        val cursor: Cursor? = CursorHelper.getImageVideoFileCursor(context, folderId, Constants.FileTypes.MEDIA_TYPE_VIDEO)
+        val cursor: Cursor? = CursorHelper.getImageVideoFileCursor(context, folderId, MediaPicker.MediaTypes.VIDEO)
 
         cursor?.let {
             val columnIndexFileId = it.getColumnIndexOrThrow(projection[0])
@@ -153,7 +154,7 @@ object FileManager : AnkoLogger {
         val folders = ArrayList<AudioFolder>()
         val folderFileCountMap = HashMap<String, Int>()
 
-        val projection = Constants.Projection.AUDIO_FOLDER
+        val projection = MediaConstants.Projection.AUDIO_FOLDER
 
         // Create the cursor pointing to the SDCard
         val cursor = CursorHelper.getAudioFolderCursor(context)
@@ -189,7 +190,7 @@ object FileManager : AnkoLogger {
 
     fun getAudioFilesInFolder(context: Context, folderPath: String): ArrayList<AudioModel> {
         val fileItems = ArrayList<AudioModel>()
-        val projection = Constants.Projection.AUDIO_FILE
+        val projection = MediaConstants.Projection.AUDIO_FILE
 
         // Create the cursor pointing to the SDCard
         val cursor: Cursor? = CursorHelper.getAudioFilesInFolderCursor(context, folderPath)
@@ -234,7 +235,7 @@ object FileManager : AnkoLogger {
         val folders = ArrayList<AudioFolder>()
         val folderFileCountMap = HashMap<String, Int>()
 
-        val projection = Constants.Projection.ALBUM_FOLDER
+        val projection = MediaConstants.Projection.ALBUM_FOLDER
 
         // Create the cursor pointing to the SDCard
         val cursor = CursorHelper.getAudioFolderCursor(context)

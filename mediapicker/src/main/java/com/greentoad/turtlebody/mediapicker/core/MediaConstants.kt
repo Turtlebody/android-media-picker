@@ -5,13 +5,7 @@ import android.provider.MediaStore
 /**
  * Created by WANGSUN on 27-Mar-19.
  */
-object Constants {
-
-    object FileTypes{
-        const val MEDIA_TYPE_IMAGE = 501
-        const val MEDIA_TYPE_VIDEO = 502
-        const val MEDIA_TYPE_AUDIO = 503
-    }
+object MediaConstants {
 
     object Queries{
         val imageQueryUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI

@@ -1,4 +1,4 @@
-# [1.0.4](2019-05-1)
+# [1.0.5](2019-05-1)
 
 
 ### Bug Fixes
@@ -6,6 +6,10 @@
 ### Features
 
 * **core:** implement temporary/permanent uri grant while using android default intent
+
+### Changes
+
+* some file names have been changed for better and clear, naming convention.
 
 
 # [1.0.2](2019-04-18)

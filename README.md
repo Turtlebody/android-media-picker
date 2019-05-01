@@ -4,7 +4,7 @@
 ---
 
 ![API](https://img.shields.io/badge/API-16%2B-34bf49.svg)
-[ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=1.0.4) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/1.0.4/link)
+[ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=1.0.5) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/1.0.5/link)
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Media%20Picker-green.svg?style=flat )]( https://android-arsenal.com/details/1/7635 )
 
 
@@ -28,7 +28,7 @@ Step 1: Add the dependency
 dependencies {
     ...
     /* media picker */
-    implementation 'com.greentoad.turtlebody:media-picker:1.0.3'
+    implementation 'com.greentoad.turtlebody:media-picker:1.0.5'
 
     /* rxjava */
     implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
@@ -46,7 +46,7 @@ MediaPickerConfig pickerConfig = new MediaPickerConfig()
         .setUriPermanentAccess(true)
         .setShowConfirmationDialog(true);
         
-MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
+MediaPicker.with(this,MediaPicker.MediaTypes.IMAGE)
         .setConfig(pickerConfig)
         .setFileMissingListener(new MediaPicker.MediaPickerImpl.OnMediaListener() {
             @Override
@@ -79,7 +79,7 @@ val pickerConfig = MediaPickerConfig()
         .setAllowMultiSelection(allowMultiple)
         .setShowConfirmationDialog(true)
 
-MediaPicker.with(this, Constants.FileTypes.MEDIA_TYPE_IMAGE)
+MediaPicker.with(this, MediaPicker.MediaTypes.IMAGE)
         .setConfig(pickerConfig)
         .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
             override fun onMissingFileWarning() {
@@ -136,9 +136,9 @@ In Android many times the file not exist physically but may contain uri. Such fi
 ```
 #### 3. Media types:
 It's a type of file user want to select.
-1. **MEDIA_TYPE_IMAGE** : for picking image files
-2. **MEDIA_TYPE_VIDEO** : for picking video files
-3. **MEDIA_TYPE_AUDIO** : for picking audio files
+1. **IMAGE** : for picking image files
+2. **VIDEO** : for picking video files
+3. **AUDIO** : for picking audio files
 
 
 ### URI:

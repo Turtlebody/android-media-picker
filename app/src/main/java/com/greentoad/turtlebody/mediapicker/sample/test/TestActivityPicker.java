@@ -1,22 +1,22 @@
 package com.greentoad.turtlebody.mediapicker.sample.test;
 
-import androidx.appcompat.app.AppCompatActivity;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.greentoad.turtlebody.mediapicker.core.Constants;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.greentoad.turtlebody.mediapicker.MediaPicker;
 import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig;
 import com.greentoad.turtlebody.mediapicker.sample.R;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class TestActivityPicker extends AppCompatActivity {
 
@@ -42,7 +42,7 @@ public class TestActivityPicker extends AppCompatActivity {
                 .setUriPermanentAccess(true)
                 .setShowConfirmationDialog(true);
 
-        MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
+        MediaPicker.with(this, MediaPicker.MediaTypes.IMAGE)
                 .setConfig(mediaPickerConfig)
                 .setFileMissingListener(new MediaPicker.MediaPickerImpl.OnMediaListener() {
                     @Override

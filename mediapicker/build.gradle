@@ -31,8 +31,8 @@ ext {
     siteUrl = 'https://github.com/Turtlebody/android-media-picker'
     gitUrl = 'https://github.com/Turtlebody/android-media-picker.git'
 
-    libraryVersionCode = 5
-    libraryVersion = '1.0.4'
+    libraryVersionCode = 6
+    libraryVersion = '1.0.5'
 
     developerId = 'greentoad'
     developerName = 'Green Toad'

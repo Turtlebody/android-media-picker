@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import com.greentoad.turtlebody.mediapicker.ui.base.FragmentBase
-import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.core.FileManager
 import com.greentoad.turtlebody.mediapicker.R
 import io.reactivex.Single
@@ -40,7 +40,7 @@ class ImageVideoFolderFragment : FragmentBase() {
 
     private var mImageVideoFolderAdapter: ImageVideoFolderAdapter = ImageVideoFolderAdapter()
     private var mImageVideoFolderList: MutableList<ImageVideoFolder> = arrayListOf()
-    private var mFileType = Constants.FileTypes.MEDIA_TYPE_IMAGE
+    private var mFileType = MediaPicker.MediaTypes.IMAGE
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -74,7 +74,7 @@ class ImageVideoFolderFragment : FragmentBase() {
 
     private fun fetchImageVideoFolders() {
         val bucketFetch: Single<ArrayList<ImageVideoFolder>> =
-                if(mFileType==Constants.FileTypes.MEDIA_TYPE_VIDEO)
+                if(mFileType==MediaPicker.MediaTypes.VIDEO)
                     Single.fromCallable<ArrayList<ImageVideoFolder>> { FileManager.fetchVideoFolders(context!!) }
                 else
                     Single.fromCallable<ArrayList<ImageVideoFolder>> { FileManager.fetchImageFolders(context!!) }

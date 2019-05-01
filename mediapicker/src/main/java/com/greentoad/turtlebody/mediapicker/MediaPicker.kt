@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.greentoad.turtlebody.mediapicker.core.Constants
+import com.greentoad.turtlebody.mediapicker.core.MediaConstants
 import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import com.karumi.dexter.Dexter
@@ -36,6 +36,12 @@ class MediaPicker {
         fun with(activity: FragmentActivity, fileType: Int): MediaPickerImpl {
             return MediaPickerImpl(activity, fileType)
         }
+    }
+
+    object MediaTypes{
+        const val IMAGE = 501
+        const val VIDEO = 502
+        const val AUDIO = 503
     }
 
     class MediaPickerImpl(activity: FragmentActivity, private var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
@@ -89,7 +95,7 @@ class MediaPicker {
             return Observable.create<ArrayList<Uri>> { emitter: ObservableEmitter<ArrayList<Uri>> ->
                 this.mEmitter = emitter
 
-                if(mFileType== Constants.FileTypes.MEDIA_TYPE_AUDIO ||mFileType== Constants.FileTypes.MEDIA_TYPE_VIDEO ||mFileType== Constants.FileTypes.MEDIA_TYPE_IMAGE)
+                if(mFileType== MediaTypes.AUDIO ||mFileType== MediaTypes.VIDEO ||mFileType== MediaTypes.IMAGE)
                     getPermission()
                 else
                     emitter.onError(Throwable("File type invalid."))
@@ -155,11 +161,11 @@ class MediaPicker {
             val intent = Intent(context, ActivityLibMain::class.java)
             intent.putExtra(MediaPickerConfig.ARG_BUNDLE, config)
             intent.putExtra(ActivityLibMain.B_ARG_FILE_TYPE, fileType)
-            startActivityForResult(intent, Constants.Intent.ACTIVITY_LIB_MAIN)
+            startActivityForResult(intent, MediaConstants.Intent.ACTIVITY_LIB_MAIN)
         }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            if (requestCode == Constants.Intent.ACTIVITY_LIB_MAIN) {
+            if (requestCode == MediaConstants.Intent.ACTIVITY_LIB_MAIN) {
                 if (resultCode == Activity.RESULT_OK) {
                     val list = data?.extras?.getSerializable(ActivityLibMain.B_ARG_URI_LIST) as ArrayList<Uri>
                     mListener?.onData(list)

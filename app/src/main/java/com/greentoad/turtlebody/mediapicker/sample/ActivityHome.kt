@@ -13,7 +13,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.bumptech.glide.Glide
-import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig
 import com.greentoad.turtlebody.mediapicker.sample.show_results.ActivityResults
@@ -40,15 +39,15 @@ class ActivityHome : ActivityBase() {
 
     private fun initButton() {
         home_ll_btn_images.setOnClickListener {
-            showAlert(Constants.FileTypes.MEDIA_TYPE_IMAGE)
+            showAlert(MediaPicker.MediaTypes.IMAGE)
         }
 
         home_ll_btn_videos.setOnClickListener {
-            showAlert(Constants.FileTypes.MEDIA_TYPE_VIDEO)
+            showAlert(MediaPicker.MediaTypes.VIDEO)
         }
 
         home_ll_btn_sounds.setOnClickListener {
-            showAlert(Constants.FileTypes.MEDIA_TYPE_AUDIO)
+            showAlert(MediaPicker.MediaTypes.AUDIO)
         }
 
         Glide.with(this)
