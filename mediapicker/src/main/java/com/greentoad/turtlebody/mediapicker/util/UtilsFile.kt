@@ -49,7 +49,7 @@ object UtilsFile {
         }
         if ("content".equals(uri.scheme!!, ignoreCase = true)) {
             val projection = arrayOf(MediaStore.Images.Media.DATA)
-            var cursor: Cursor? = null
+            val cursor: Cursor?
             try {
                 cursor = context.contentResolver.query(uri, projection, selection, selectionArgs, null)
                 val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)

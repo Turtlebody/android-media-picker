@@ -18,11 +18,11 @@ class ImageViewCheckable : ImageView, Checkable {
     private val CHECKED_STATE_SET = intArrayOf(android.R.attr.state_activated, android.R.attr.state_checked)
     internal var mIsChecked = false
 
-    @JvmOverloads constructor(context: Context): this(context, null)
+    constructor(context: Context): this(context, null)
 
-    @JvmOverloads constructor(context: Context, attrs: AttributeSet?):this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?):this(context, attrs, 0)
 
-    @JvmOverloads constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int):
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int):
             super(context, attrs, defStyleAttr)
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
