@@ -79,6 +79,12 @@ class ActivityHome : ActivityBase() {
 
     @SuppressLint("CheckResult")
     private fun startMediaPicker(fileType: Int, allowMultiple: Boolean) {
+        var pickerConfig = MediaPickerConfig()
+                .setUriPermanentAccess(false)
+                .setAllowMultiSelection(allowMultiple)
+                .setShowConfirmationDialog(true)
+
+
         MediaPicker.with(this, fileType)
                 .setConfig(MediaPickerConfig()
                         .setUriPermanentAccess(false)

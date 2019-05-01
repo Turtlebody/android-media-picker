@@ -37,7 +37,10 @@ public class TestActivityPicker extends AppCompatActivity {
     }
 
     private void startPick() {
-        MediaPickerConfig mediaPickerConfig = new MediaPickerConfig().setAllowMultiSelection(false).setShowConfirmationDialog(true);
+        MediaPickerConfig mediaPickerConfig = new MediaPickerConfig()
+                .setAllowMultiSelection(false)
+                .setUriPermanentAccess(true)
+                .setShowConfirmationDialog(true);
 
         MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
                 .setConfig(mediaPickerConfig)

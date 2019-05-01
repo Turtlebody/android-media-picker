@@ -26,7 +26,7 @@ ext {
     libraryName = 'Android Mediapicker'
     artifact = 'media-picker'
 
-    libraryDescription = 'Android Library for selecting images from local storage'
+    libraryDescription = 'Android Library for selecting media files from local storage'
 
     siteUrl = 'https://github.com/Turtlebody/android-media-picker'
     gitUrl = 'https://github.com/Turtlebody/android-media-picker.git'
@@ -100,6 +100,3 @@ repositories {
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
-
-// issue duplicate
-//https://stackoverflow.com/questions/16204667/nosuchfielderror-on-findviewbyid

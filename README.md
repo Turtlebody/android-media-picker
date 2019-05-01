@@ -41,7 +41,10 @@ Step 1: Declare and Initialize MediaPicker.
 
 #### Java
 ```java
-MediaPickerConfig pickerConfig = new MediaPickerConfig().setAllowMultiSelection(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
+MediaPickerConfig pickerConfig = new MediaPickerConfig()
+        .setAllowMultiSelection(false)
+        .setUriPermanentAccess(true)
+        .setShowConfirmationDialog(true);
         
 MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
         .setConfig(pickerConfig)
@@ -71,19 +74,23 @@ MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
 
 #### Kotlin
 ```kotlin
-val pickerConfig = MediaPickerConfig().setAllowMultiSelection(allowMultiple).setUriPermanentAccess(true).setShowConfirmationDialog(true)
+val pickerConfig = MediaPickerConfig()
+        .setUriPermanentAccess(false)
+        .setAllowMultiSelection(allowMultiple)
+        .setShowConfirmationDialog(true)
+
 MediaPicker.with(this, Constants.FileTypes.MEDIA_TYPE_IMAGE)
         .setConfig(pickerConfig)
         .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
             override fun onMissingFileWarning() {
-                Toast.makeText(this@ActivityHome,"some file is missing",Toast.LENGTH_LONG).show()
+                //trigger when some file are missing
             }
         })
         .onResult()
         .subscribe({
-            info { "success: $it" }
+            println ( "success: $it" )
         },{
-            info { "error: $it" }
+            println ( "error: $it" )
         })
 ```
 
@@ -101,7 +108,10 @@ It is use to set the configuration.
 eg.
 ```java
 //Pick single file with permanent access uri and confirmation dialog
-MediaPickerConfig pickerConfig = new MediaPickerConfig().setAllowMultiSelection(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
+MediaPickerConfig pickerConfig = new MediaPickerConfig()
+        .setAllowMultiSelection(false)
+        .setUriPermanentAccess(true)
+        .setShowConfirmationDialog(true);
 ```
 
 #### 2. ExtraListener:
