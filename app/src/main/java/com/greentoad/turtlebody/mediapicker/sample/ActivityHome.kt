@@ -82,7 +82,7 @@ class ActivityHome : ActivityBase() {
         MediaPicker.with(this, fileType)
                 .setConfig(MediaPickerConfig()
                         .setUriPermanentAccess(false)
-                        .setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true))
+                        .setAllowMultiSelection(allowMultiple).setShowConfirmationDialog(true))
                 .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
                     override fun onMissingFileWarning() {
                         Toast.makeText(this@ActivityHome,"some file is missing",Toast.LENGTH_LONG).show()

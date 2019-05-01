@@ -50,7 +50,7 @@ abstract class MediaListFragment : FragmentBase() {
         /*******************************************************
          * Dynamically change marginBottom for recyclerView
          *******************************************************/
-        if(mMediaPickerConfig.mAllowMultiImages){
+        if(mMediaPickerConfig.mAllowMultiSelection){
             val params = CoordinatorLayout.LayoutParams(
                     CoordinatorLayout.LayoutParams.MATCH_PARENT,
                     CoordinatorLayout.LayoutParams.MATCH_PARENT)
@@ -71,7 +71,7 @@ abstract class MediaListFragment : FragmentBase() {
             getAllUris()
         }
 
-        if (!mMediaPickerConfig.mAllowMultiImages) {
+        if (!mMediaPickerConfig.mAllowMultiSelection) {
             tb_media_picker_file_fragment_bottom_ll.visibility = View.GONE
         }
     }

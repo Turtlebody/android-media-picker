@@ -69,7 +69,7 @@ class ImageListFragment : MediaListFragment(), ImageAdapter.OnImageClickListener
 
 
     override fun onImageCheck(pData: ImageModel) {
-        if(!mMediaPickerConfig.mAllowMultiImages){
+        if(!mMediaPickerConfig.mAllowMultiSelection){
             if(mMediaPickerConfig.mShowConfirmationDialog){
                 val simpleAlert = AlertDialog.Builder(context!!)
                 simpleAlert.setMessage("Are you sure to select ${pData.name}")
@@ -109,7 +109,7 @@ class ImageListFragment : MediaListFragment(), ImageAdapter.OnImageClickListener
 
     private fun initAdapter() {
         mImageAdapter.setListener(this)
-        mImageAdapter.mShowCheckBox = mMediaPickerConfig.mAllowMultiImages
+        mImageAdapter.mShowCheckBox = mMediaPickerConfig.mAllowMultiSelection
         tb_media_picker_file_fragment_recycler_view.layoutManager = GridLayoutManager(context,2)
         tb_media_picker_file_fragment_recycler_view.adapter = mImageAdapter
         fetchImageFiles()

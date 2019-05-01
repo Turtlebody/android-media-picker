@@ -41,10 +41,10 @@ Step 1: Declare and Initialize MediaPicker.
 
 #### Java
 ```java
-PickerConfig mediaPickerConfig = new PickerConfig().setAllowMultiImages(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
+MediaPickerConfig pickerConfig = new MediaPickerConfig().setAllowMultiSelection(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
         
 MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
-        .setConfig(mediaPickerConfig)
+        .setConfig(pickerConfig)
         .setFileMissingListener(new MediaPicker.MediaPickerImpl.OnMediaListener() {
             @Override
             public void onMissingFileWarning() {
@@ -71,9 +71,9 @@ MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
 
 #### Kotlin
 ```kotlin
-val mediaPickerConfig = PickerConfig().setAllowMultiImages(allowMultiple).setUriPermanentAccess(true).setShowConfirmationDialog(true)
+val pickerConfig = MediaPickerConfig().setAllowMultiSelection(allowMultiple).setUriPermanentAccess(true).setShowConfirmationDialog(true)
 MediaPicker.with(this, Constants.FileTypes.MEDIA_TYPE_IMAGE)
-        .setConfig(mediaPickerConfig)
+        .setConfig(pickerConfig)
         .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
             override fun onMissingFileWarning() {
                 Toast.makeText(this@ActivityHome,"some file is missing",Toast.LENGTH_LONG).show()
@@ -89,9 +89,9 @@ MediaPicker.with(this, Constants.FileTypes.MEDIA_TYPE_IMAGE)
 
 ## Explanation:
 
-#### 1. PickerConfig:
+#### 1. MediaPickerConfig:
 It is use to set the configuration.
-1. **.setAllowMultiImages(booleanValue)**: tells whether to select single file or multiple file.
+1. **.setAllowMultiSelection(booleanValue)**: tells whether to select single file or multiple file.
 2. **.setUriPermanentAccess(booleanValue)**: grant uri access permission. 
 * Temporary uri may not work once your app terminates(so storaring temporary uri in database is not good practise, so use permanent uri in such case).
 * This option only works while selecting file from default android intent.
@@ -101,7 +101,7 @@ It is use to set the configuration.
 eg.
 ```java
 //Pick single file with permanent access uri and confirmation dialog
-PickerConfig mediaPickerConfig = new PickerConfig().setAllowMultiImages(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
+MediaPickerConfig pickerConfig = new MediaPickerConfig().setAllowMultiSelection(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
 ```
 
 #### 2. ExtraListener:

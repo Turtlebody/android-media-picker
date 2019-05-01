@@ -257,7 +257,7 @@ class ActivityLibMain : ActivityBase() {
                 Intent(Intent.ACTION_OPEN_DOCUMENT)
             else
                 Intent(Intent.ACTION_GET_CONTENT)
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, mMediaPickerConfig.mAllowMultiImages)
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, mMediaPickerConfig.mAllowMultiSelection)
             intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
             intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
         } else {

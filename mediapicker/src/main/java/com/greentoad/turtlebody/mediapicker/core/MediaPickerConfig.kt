@@ -7,7 +7,7 @@ import java.io.Serializable
  */
 class MediaPickerConfig: Serializable {
     var mShowConfirmationDialog: Boolean = false
-    var mAllowMultiImages: Boolean = false
+    var mAllowMultiSelection: Boolean = false
     var mUriPermanentAccess: Boolean = false
 
 
@@ -26,8 +26,8 @@ class MediaPickerConfig: Serializable {
     /**
      * Allow multiple selection
      */
-    fun setAllowMultiImages(value: Boolean): MediaPickerConfig {
-        mAllowMultiImages = value
+    fun setAllowMultiSelection(value: Boolean): MediaPickerConfig {
+        mAllowMultiSelection = value
         return this
     }
 

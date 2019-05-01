@@ -71,7 +71,7 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
 
 
     override fun onAudioCheck(pData: AudioModel) {
-        if(!mMediaPickerConfig.mAllowMultiImages){
+        if(!mMediaPickerConfig.mAllowMultiSelection){
             if(mMediaPickerConfig.mShowConfirmationDialog){
                 val simpleAlert = AlertDialog.Builder(context!!)
                 simpleAlert.setMessage("Are you sure to select ${pData.name}")
@@ -111,7 +111,7 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
 
     private fun initAdapter() {
         mAudioAdapter.setListener(this)
-        mAudioAdapter.mShowCheckBox = mMediaPickerConfig.mAllowMultiImages
+        mAudioAdapter.mShowCheckBox = mMediaPickerConfig.mAllowMultiSelection
 
         tb_media_picker_file_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
         tb_media_picker_file_fragment_recycler_view.adapter = mAudioAdapter
