@@ -1,4 +1,13 @@
-<a name="7.0.0-beta.24"></a>
+# [1.0.4](2019-05-1)
+
+
+### Bug Fixes
+
+### Features
+
+* **core:** implement temporary/permanent uri grant while using android default intent
+
+
 # [1.0.2](2019-04-18)
 
 
