@@ -15,7 +15,7 @@ import com.afollestad.materialdialogs.customview.getCustomView
 import com.bumptech.glide.Glide
 import com.greentoad.turtlebody.mediapicker.core.Constants
 import com.greentoad.turtlebody.mediapicker.MediaPicker
-import com.greentoad.turtlebody.mediapicker.core.ImagePickerConfig
+import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig
 import com.greentoad.turtlebody.mediapicker.sample.show_results.ActivityResults
 import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import kotlinx.android.synthetic.main.activity_home.*
@@ -80,7 +80,7 @@ class ActivityHome : ActivityBase() {
     @SuppressLint("CheckResult")
     private fun startMediaPicker(fileType: Int, allowMultiple: Boolean) {
         MediaPicker.with(this, fileType)
-                .setConfig(ImagePickerConfig()
+                .setConfig(MediaPickerConfig()
                         .setUriPermanentAccess(false)
                         .setAllowMultiImages(allowMultiple).setShowConfirmationDialog(true))
                 .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{

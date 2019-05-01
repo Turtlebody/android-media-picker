@@ -12,7 +12,7 @@ import android.widget.Button;
 
 import com.greentoad.turtlebody.mediapicker.core.Constants;
 import com.greentoad.turtlebody.mediapicker.MediaPicker;
-import com.greentoad.turtlebody.mediapicker.core.ImagePickerConfig;
+import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig;
 import com.greentoad.turtlebody.mediapicker.sample.R;
 
 import java.io.File;
@@ -37,10 +37,10 @@ public class TestActivityPicker extends AppCompatActivity {
     }
 
     private void startPick() {
-        ImagePickerConfig imagePickerConfig = new ImagePickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
+        MediaPickerConfig mediaPickerConfig = new MediaPickerConfig().setAllowMultiImages(false).setShowConfirmationDialog(true);
 
         MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
-                .setConfig(imagePickerConfig)
+                .setConfig(mediaPickerConfig)
                 .setFileMissingListener(new MediaPicker.MediaPickerImpl.OnMediaListener() {
                     @Override
                     public void onMissingFileWarning() {

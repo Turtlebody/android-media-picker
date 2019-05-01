@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.greentoad.turtlebody.mediapicker.sample.R
 import kotlinx.android.synthetic.main.item_result.view.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import java.io.File
 
 /**
  * Created by WANGSUN on 26-Mar-19.
  */
-class ResultsAdapter : RecyclerView.Adapter<ResultsAdapter.FolderVewHolder>() {
+class ResultsAdapter : RecyclerView.Adapter<ResultsAdapter.FolderVewHolder>(),AnkoLogger {
     private var mData: MutableList<Uri> = arrayListOf()
     private lateinit var mContext: Context
 
@@ -41,11 +43,17 @@ class ResultsAdapter : RecyclerView.Adapter<ResultsAdapter.FolderVewHolder>() {
         fun bind(pData: Uri) {
 
             val file = File(pData.path)
+
             itemView.item_result_file_name.text = file.name
             val mimeType = mContext.contentResolver.getType(pData)!!
 
             when {
                 mimeType.contains("audio") -> {
+                    Glide.with(itemView)
+                            .load(R.drawable.mp3_icon)
+                            .into(itemView.item_result_icon)
+                }
+                mimeType.contains("ogg") -> {
                     Glide.with(itemView)
                             .load(R.drawable.mp3_icon)
                             .into(itemView.item_result_icon)

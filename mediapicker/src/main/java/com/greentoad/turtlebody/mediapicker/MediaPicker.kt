@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.greentoad.turtlebody.mediapicker.core.Constants
-import com.greentoad.turtlebody.mediapicker.core.ImagePickerConfig
+import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -41,7 +41,7 @@ class MediaPicker {
     class MediaPickerImpl(activity: FragmentActivity, private var mFileType: Int) : PickerFragment.OnPickerListener, AnkoLogger {
         private lateinit var mEmitter: ObservableEmitter<ArrayList<Uri>>
         private var mActivity: WeakReference<FragmentActivity> = WeakReference(activity)
-        private var mConfigImage: ImagePickerConfig = ImagePickerConfig()
+        private var mConfigMedia: MediaPickerConfig = MediaPickerConfig()
         private var mOnMediaListener: OnMediaListener? = null
 
 
@@ -66,10 +66,10 @@ class MediaPicker {
 
         /**
          * set configuration
-         * @param configImage pass ImagePickerConfig
+         * @param configMedia pass MediaPickerConfig
          */
-        fun setConfig(configImage: ImagePickerConfig): MediaPickerImpl{
-            mConfigImage = configImage
+        fun setConfig(configMedia: MediaPickerConfig): MediaPickerImpl{
+            mConfigMedia = configMedia
             return this
         }
 
@@ -126,7 +126,7 @@ class MediaPicker {
 
         private fun startFragment() {
             val bundle = Bundle()
-            bundle.putSerializable(ImagePickerConfig.ARG_BUNDLE, mConfigImage)
+            bundle.putSerializable(MediaPickerConfig.ARG_BUNDLE, mConfigMedia)
             bundle.putSerializable(ActivityLibMain.B_ARG_FILE_TYPE, mFileType)
 
             val fragment = PickerFragment()
@@ -149,11 +149,11 @@ class MediaPicker {
         override fun onActivityCreated(savedInstanceState: Bundle?) {
             super.onActivityCreated(savedInstanceState)
 
-            val config = arguments?.getSerializable(ImagePickerConfig.ARG_BUNDLE)
+            val config = arguments?.getSerializable(MediaPickerConfig.ARG_BUNDLE)
             val fileType = arguments?.getInt(ActivityLibMain.B_ARG_FILE_TYPE)
 
             val intent = Intent(context, ActivityLibMain::class.java)
-            intent.putExtra(ImagePickerConfig.ARG_BUNDLE, config)
+            intent.putExtra(MediaPickerConfig.ARG_BUNDLE, config)
             intent.putExtra(ActivityLibMain.B_ARG_FILE_TYPE, fileType)
             startActivityForResult(intent, Constants.Intent.ACTIVITY_LIB_MAIN)
         }

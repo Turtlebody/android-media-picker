@@ -23,5 +23,5 @@
 #-keepattributes Signature
 #-keepattributes *Annotation*
 #
-## Retrofit configImage
+## Retrofit configMedia
 #-keepattributes Exceptions

@@ -69,8 +69,8 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
     }
 
     override fun onVideoCheck(pData: VideoModel) {
-        if(!mImagePickerConfig.mAllowMultiImages){
-            if(mImagePickerConfig.mShowConfirmationDialog){
+        if(!mMediaPickerConfig.mAllowMultiImages){
+            if(mMediaPickerConfig.mShowConfirmationDialog){
                 val simpleAlert = AlertDialog.Builder(context!!)
                 simpleAlert.setMessage("Are you sure to select ${pData.name}")
                         .setCancelable(false)
@@ -109,7 +109,7 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
 
     private fun initAdapter() {
         mVideoAdapter.setListener(this)
-        mVideoAdapter.mShowCheckBox = mImagePickerConfig.mAllowMultiImages
+        mVideoAdapter.mShowCheckBox = mMediaPickerConfig.mAllowMultiImages
 
         tb_media_picker_file_fragment_recycler_view.layoutManager = GridLayoutManager(context,2)
         tb_media_picker_file_fragment_recycler_view.adapter = mVideoAdapter

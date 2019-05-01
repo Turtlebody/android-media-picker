@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.greentoad.turtlebody.mediapicker.core.ImagePickerConfig
+import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig
 import com.greentoad.turtlebody.mediapicker.ui.ActivityLibMain
 import com.greentoad.turtlebody.mediapicker.ui.base.FragmentBase
 import kotlinx.android.synthetic.main.tb_media_picker_file_fragment.*
@@ -22,7 +22,7 @@ abstract class MediaListFragment : FragmentBase() {
         const val B_ARG_PICKER_CONFIG = "media_list_fragment.args.pickerConfig"
     }
 
-    var mImagePickerConfig: ImagePickerConfig = ImagePickerConfig()
+    var mMediaPickerConfig: MediaPickerConfig = MediaPickerConfig()
     var mFolderId: String = ""
     var mUriList: ArrayList<Uri> = arrayListOf()
 
@@ -32,7 +32,7 @@ abstract class MediaListFragment : FragmentBase() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            mImagePickerConfig = it.getSerializable(B_ARG_PICKER_CONFIG) as ImagePickerConfig
+            mMediaPickerConfig = it.getSerializable(B_ARG_PICKER_CONFIG) as MediaPickerConfig
         }
         onRestoreState(savedInstanceState, arguments)
     }
@@ -50,7 +50,7 @@ abstract class MediaListFragment : FragmentBase() {
         /*******************************************************
          * Dynamically change marginBottom for recyclerView
          *******************************************************/
-        if(mImagePickerConfig.mAllowMultiImages){
+        if(mMediaPickerConfig.mAllowMultiImages){
             val params = CoordinatorLayout.LayoutParams(
                     CoordinatorLayout.LayoutParams.MATCH_PARENT,
                     CoordinatorLayout.LayoutParams.MATCH_PARENT)
@@ -71,7 +71,7 @@ abstract class MediaListFragment : FragmentBase() {
             getAllUris()
         }
 
-        if (!mImagePickerConfig.mAllowMultiImages) {
+        if (!mMediaPickerConfig.mAllowMultiImages) {
             tb_media_picker_file_fragment_bottom_ll.visibility = View.GONE
         }
     }

@@ -5,7 +5,7 @@ import java.io.Serializable
 /**
  * Created by WANGSUN on 29-Mar-19.
  */
-class ImagePickerConfig: Serializable {
+class MediaPickerConfig: Serializable {
     var mShowConfirmationDialog: Boolean = false
     var mAllowMultiImages: Boolean = false
     var mUriPermanentAccess: Boolean = false
@@ -18,7 +18,7 @@ class ImagePickerConfig: Serializable {
     /**
      *  Show confirmation dialog after selecting file (works only for single file selection)
      */
-    fun setShowConfirmationDialog(value: Boolean): ImagePickerConfig {
+    fun setShowConfirmationDialog(value: Boolean): MediaPickerConfig {
         mShowConfirmationDialog = value
         return this
     }
@@ -26,7 +26,7 @@ class ImagePickerConfig: Serializable {
     /**
      * Allow multiple selection
      */
-    fun setAllowMultiImages(value: Boolean): ImagePickerConfig {
+    fun setAllowMultiImages(value: Boolean): MediaPickerConfig {
         mAllowMultiImages = value
         return this
     }
@@ -34,7 +34,7 @@ class ImagePickerConfig: Serializable {
     /**
      * Allow multiple selection
      */
-    fun setUriPermanentAccess(value: Boolean): ImagePickerConfig {
+    fun setUriPermanentAccess(value: Boolean): MediaPickerConfig {
         mUriPermanentAccess = value
         return this
     }

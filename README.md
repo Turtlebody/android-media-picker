@@ -41,10 +41,10 @@ Step 1: Declare and Initialize MediaPicker.
 
 #### Java
 ```java
-PickerConfig imagePickerConfig = new PickerConfig().setAllowMultiImages(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
+PickerConfig mediaPickerConfig = new PickerConfig().setAllowMultiImages(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
         
 MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
-        .setConfig(imagePickerConfig)
+        .setConfig(mediaPickerConfig)
         .setFileMissingListener(new MediaPicker.MediaPickerImpl.OnMediaListener() {
             @Override
             public void onMissingFileWarning() {
@@ -71,9 +71,9 @@ MediaPicker.with(this,Constants.FileTypes.MEDIA_TYPE_IMAGE)
 
 #### Kotlin
 ```kotlin
-val imagePickerConfig = PickerConfig().setAllowMultiImages(allowMultiple).setUriPermanentAccess(true).setShowConfirmationDialog(true)
+val mediaPickerConfig = PickerConfig().setAllowMultiImages(allowMultiple).setUriPermanentAccess(true).setShowConfirmationDialog(true)
 MediaPicker.with(this, Constants.FileTypes.MEDIA_TYPE_IMAGE)
-        .setConfig(imagePickerConfig)
+        .setConfig(mediaPickerConfig)
         .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
             override fun onMissingFileWarning() {
                 Toast.makeText(this@ActivityHome,"some file is missing",Toast.LENGTH_LONG).show()
@@ -101,7 +101,7 @@ It is use to set the configuration.
 eg.
 ```java
 //Pick single file with permanent access uri and confirmation dialog
-PickerConfig imagePickerConfig = new PickerConfig().setAllowMultiImages(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
+PickerConfig mediaPickerConfig = new PickerConfig().setAllowMultiImages(false).setUriPermanentAccess(true).setShowConfirmationDialog(true);
 ```
 
 #### 2. ExtraListener:
