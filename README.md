@@ -186,7 +186,7 @@ Glide.with(context)
 ---
 
 
-## To pick more type of files like doc, ppt, txt etc. you can use [DocPicker](https://github.com/Turtlebody/android-doc-picker) library.
+## To pick more type of files like doc, ppt, txt etc. you can use [Turtlebody Doc Picker](https://github.com/Turtlebody/android-doc-picker) library.
 
 
 
