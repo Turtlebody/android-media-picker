@@ -59,20 +59,20 @@ abstract class MediaListFragment : FragmentBase() {
             val px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56f, r.displayMetrics).toInt()
 
             params.setMargins(0, 0, 0, px)
-            tb_media_picker_file_fragment_recycler_view.layoutParams = params
+            file_fragment_recycler_view.layoutParams = params
         }
     }
 
     private fun initButton() {
-        tb_media_picker_file_fragment_btn_cancel.setOnClickListener {
+        file_fragment_btn_cancel.setOnClickListener {
             (activity as ActivityLibMain).onBackPressed()
         }
-        tb_media_picker_file_fragment_btn_done.setOnClickListener {
+        file_fragment_btn_done.setOnClickListener {
             getAllUris()
         }
 
         if (!mMediaPickerConfig.mAllowMultiSelection) {
-            tb_media_picker_file_fragment_bottom_ll.visibility = View.GONE
+            file_fragment_bottom_ll.visibility = View.GONE
         }
     }
 

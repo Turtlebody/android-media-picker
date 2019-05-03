@@ -19,7 +19,7 @@
             app:srcCompat="@drawable/tb_media_picker_ic_audio_box"
             android:layout_gravity="center_vertical"/>
         <ImageView
-            android:id="@+id/tb_media_picker_audio_mimetype_icon"
+            android:id="@+id/item_audio_mimetype_icon"
             android:layout_width="match_parent"
             android:layout_height="@dimen/length_20"
             android:scaleType="centerInside"
@@ -37,12 +37,12 @@
         android:layout_gravity="center">
 
         <TextView
-            android:id="@+id/tb_media_picker_audio_name"
+            android:id="@+id/item_audio_name"
             style="@style/TextTitle"
             tools:text="Audio Name" />
 
         <TextView
-            android:id="@+id/tb_media_picker_audio_size"
+            android:id="@+id/item_audio_size"
             style="@style/TextNormal"
             tools:text="Size"
             android:textSize="@dimen/font_14" />
@@ -50,7 +50,7 @@
 
 
     <CheckBox
-        android:id="@+id/tb_media_picker_audio_checkbox"
+        android:id="@+id/item_audio_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/offset_8"

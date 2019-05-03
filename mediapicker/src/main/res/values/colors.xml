@@ -11,13 +11,6 @@
     <color name="tb_media_picker_toolbar_counter_background">#eeeeee</color>
 
 
-    <!--<color name="colorPrimary">#25bc91</color>
-    <color name="colorPrimaryDark">#31bd95</color>
-    <color name="colorPrimaryLight">#99ead2</color>
-    <color name="colorAccent">#757575</color>
-    <color name="colorAccentDark">@color/md_grey_800</color>
-    <color name="colorAccentLight">@color/md_grey_100</color>-->
-
 
     <!--grey-->
     <array name="greys">
@@ -117,30 +110,5 @@
 
 
     <color name="md_statusbar_translucent">#4000</color>
-
-
-
-    <!--<color name="colorPrimary">@color/md_grey_600</color>-->
-    <!--<color name="colorPrimaryDark">@color/md_grey_800</color>-->
-    <!--<color name="colorPrimaryLight">@color/md_black_1000_25</color>-->
-    <!--<color name="colorAccent">@color/md_grey_700</color>-->
-    <!--<color name="colorAccentDark">@color/md_grey_800</color>-->
-    <!--<color name="colorAccentLight">@color/md_black_1000_25</color>-->
-
-
-
-    <!--Shimmer-->
-    <color name="placeholder_bg">#dddddd</color>
-    <color name="item_name">#0c0c0c</color>
-    <color name="description">#1a1a1a</color>
-    <color name="chef">#777</color>
-    <color name="timestamp">#777</color>
-
-    <color name="black_overlay">#66000000</color>
-
-    <color name="red">#FFD9C7</color>
-
-
-
 
 </resources>

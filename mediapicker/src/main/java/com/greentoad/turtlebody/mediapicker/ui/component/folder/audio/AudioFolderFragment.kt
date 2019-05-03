@@ -61,8 +61,8 @@ class AudioFolderFragment : FragmentBase() {
             }
         })
 
-        tb_media_picker_folder_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
-        tb_media_picker_folder_fragment_recycler_view.adapter = mAudioFolderAdapter
+        folder_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
+        folder_fragment_recycler_view.adapter = mAudioFolderAdapter
         fetchAudioFolders()
     }
 
@@ -75,18 +75,18 @@ class AudioFolderFragment : FragmentBase() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<ArrayList<AudioFolder>> {
                     override fun onSubscribe(@NonNull d: Disposable) {
-                        tb_media_picker_frame_progress.visibility = View.VISIBLE
+                        frame_progress.visibility = View.VISIBLE
                     }
 
                     override fun onSuccess(@NonNull audioFolders: ArrayList<AudioFolder>) {
                         mAudioFolderList = audioFolders
                         info { "folders: $audioFolders" }
                         mAudioFolderAdapter.setData(mAudioFolderList)
-                        tb_media_picker_frame_progress.visibility = View.GONE
+                        frame_progress.visibility = View.GONE
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        tb_media_picker_frame_progress.visibility = View.GONE
+                        frame_progress.visibility = View.GONE
                         e.printStackTrace()
                         info { "error: ${e.message}" }
                     }

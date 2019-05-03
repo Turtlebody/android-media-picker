@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/tb_media_picker_activity_main_ll"
+    android:id="@+id/activity_lib_main_ll"
     tools:context=".ui.ActivityLibMain">
 
     <androidx.appcompat.widget.Toolbar
         app:title="@string/app_name"
-        android:id="@+id/tb_media_picker_activity_toolbar"
+        android:id="@+id/activity_lib_main_toolbar"
         app:layout_collapseMode="pin"
         app:titleTextAppearance="@style/App.TextAppearance.h4.Title"
         app:popupTheme="@style/AppTheme.PopupOverlay"
@@ -22,7 +22,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
-            android:id="@+id/toolbar_txt_count"
+            android:id="@+id/activity_lib_main_toolbar_txt_count"
             android:layout_width="@dimen/length_36"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
@@ -41,7 +41,7 @@
         android:background="@color/md_black_1000_15"/>
 
     <FrameLayout
-        android:id="@+id/tb_media_picker_frame_content"
+        android:id="@+id/activity_lib_main_frame_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

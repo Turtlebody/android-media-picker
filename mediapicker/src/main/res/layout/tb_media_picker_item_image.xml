@@ -8,21 +8,14 @@
     android:layout_margin="@dimen/offset_1">
 
     <com.greentoad.turtlebody.mediapicker.widget.SquareImage
-        android:id="@+id/tb_media_picker_item_image_cover_image"
+        android:id="@+id/item_image_cover_image"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"/>
 
-    <!--<CheckBox-->
-        <!--android:id="@+id/cb_btn_selection"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="end|top"-->
-        <!--android:layout_margin="@dimen/offset_4"/>-->
-
     <com.greentoad.turtlebody.mediapicker.widget.ImageViewCheckable
-        android:id="@+id/tb_media_picker_item_image_checkbox"
+        android:id="@+id/item_image_checkbox"
         android:src="@drawable/tb_media_picker_sc_check_file"
         android:layout_width="@dimen/length_32"
         android:layout_height="@dimen/length_32"

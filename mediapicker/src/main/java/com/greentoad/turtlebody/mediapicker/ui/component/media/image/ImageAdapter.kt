@@ -53,19 +53,19 @@ class ImageAdapter: RecyclerView.Adapter<ImageAdapter.ImageVewHolder>() {
 
             Glide.with(itemView)
                     .load(File(pData.thumbnailPath))
-                    .into(itemView.tb_media_picker_item_image_cover_image)
+                    .into(itemView.item_image_cover_image)
 
-            itemView.tb_media_picker_item_image_checkbox.isChecked = pData.isSelected
+            itemView.item_image_checkbox.isChecked = pData.isSelected
 
             itemView.setOnClickListener {
                 mOnImageClickListener?.onImageCheck(pData)
             }
 
             if(!mShowCheckBox){
-                itemView.tb_media_picker_item_image_checkbox.visibility = View.GONE
+                itemView.item_image_checkbox.visibility = View.GONE
             }
             else{
-                itemView.tb_media_picker_item_image_checkbox.visibility = View.VISIBLE
+                itemView.item_image_checkbox.visibility = View.VISIBLE
             }
         }
     }

@@ -4,7 +4,7 @@
 ---
 
 ![API](https://img.shields.io/badge/API-16%2B-34bf49.svg)
-[ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=1.0.5) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/1.0.5/link)
+[ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=latest) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/1.0.6/link)
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Media%20Picker-green.svg?style=flat )]( https://android-arsenal.com/details/1/7635 )
 
 
@@ -28,7 +28,7 @@ Step 1: Add the dependency
 dependencies {
     ...
     /* media picker */
-    implementation 'com.greentoad.turtlebody:media-picker:1.0.5'
+    implementation 'com.greentoad.turtlebody:media-picker:1.0.6'
 
     /* rxjava */
     implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
@@ -184,6 +184,9 @@ Glide.with(context)
 *  [Developer Setup & Usage](https://github.com/Turtlebody/android-media-picker/wiki/Developer-Setup)
 
 ---
+
+
+## To pick more type of files like doc, ppt, txt etc. you can use [DocPicker](https://github.com/Turtlebody/android-doc-picker) library.
 
 
 

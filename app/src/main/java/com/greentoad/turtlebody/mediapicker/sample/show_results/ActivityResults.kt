@@ -19,7 +19,7 @@ class ActivityResults : ActivityBase() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
 
-        initToolbar(R.drawable.ic_arrow_back_black_24dp,find(R.id.toolbar))
+        initToolbar(R.drawable.tb_media_picker_ic_arrow_back_black_24dp,find(R.id.toolbar))
         toolbarTitle = "Selected Files"
 
 

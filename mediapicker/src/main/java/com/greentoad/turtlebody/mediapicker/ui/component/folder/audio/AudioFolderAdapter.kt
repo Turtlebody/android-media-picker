@@ -48,14 +48,14 @@ class AudioFolderAdapter: RecyclerView.Adapter<AudioFolderAdapter.FolderVewHolde
     inner class FolderVewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(pData: AudioFolder){
 
-            itemView.folder_txt_folder_name.text = pData.name
-            itemView.folder_txt_total_items.text = "${pData.contentCount} items"
+            itemView.item_folder_txt_folder_name.text = pData.name
+            itemView.item_folder_txt_total_items.text = "${pData.contentCount} items"
 
-            itemView.tb_media_picker_item_folder_fl.visibility = View.GONE
+            itemView.item_folder_fl.visibility = View.GONE
 
             Glide.with(itemView)
                     .load(R.drawable.tb_media_picker_ic_music_folder)
-                    .into(itemView.folder_image_folder_icon)
+                    .into(itemView.item_folder_icon)
 
             itemView.setOnClickListener {
                 mOnAudioFolderClickListener?.onFolderClick(pData)

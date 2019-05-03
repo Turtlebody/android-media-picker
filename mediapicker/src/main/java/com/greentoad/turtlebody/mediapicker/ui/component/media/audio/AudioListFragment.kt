@@ -104,7 +104,7 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
                 }
             }
             (activity as ActivityLibMain).updateCounter(mSelectedAudioModelList.size)
-            tb_media_picker_file_fragment_btn_done.isEnabled = mSelectedAudioModelList.size>0
+            file_fragment_btn_done.isEnabled = mSelectedAudioModelList.size>0
         }
     }
 
@@ -113,8 +113,8 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
         mAudioAdapter.setListener(this)
         mAudioAdapter.mShowCheckBox = mMediaPickerConfig.mAllowMultiSelection
 
-        tb_media_picker_file_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
-        tb_media_picker_file_fragment_recycler_view.adapter = mAudioAdapter
+        file_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
+        file_fragment_recycler_view.adapter = mAudioAdapter
         fetchAudioFiles()
 
     }
@@ -140,16 +140,16 @@ class AudioListFragment : MediaListFragment(), AudioAdapter.OnAudioClickListener
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<Boolean> {
                     override fun onSubscribe(@NonNull d: Disposable) {
-                        tb_media_picker_frame_progress.visibility = View.VISIBLE
+                        frame_progress.visibility = View.VISIBLE
                     }
 
                     override fun onSuccess(t: Boolean) {
                         mAudioAdapter.setData(mAudioModelList)
-                        tb_media_picker_frame_progress.visibility = View.GONE
+                        frame_progress.visibility = View.GONE
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        tb_media_picker_frame_progress.visibility = View.GONE
+                        frame_progress.visibility = View.GONE
                         info { "error: ${e.message}" }
                     }
                 })

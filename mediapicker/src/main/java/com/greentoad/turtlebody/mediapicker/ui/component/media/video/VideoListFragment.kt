@@ -102,7 +102,7 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
                 }
             }
             (activity as ActivityLibMain).updateCounter(mSelectedVideoModelList.size)
-            tb_media_picker_file_fragment_btn_done.isEnabled = mSelectedVideoModelList.size>0
+            file_fragment_btn_done.isEnabled = mSelectedVideoModelList.size>0
         }
     }
 
@@ -111,8 +111,8 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
         mVideoAdapter.setListener(this)
         mVideoAdapter.mShowCheckBox = mMediaPickerConfig.mAllowMultiSelection
 
-        tb_media_picker_file_fragment_recycler_view.layoutManager = GridLayoutManager(context,2)
-        tb_media_picker_file_fragment_recycler_view.adapter = mVideoAdapter
+        file_fragment_recycler_view.layoutManager = GridLayoutManager(context,2)
+        file_fragment_recycler_view.adapter = mVideoAdapter
         fetchVideoFiles()
 
     }
@@ -135,16 +135,16 @@ class VideoListFragment : MediaListFragment(), VideoAdapter.OnVideoClickListener
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<Boolean> {
                     override fun onSubscribe(@NonNull d: Disposable) {
-                        tb_media_picker_frame_progress.visibility = View.VISIBLE
+                        frame_progress.visibility = View.VISIBLE
                     }
 
                     override fun onSuccess(t: Boolean) {
                         mVideoAdapter.setData(mVideoModelList)
-                        tb_media_picker_frame_progress.visibility = View.GONE
+                        frame_progress.visibility = View.GONE
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        tb_media_picker_frame_progress.visibility = View.GONE
+                        frame_progress.visibility = View.GONE
                         info { "error: ${e.message}" }
                     }
                 })

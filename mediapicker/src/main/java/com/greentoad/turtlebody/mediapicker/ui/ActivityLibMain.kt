@@ -47,11 +47,11 @@ class ActivityLibMain : ActivityBase() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.tb_media_picker_activity_main)
+        setContentView(R.layout.tb_media_picker_activity_lib_main)
 
-        initToolbar(R.drawable.ic_arrow_back_black_24dp, find(R.id.tb_media_picker_activity_toolbar))
+        initToolbar(R.drawable.tb_media_picker_ic_arrow_back_black_24dp, find(R.id.activity_lib_main_toolbar))
         toolbarTitle = "Select Folder"
-        vToolbarCounter = find<TextView>(R.id.toolbar_txt_count)
+        vToolbarCounter = find<TextView>(R.id.activity_lib_main_toolbar_txt_count)
 
         if (intent.extras != null) {
             mMediaPickerConfig = intent.getSerializableExtra(MediaPickerConfig.ARG_BUNDLE) as MediaPickerConfig
@@ -61,7 +61,7 @@ class ActivityLibMain : ActivityBase() {
 
 
     override fun onBackPressed() {
-        val fragment = supportFragmentManager.findFragmentById(R.id.tb_media_picker_frame_content)
+        val fragment = supportFragmentManager.findFragmentById(R.id.activity_lib_main_frame_content)
         when (fragment) {
             is ImageVideoFolderFragment -> finish()
             is AudioFolderFragment -> finish()
@@ -204,7 +204,7 @@ class ActivityLibMain : ActivityBase() {
         mMenuItem.isVisible = false
 
         val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.tb_media_picker_frame_content, fragment, fragmentTag)
+        ft.add(R.id.activity_lib_main_frame_content, fragment, fragmentTag)
                 .addToBackStack(null)
                 .commit()
     }
@@ -277,7 +277,7 @@ class ActivityLibMain : ActivityBase() {
 
         val fragment = ImageVideoFolderFragment.newInstance(MediaConstants.Fragment.IMAGE_VIDEO_FOLDER, bundle)
         val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.tb_media_picker_frame_content, fragment, ImageVideoFolderFragment::class.java.simpleName)
+        ft.add(R.id.activity_lib_main_frame_content, fragment, ImageVideoFolderFragment::class.java.simpleName)
                 .addToBackStack(null)
                 .commit()
     }
@@ -285,7 +285,7 @@ class ActivityLibMain : ActivityBase() {
     private fun startAudioFolderFragment() {
         val fragment = AudioFolderFragment.newInstance(MediaConstants.Fragment.AUDIO_FOLDER, Bundle())
         val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.tb_media_picker_frame_content, fragment, AudioFolderFragment::class.java.simpleName)
+        ft.add(R.id.activity_lib_main_frame_content, fragment, AudioFolderFragment::class.java.simpleName)
                 .addToBackStack(null)
                 .commit()
     }

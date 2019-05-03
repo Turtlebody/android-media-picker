@@ -65,8 +65,8 @@ class ImageVideoFolderFragment : FragmentBase() {
                 (activity as ActivityLibMain).startMediaListFragment(pData.id)
             }
         })
-        tb_media_picker_folder_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
-        tb_media_picker_folder_fragment_recycler_view.adapter = mImageVideoFolderAdapter
+        folder_fragment_recycler_view.layoutManager = LinearLayoutManager(context)
+        folder_fragment_recycler_view.adapter = mImageVideoFolderAdapter
         fetchImageVideoFolders()
 
 
@@ -85,17 +85,17 @@ class ImageVideoFolderFragment : FragmentBase() {
                 .subscribe(object : SingleObserver<ArrayList<ImageVideoFolder>> {
 
                     override fun onSubscribe(@NonNull d: Disposable) {
-                        tb_media_picker_frame_progress.visibility = View.VISIBLE
+                        frame_progress.visibility = View.VISIBLE
                     }
 
                     override fun onSuccess(@NonNull imageVideoFolders: ArrayList<ImageVideoFolder>) {
                         mImageVideoFolderList = imageVideoFolders
                         mImageVideoFolderAdapter.setData(mImageVideoFolderList)
-                        tb_media_picker_frame_progress.visibility = View.GONE
+                        frame_progress.visibility = View.GONE
                     }
 
                     override fun onError(@NonNull e: Throwable) {
-                        tb_media_picker_frame_progress.visibility = View.GONE
+                        frame_progress.visibility = View.GONE
                         e.printStackTrace()
                         info { "error: ${e.message}" }
                     }

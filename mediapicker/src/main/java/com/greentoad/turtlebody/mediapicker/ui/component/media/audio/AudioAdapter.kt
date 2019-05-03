@@ -56,27 +56,27 @@ class AudioAdapter: RecyclerView.Adapter<AudioAdapter.AudioVewHolder>(), AnkoLog
 
             Glide.with(itemView)
                     .load(getDrawableForMime(pData.mimeType, pData.filePath))
-                    .into(itemView.tb_media_picker_audio_mimetype_icon)
+                    .into(itemView.item_audio_mimetype_icon)
 
-            itemView.tb_media_picker_audio_checkbox.isChecked = pData.isSelected
+            itemView.item_audio_checkbox.isChecked = pData.isSelected
             val size = (pData.size/1000).toString()
 
-            itemView.tb_media_picker_audio_name.text = pData.name
-            itemView.tb_media_picker_audio_size.text = "$size KB"
+            itemView.item_audio_name.text = pData.name
+            itemView.item_audio_size.text = "$size KB"
 
             itemView.setOnClickListener {
                 mOnAudioClickListener?.onAudioCheck(pData)
             }
 
-            itemView.tb_media_picker_audio_checkbox.setOnClickListener {
+            itemView.item_audio_checkbox.setOnClickListener {
                 mOnAudioClickListener?.onAudioCheck(pData)
             }
 
             if(!mShowCheckBox){
-                itemView.tb_media_picker_audio_checkbox.visibility = View.GONE
+                itemView.item_audio_checkbox.visibility = View.GONE
             }
             else{
-                itemView.tb_media_picker_audio_checkbox.visibility = View.VISIBLE
+                itemView.item_audio_checkbox.visibility = View.VISIBLE
             }
         }
 
