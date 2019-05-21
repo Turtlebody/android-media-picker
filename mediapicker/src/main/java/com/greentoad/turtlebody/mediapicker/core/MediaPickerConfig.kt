@@ -7,8 +7,13 @@ import java.io.Serializable
  */
 class MediaPickerConfig: Serializable {
     var mShowConfirmationDialog: Boolean = false
+        private set
     var mAllowMultiSelection: Boolean = false
+        private set
     var mUriPermanentAccess: Boolean = false
+        private set
+    var mScreenOrientation: Int? = null
+        private set
 
 
     companion object {
@@ -36,6 +41,12 @@ class MediaPickerConfig: Serializable {
      */
     fun setUriPermanentAccess(value: Boolean): MediaPickerConfig {
         mUriPermanentAccess = value
+        return this
+    }
+
+
+    fun setScreenOrientation(value: Int): MediaPickerConfig {
+        mScreenOrientation = value
         return this
     }
 }

@@ -3,6 +3,7 @@ package com.greentoad.turtlebody.mediapicker.sample
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -81,7 +82,8 @@ class ActivityHome : ActivityBase() {
         MediaPicker.with(this, fileType)
                 .setConfig(MediaPickerConfig()
                         .setUriPermanentAccess(false)
-                        .setAllowMultiSelection(allowMultiple).setShowConfirmationDialog(true))
+                        .setAllowMultiSelection(allowMultiple).setShowConfirmationDialog(true)
+                        .setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT))
                 .setFileMissingListener(object : MediaPicker.MediaPickerImpl.OnMediaListener{
                     override fun onMissingFileWarning() {
                         Toast.makeText(this@ActivityHome,"some file is missing",Toast.LENGTH_LONG).show()

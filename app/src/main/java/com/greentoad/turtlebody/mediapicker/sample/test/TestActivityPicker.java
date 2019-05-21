@@ -1,5 +1,6 @@
 package com.greentoad.turtlebody.mediapicker.sample.test;
 
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,7 +41,8 @@ public class TestActivityPicker extends AppCompatActivity {
         MediaPickerConfig mediaPickerConfig = new MediaPickerConfig()
                 .setAllowMultiSelection(false)
                 .setUriPermanentAccess(true)
-                .setShowConfirmationDialog(true);
+                .setShowConfirmationDialog(true)
+                .setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         MediaPicker.with(this, MediaPicker.MediaTypes.IMAGE)
                 .setConfig(mediaPickerConfig)

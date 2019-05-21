@@ -44,7 +44,8 @@ Step 1: Declare and Initialize MediaPicker.
 MediaPickerConfig pickerConfig = new MediaPickerConfig()
         .setAllowMultiSelection(false)
         .setUriPermanentAccess(true)
-        .setShowConfirmationDialog(true);
+        .setShowConfirmationDialog(true)
+        .setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         
 MediaPicker.with(this,MediaPicker.MediaTypes.IMAGE)
         .setConfig(pickerConfig)
@@ -78,6 +79,7 @@ val pickerConfig = MediaPickerConfig()
         .setUriPermanentAccess(false)
         .setAllowMultiSelection(allowMultiple)
         .setShowConfirmationDialog(true)
+        .setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
 MediaPicker.with(this, MediaPicker.MediaTypes.IMAGE)
         .setConfig(pickerConfig)
@@ -111,7 +113,8 @@ eg.
 MediaPickerConfig pickerConfig = new MediaPickerConfig()
         .setAllowMultiSelection(false)
         .setUriPermanentAccess(true)
-        .setShowConfirmationDialog(true);
+        .setShowConfirmationDialog(true)
+        .setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 ```
 
 #### 2. ExtraListener:

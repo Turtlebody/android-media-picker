@@ -1,3 +1,14 @@
+# [1.0.7](2019-05-21)
+
+
+### Bug Fixes
+
+### Features
+* You can set screen orientation for picker ui in ImagePickerConfiguration.
+
+### Changes
+
+
 # [1.0.6](2019-05-3)
 
 

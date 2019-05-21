@@ -2,6 +2,7 @@ package com.greentoad.turtlebody.mediapicker.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -50,12 +51,17 @@ class ActivityLibMain : ActivityBase() {
         setContentView(R.layout.tb_media_picker_activity_lib_main)
 
         initToolbar(R.drawable.tb_media_picker_ic_arrow_back_black_24dp, find(R.id.activity_lib_main_toolbar))
+
         toolbarTitle = "Select Folder"
         vToolbarCounter = find<TextView>(R.id.activity_lib_main_toolbar_txt_count)
 
         if (intent.extras != null) {
             mMediaPickerConfig = intent.getSerializableExtra(MediaPickerConfig.ARG_BUNDLE) as MediaPickerConfig
             mFileType = intent.getIntExtra(B_ARG_FILE_TYPE, MediaPicker.MediaTypes.IMAGE)
+
+            mMediaPickerConfig.mScreenOrientation?.let {
+                requestedOrientation = it
+            }
         }
     }
 
