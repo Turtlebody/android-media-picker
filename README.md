@@ -4,7 +4,7 @@
 ---
 
 ![API](https://img.shields.io/badge/API-16%2B-34bf49.svg)
-[ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=latest) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/1.0.6/link)
+[ ![Download](https://api.bintray.com/packages/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/images/download.svg?version=latest) ](https://bintray.com/greentoad/android-media-picker/com.greentoad.turtlebody.mediapicker/latest/link)
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Media%20Picker-green.svg?style=flat )]( https://android-arsenal.com/details/1/7635 )
 
 
@@ -28,7 +28,7 @@ Step 1: Add the dependency
 dependencies {
     ...
     /* media picker */
-    implementation 'com.greentoad.turtlebody:media-picker:1.0.6'
+    implementation 'com.greentoad.turtlebody:media-picker:1.0.8'
 
     /* rxjava */
     implementation 'io.reactivex.rxjava2:rxjava:2.2.5'

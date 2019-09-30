@@ -121,7 +121,7 @@ class ActivityLibMain : ActivityBase() {
                 val uri = intent.data
                 info { "handleFileData: $uri" }
                 if(FileHelper.isFileExist(this,uri))
-                    uriList.add(uri)
+                    uriList.add(uri!!)
             }
             else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 if (intent.clipData != null) {
