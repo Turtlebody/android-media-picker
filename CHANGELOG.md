@@ -4,6 +4,16 @@
 ### Bug Fixes
 
 ### Features
+
+### Changes
+* upgraded dependencies/android api level
+
+# [1.0.7](2019-05-21)
+
+
+### Bug Fixes
+
+### Features
 * You can set screen orientation for picker ui in ImagePickerConfiguration.
 
 ### Changes

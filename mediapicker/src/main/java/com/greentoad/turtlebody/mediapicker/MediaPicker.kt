@@ -139,7 +139,7 @@ class MediaPicker {
             fragment.arguments = bundle
             info { "imagePicker mFileType: $mFileType" }
             fragment.setListener(this)
-            mActivity.get()?.supportFragmentManager?.beginTransaction()?.add(fragment, PickerFragment::class.java.simpleName)?.commit()
+            mActivity.get()?.supportFragmentManager?.beginTransaction()?.add(fragment, PickerFragment::class.java.simpleName)?.commitAllowingStateLoss()
         }
 
         interface OnMediaListener {

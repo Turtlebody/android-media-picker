@@ -45,6 +45,9 @@ class MediaPickerConfig: Serializable {
     }
 
 
+    /**
+     * set screen rotation
+     */
     fun setScreenOrientation(value: Int): MediaPickerConfig {
         mScreenOrientation = value
         return this
