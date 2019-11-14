@@ -9,6 +9,14 @@ import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.text.TextUtils
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 
 import java.net.URISyntaxException
 
@@ -20,47 +28,60 @@ object UtilsFile {
     @SuppressLint("NewApi")
     @Throws(URISyntaxException::class)
     fun getFilePath(context: Context, uri_: Uri): String? {
-        var uri = uri_
+        var contentUri: Uri? = null
         var selection: String? = null
         var selectionArgs: Array<String>? = null
         // Uri is different in versions after KITKAT (Android 4.4), we need to
-        if (Build.VERSION.SDK_INT >= 19 && DocumentsContract.isDocumentUri(context.applicationContext, uri)) {
-            if (isExternalStorageDocument(uri)) {
-                val docId = DocumentsContract.getDocumentId(uri)
-                val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
-            } else if (isDownloadsDocument(uri)) {
-                val id = DocumentsContract.getDocumentId(uri)
-                uri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
-            } else if (isMediaDocument(uri)) {
-                val docId = DocumentsContract.getDocumentId(uri)
-                val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                val type = split[0]
-                if ("image" == type) {
-                    uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                } else if ("video" == type) {
-                    uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-                } else if ("audio" == type) {
-                    uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+        if (Build.VERSION.SDK_INT >= 19 && DocumentsContract.isDocumentUri(context.applicationContext, uri_)) {
+            when {
+                isExternalStorageDocument(uri_) -> {
+                    val docId = DocumentsContract.getDocumentId(uri_)
+                    val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                    return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
                 }
-                selection = "_id=?"
-                selectionArgs = arrayOf(split[1])
+                isDownloadsDocument(uri_) -> {
+                    val id = DocumentsContract.getDocumentId(uri_)
+                    contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
+                }
+                isMediaDocument(uri_) -> {
+                    val docId = DocumentsContract.getDocumentId(uri_)
+                    val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                    val type = split[0]
+                    if ("image" == type) {
+                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    } else if ("video" == type) {
+                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                    } else if ("audio" == type) {
+                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                    }
+                    selection = "_id=?"
+                    selectionArgs = arrayOf(split[1])
+                }
             }
         }
-        if ("content".equals(uri.scheme!!, ignoreCase = true)) {
+        if ("content".equals(contentUri?.scheme!!, ignoreCase = true)) {
             val projection = arrayOf(MediaStore.Images.Media.DATA)
-            val cursor: Cursor?
+            var cursor: Cursor? = null
             try {
-                cursor = context.contentResolver.query(uri, projection, selection, selectionArgs, null)
-                val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                cursor = context.contentResolver.query(
+                    contentUri,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null
+                )
+                val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
                 if (cursor.moveToFirst()) {
-                    return cursor.getString(column_index)
+                    return cursor.getString(columnIndex)
                 }
             } catch (e: Exception) {
+                return getFilePathFromURI(context, uri_)
+            } finally {
+                cursor?.close()
             }
 
-        } else if ("file".equals(uri.scheme!!, ignoreCase = true)) {
-            return uri.path
+        } else if ("file".equals(uri_.scheme!!, ignoreCase = true)) {
+            return uri_.path
         }
         return null
     }
@@ -75,5 +96,69 @@ object UtilsFile {
 
     private fun isMediaDocument(uri: Uri): Boolean {
         return "com.android.providers.media.documents" == uri.authority
+    }
+
+    private fun getFilePathFromURI(context:Context, contentUri:Uri):String? {
+        // copy file and send new file path
+        val fileName = getFileName(contentUri)
+        if (!TextUtils.isEmpty(fileName))
+        {
+            val copyFile = File("${context.filesDir}${File.separator}$fileName")
+            copy(context, contentUri, copyFile)
+            return copyFile.absolutePath
+        }
+        return null
+    }
+
+    private fun getFileName(uri:Uri?):String? {
+        if (uri == null) return null
+        var fileName:String? = null
+        val path = uri.path ?: return null
+        val cut = path.lastIndexOf('/')
+        if (cut != -1)
+        {
+            fileName = path.substring(cut + 1)
+        }
+        return fileName
+    }
+    private fun copy(context:Context, srcUri:Uri, dstFile:File) {
+        try
+        {
+            val inputStream = context.contentResolver.openInputStream(srcUri) ?: return
+            val outputStream = FileOutputStream(dstFile)
+            copyFile(inputStream, outputStream)
+            inputStream.close()
+            outputStream.close()
+        }
+        catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+    @Throws(IOException::class)
+    private fun copyFile(inputStream: InputStream, outputStream: OutputStream) {
+        val size = 1024 * 2
+        val buffer = ByteArray(size)
+        val bufferedInputStream = BufferedInputStream(inputStream, size)
+        val bufferedOutputStream = BufferedOutputStream(outputStream, size)
+        var n:Int
+        try
+        {
+            while (bufferedInputStream.read(buffer, 0, size).also { n = it } >= 0)
+            {
+                bufferedOutputStream.write(buffer, 0, n)
+            }
+            bufferedOutputStream.flush()
+        }
+        finally
+        {
+            try
+            {
+                bufferedOutputStream.close()
+                bufferedInputStream.close()
+            }
+            catch (e:IOException) {
+                e.printStackTrace()
+            }
+        }
     }
 }
