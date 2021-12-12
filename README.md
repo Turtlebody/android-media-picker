@@ -1,3 +1,9 @@
+ ## This is deprecated. Please use other library like: 
+- For images and videos: [Matisse](https://github.com/zhihu/Matisse)
+- For documents: [UnicornFilePicker](https://github.com/abhishekti7/UnicornFilePicker)
+
+---
+
 
 ![](https://thedroid.io/assets/img/tb-media-picker.png)
 
